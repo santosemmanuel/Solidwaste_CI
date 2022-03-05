@@ -18,8 +18,11 @@
     <!-- Page level custom scripts for Tables-->
     <script src="<?php echo base_url().'assets/js/demo/datatables-demo.js' ?>"></script>
 
-    
-
+    <script>
+        $('#signUpModal').on('shown.bs.modal', function () {
+            init();
+        });
+    </script>
 </body>
 
 </html>

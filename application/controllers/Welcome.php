@@ -41,8 +41,15 @@ class Welcome extends CI_Controller{
 				redirect(base_url().'welcome?pesan=gagal');
 			}
 		} else {
-			$this->load->view('login');
+
+			$this->index();
 		}
+	}
+
+	function signUpPage(){
+		$this->load->view('header');
+		$this->load->view('signup');
+		$this->load->view('source');
 	}
 
 	function logout(){
