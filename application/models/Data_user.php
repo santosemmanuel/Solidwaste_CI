@@ -11,4 +11,11 @@ class Data_user extends CI_Model {
 		$this->db->where($where);
 		return $this->db->get('user');
 	}
+
+	public function save_user_data($user_data) {
+		$data = array(
+			'firstName' => $user_data['firstName']
+		);
+		$this->db->insert('user_info', $data);
+	}
 }

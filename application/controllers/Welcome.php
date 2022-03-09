@@ -47,9 +47,8 @@ class Welcome extends CI_Controller{
 	}
 
 	function signUpPage(){
-		$this->load->view('header');
-		$this->load->view('signup');
-		$this->load->view('source');
+		$user_data = $this->input->post();
+		$this->data_user->save_user_data($user_data);
 	}
 
 	function logout(){

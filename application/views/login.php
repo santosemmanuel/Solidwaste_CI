@@ -78,43 +78,43 @@
                     </div>
                     <div class="modal-body">
                     
-                        <form>
+                        <form method="post" id="signUpForm">
                             <div class="row">
                                 <div class="col">
                                     <label for="exampleInputEmail1">First Name</label>
-                                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                                    <input type="text" class="form-control" aria-describedby="" name="firstName" placeholder="First Name">
                                 </div>
                                 <div class="col">
                                     <label for="exampleInputPassword1">Middle Name</label>
-                                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                                    <input type="text" class="form-control" name="middleName" placeholder="Middle Name">
                                 </div>
                                 <div class="col">
                                     <label for="exampleInputPassword1">Last Name</label>
-                                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                                    <input type="text" class="form-control" name="lastName" placeholder="Last Name">
                                 </div>
                             </div><br>
                             <div class="row">
                                 <div class="col">
                                     <label for="exampleInputEmail1">Username</label>
-                                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                                    <input type="text" class="form-control" aria-describedby="" name="userName" placeholder="Username">
                                 </div>
                                 <div class="col">
                                     <label for="exampleInputPassword1">Password</label>
-                                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                                    <input type="password" class="form-control" name="password" placeholder="Password">
                                 </div>
                                 <div class="col">
                                     <label for="exampleInputPassword1">Re-type Password</label>
-                                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                                    <input type="password" class="form-control" name="reTypePassword" placeholder="Re-type Password">
                                 </div>
                             </div><br>
                             <div class="row">
                                 <div class="col">
                                     <label for="exampleInputEmail1">Business Name</label>
-                                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                                    <input type="email" class="form-control" aria-describedby="" name="businessName" placeholder="Business Name">
                                 </div>
                                 <div class="col">
                                     <label for="exampleInputPassword1">Business Type</label>
-                                    <select class="form-control" id="exampleFormControlSelect1">
+                                    <select class="form-control" name="businessType">
                                         <option>Sole Proprietorship</option>
                                         <option>Partnership</option>
                                         <option>Limited Partnership</option>
@@ -126,17 +126,17 @@
                                 </div>
                                 <div class="col">
                                     <label for="exampleInputPassword1">Annual Income Tax Return</label>
-                                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                                    <input type="number" class="form-control" name="ITR" placeholder="Annual Income Tax Return">
                                 </div>
                             </div><br>
                             <div class="row">
                                 <div class="col-3">
                                     <label for="exampleInputEmail1">TIN</label>
-                                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                                    <input type="text" class="form-control" aria-describedby="" name="TIN" placeholder="TIN">
                                 </div>
                                 <div class="col">
                                     <label for="exampleInputPassword1">Select Brgy.</label>
-                                    <select class="form-control" id="exampleFormControlSelect1">
+                                    <select class="form-control" name="barangay">
                                         <option>Poblacion District I</option>
                                         <option>Poblacion District II</option>
                                         <option>Poblacion District III</option>
@@ -150,42 +150,66 @@
                                 </div>
                                 <div class="col">
                                     <label for="exampleInputPassword1">Address</label>
-                                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                                    <input type="text" class="form-control" name="address" placeholder="Address">
                                 </div>
                             </div><br>
                             <div class="row">
                                 <div id="map" class="map"></div>
                             </div>
-                        </form>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-success">Sign Up</button>
+                        <input type="submit" class="btn btn-success" value="Sign Up" />
                     </div>
+                    </form>
                 </div>
             </div>
         </div>
-
     </div>
     <script type="text/javascript">
-        function init(){
-            
-            const map = new ol.Map({
-                view: new ol.View({
-                    center: [13903066.89804018, 1229275.2830421156],
-                    zoom: 15
-                }),
-                layers: [
-                    new ol.layer.Tile({
-                        source: new ol.source.OSM()
-                    })
-                ],
-                target: 'map'
+        const map = new ol.Map({
+            target: 'map',
+            layers: [
+                new ol.layer.Tile({ 
+                    minZoom: 10,
+                    source: new ol.source.OSM(),
+                })
+            ],
+            view: new ol.View({
+                center: [13903066.89804018, 1229275.2830421156],
+                zoom: 15,
+                minZoom: 11,
             })
+        });
 
-            map.on('click', function(e){
-                console.log(e);
+        map.on('click', function(env){
+            
+            map.getLayers().forEach(layer => {
+                if (layer.get('name') && layer.get('name') == 'vectorLayer'){
+                    map.removeLayer(layer)
+                }
+            });
+
+            const iconFeature = new ol.Feature({
+                geometry: new ol.geom.Point([env.coordinate[0], env.coordinate[1]])
+            });
+
+            var layer = new ol.layer.Vector({
+                source: new ol.source.Vector({
+                    features: [iconFeature]
+                }),
+                style: new ol.style.Style({
+                    image: new ol.style.Icon({
+                    anchor: [0.5, 46],
+                    anchorXUnits: 'fraction',
+                    anchorYUnits: 'pixels',
+                    src: 'https://openlayers.org/en/latest/examples/data/icon.png'
+                    })
+                })
             })
-        }
+            layer.set('name', 'vectorLayer');
+            map.addLayer(layer);
+        })
     </script>
+  
 </body>
