@@ -77,7 +77,9 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                    
+                    <div class="alert alert-danger" role="alert" id="alertMessage">
+                            
+                    </div>
                         <form method="post" id="signUpForm">
                             <div class="row">
                                 <div class="col">
@@ -110,7 +112,7 @@
                             <div class="row">
                                 <div class="col">
                                     <label for="exampleInputEmail1">Business Name</label>
-                                    <input type="email" class="form-control" aria-describedby="" name="businessName" placeholder="Business Name">
+                                    <input type="text" class="form-control" aria-describedby="" name="businessName" placeholder="Business Name">
                                 </div>
                                 <div class="col">
                                     <label for="exampleInputPassword1">Business Type</label>
@@ -166,50 +168,5 @@
             </div>
         </div>
     </div>
-    <script type="text/javascript">
-        const map = new ol.Map({
-            target: 'map',
-            layers: [
-                new ol.layer.Tile({ 
-                    minZoom: 10,
-                    source: new ol.source.OSM(),
-                })
-            ],
-            view: new ol.View({
-                center: [13903066.89804018, 1229275.2830421156],
-                zoom: 15,
-                minZoom: 11,
-            })
-        });
-
-        map.on('click', function(env){
-            
-            map.getLayers().forEach(layer => {
-                if (layer.get('name') && layer.get('name') == 'vectorLayer'){
-                    map.removeLayer(layer)
-                }
-            });
-
-            const iconFeature = new ol.Feature({
-                geometry: new ol.geom.Point([env.coordinate[0], env.coordinate[1]])
-            });
-
-            var layer = new ol.layer.Vector({
-                source: new ol.source.Vector({
-                    features: [iconFeature]
-                }),
-                style: new ol.style.Style({
-                    image: new ol.style.Icon({
-                    anchor: [0.5, 46],
-                    anchorXUnits: 'fraction',
-                    anchorYUnits: 'pixels',
-                    src: 'https://openlayers.org/en/latest/examples/data/icon.png'
-                    })
-                })
-            })
-            layer.set('name', 'vectorLayer');
-            map.addLayer(layer);
-        })
-    </script>
   
 </body>

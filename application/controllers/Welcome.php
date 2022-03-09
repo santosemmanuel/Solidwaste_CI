@@ -46,9 +46,36 @@ class Welcome extends CI_Controller{
 		}
 	}
 
-	function signUpPage(){
-		$user_data = $this->input->post();
-		$this->data_user->save_user_data($user_data);
+	function signUp(){
+
+		if ($this->input->is_ajax_request()) {
+
+			$this->form_validation->set_rules('firstName', 'First Name', 'required');
+			$this->form_validation->set_rules('middleName', 'Middle Name', 'required');
+			$this->form_validation->set_rules('lastName', 'Last Name', 'required');
+			$this->form_validation->set_rules('userName', 'User Name', 'required');
+			$this->form_validation->set_rules('password', 'Password', 'required');
+			$this->form_validation->set_rules('reTypePassword', 'Password Confirmation', 'required|matches[password]');
+			$this->form_validation->set_rules('businessName', 'Business Name', 'required');
+			$this->form_validation->set_rules('ITR', 'Annual Income Tax Return', 'required');
+			$this->form_validation->set_rules('TIN', 'Tax Identification Number', 'required');
+			$this->form_validation->set_rules('address', 'Address', 'required');
+
+			if ($this->form_validation->run() != FALSE) {
+				if($this->data_user->save_user_data($this->input->post())){
+					$data= array('response' => 'success', 'message' => 'Data Added Successfully');
+				} else {
+					$data= array('response' => 'success', 'message' => 'Data Failed');
+				}
+			} else {
+				$data = array('response' => 'error', 'message' => validation_errors());
+			}
+
+		} else {
+			echo "No direct script access allowed";
+		}
+		echo json_encode($data);
+
 	}
 
 	function logout(){

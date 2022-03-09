@@ -1,10 +1,14 @@
     <!-- Custom made script for this project-->
     <script src="<?php echo base_url().'assets/js/script.js' ?>"></script>
-
+    
     <!-- Bootstrap core JavaScript-->
     <script src="<?php echo base_url().'assets/vendor/jquery/jquery.min.js' ?>"></script>
     <script src="<?php echo base_url().'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' ?>"></script>
-
+    
+    <!-- Costum Javascript code -->
+    <script>var base_url = "<?= base_url()?>";</script>
+    <script src="<?php echo base_url().'assets/js/index.js'?>"></script>
+    
     <!-- Core plugin JavaScript-->
     <script src="<?php echo base_url().'assets/vendor/jquery-easing/jquery.easing.min.js' ?>"></script>
 
@@ -17,7 +21,7 @@
 
     <!-- Page level custom scripts for Tables-->
     <script src="<?php echo base_url().'assets/js/demo/datatables-demo.js' ?>"></script>
-    <script src="<?php echo base_url().'assets/js/index.js'?>"></script>
+    
 </body>
 
 </html>
