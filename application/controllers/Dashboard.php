@@ -18,8 +18,10 @@ class Dashboard extends CI_Controller {
 
 	public function index()
 	{
-		$user['username'] = $this->session->userdata('username');
-
+		$user = array(
+			'name' => $this->session->userdata('name'),
+			'level' => $this->session->userdata('level')
+		);
 		$total_pendapatan = $this->data_transac->total_income_year();
 		$total_expend = $this->data_expend->total_spend_year();
 		$total_keuntungan = $total_pendapatan - $total_expend;

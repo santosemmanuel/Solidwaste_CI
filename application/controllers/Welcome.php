@@ -31,6 +31,7 @@ class Welcome extends CI_Controller{
 			if($cek > 0){
 				$session = array(
 							'user_id'=> $d->user_id,
+							'name' => $d->firstName,
 							'username'=> $d->username,
 							'level'=> $d->level,
 							'status' => 'login'
@@ -41,7 +42,6 @@ class Welcome extends CI_Controller{
 				redirect(base_url().'welcome?pesan=gagal');
 			}
 		} else {
-
 			$this->index();
 		}
 	}
@@ -53,6 +53,7 @@ class Welcome extends CI_Controller{
 			$this->form_validation->set_rules('firstName', 'First Name', 'required');
 			$this->form_validation->set_rules('middleName', 'Middle Name', 'required');
 			$this->form_validation->set_rules('lastName', 'Last Name', 'required');
+			$this->form_validation->set_rules('contactNumber', 'Contact Number', 'required');
 			$this->form_validation->set_rules('userName', 'User Name', 'required');
 			$this->form_validation->set_rules('password', 'Password', 'required');
 			$this->form_validation->set_rules('reTypePassword', 'Password Confirmation', 'required|matches[password]');
@@ -60,12 +61,13 @@ class Welcome extends CI_Controller{
 			$this->form_validation->set_rules('ITR', 'Annual Income Tax Return', 'required');
 			$this->form_validation->set_rules('TIN', 'Tax Identification Number', 'required');
 			$this->form_validation->set_rules('address', 'Address', 'required');
-
+			$this->form_validation->set_rules('coordinates', 'Location on the Map', 'required');
+		
 			if ($this->form_validation->run() != FALSE) {
 				if($this->data_user->save_user_data($this->input->post())){
-					$data= array('response' => 'success', 'message' => 'Data Added Successfully');
+					$data = array('response' => 'success');
 				} else {
-					$data= array('response' => 'success', 'message' => 'Data Failed');
+					$data= array('response' => 'error', 'message' => 'Data Failed');
 				}
 			} else {
 				$data = array('response' => 'error', 'message' => validation_errors());
@@ -75,7 +77,6 @@ class Welcome extends CI_Controller{
 			echo "No direct script access allowed";
 		}
 		echo json_encode($data);
-
 	}
 
 	function logout(){

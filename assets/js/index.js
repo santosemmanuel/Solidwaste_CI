@@ -51,19 +51,76 @@ map.on('click', function(env){
 
 $(document).ready(function(){
     $("#alertMessage").hide();
+    
+    // Add user
     $("#signUpForm").submit(function(e){
+
         e.preventDefault();
         var dataForm = $("#signUpForm").serializeArray();
-        dataForm.push({name: 'coordinates', value: Mapcoordinates[0]+", "+Mapcoordinates[1]});
+        
+        if(Mapcoordinates.length == 0){
+            dataForm.push({name: 'coordinates', value: ""});
+        } else {
+            dataForm.push({name: 'coordinates', value: Mapcoordinates[0]+", "+Mapcoordinates[1]});
+        }
+
         $.ajax({
             url: base_url+"welcome/signUp",
             type: "post",
             dataType: "json",
             data: dataForm,
             success: function(data){
-                $("#alertMessage").show();
-                $("#alertMessage").html(data.message);
+                if(data.response == 'success'){
+                    window.location.href = base_url+"welcome?pesan=SignUpConfirm";
+                } else {
+                    $("#alertMessage").show();
+                    $("#alertMessage").html(data.message);
+                }
             }
         })
     })
+    
+    //Add Admin
+    $("#submitAdmin").submit(function(e){
+        e.preventDefault();
+
+        var dataForm = $("#submitAdmin").serializeArray();
+        $.ajax({
+            url: base_url+"settings/addAdmin",
+            type: "post",
+            dataType: "json",
+            data: dataForm,
+            success: function(data){
+                if(data.response == 'success'){
+                    location.reload();
+                } else {
+                    $("#alertMessage").show();
+                    $("#alertMessage").html(data.message);
+                }
+            }
+        });
+        
+    });
+    
+    //Edit Admin
+    $("#editAdmin").submit(function(e){
+        e.preventDefault();
+
+        var dataForm = $("#editAdmin").serializeArray();
+        $.ajax({
+            url: base_url+"settings/editAdmin",
+            type: "post",
+            dataType: "json",
+            data: dataForm,
+            success: function(data){
+                if(data.response == 'success'){
+                    location.reload();
+                } else {
+                    $("#alertMessage").show();
+                    $("#alertMessage").html(data.message);
+                }
+            }
+        });
+        
+    });
 });

@@ -1,4 +1,3 @@
-
 <link rel="stylesheet" href="<?= base_url()?>assets/css/cover.css"> 
 <body style="background-image: url('<?php echo base_url() ?>assets/img/burauen_cover.jpg'); ">
 
@@ -33,7 +32,9 @@
                                 } else if ($_GET['pesan'] == "logout") {
                                     echo "<div class='alert alert-danger'>You have logged out.</div>";
                                 } else if ($_GET['pesan'] == "belumlogin") {
-                                    echo "<div class='alert alert-success'>Please login first.</div>";
+                                    echo "<div class='alert alert-warning'>Please login first.</div>";
+                                } else if ($_GET['pesan'] == "SignUpConfirm") {
+                                    echo "<div class='alert alert-success'>Congratulations! Please login using your previously created Account.</div>";
                                 }
                             }
                         ?>
@@ -77,11 +78,9 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                    <div class="alert alert-danger" role="alert" id="alertMessage">
-                            
-                    </div>
+                    <div class="alert alert-danger" role="alert" id="alertMessage"></div>
                         <form method="post" id="signUpForm">
-                            <div class="row">
+                            <div class="form-row">
                                 <div class="col">
                                     <label for="exampleInputEmail1">First Name</label>
                                     <input type="text" class="form-control" aria-describedby="" name="firstName" placeholder="First Name">
@@ -90,12 +89,18 @@
                                     <label for="exampleInputPassword1">Middle Name</label>
                                     <input type="text" class="form-control" name="middleName" placeholder="Middle Name">
                                 </div>
+                            </div>
+                            <div class="form-row">
                                 <div class="col">
                                     <label for="exampleInputPassword1">Last Name</label>
                                     <input type="text" class="form-control" name="lastName" placeholder="Last Name">
                                 </div>
-                            </div><br>
-                            <div class="row">
+                                <div class="col">
+                                <label for="exampleInputPassword1">Contact Number</label>
+                                    <input type="text" class="form-control" name="contactNumber" placeholder="(e.g. 09123456789)">
+                                </div>
+                            </div>
+                            <div class="form-row">
                                 <div class="col">
                                     <label for="exampleInputEmail1">Username</label>
                                     <input type="text" class="form-control" aria-describedby="" name="userName" placeholder="Username">
@@ -108,8 +113,8 @@
                                     <label for="exampleInputPassword1">Re-type Password</label>
                                     <input type="password" class="form-control" name="reTypePassword" placeholder="Re-type Password">
                                 </div>
-                            </div><br>
-                            <div class="row">
+                            </div>
+                            <div class="form-row">
                                 <div class="col">
                                     <label for="exampleInputEmail1">Business Name</label>
                                     <input type="text" class="form-control" aria-describedby="" name="businessName" placeholder="Business Name">
@@ -130,8 +135,8 @@
                                     <label for="exampleInputPassword1">Annual Income Tax Return</label>
                                     <input type="number" class="form-control" name="ITR" placeholder="Annual Income Tax Return">
                                 </div>
-                            </div><br>
-                            <div class="row">
+                            </div>
+                            <div class="form-row">
                                 <div class="col-3">
                                     <label for="exampleInputEmail1">TIN</label>
                                     <input type="text" class="form-control" aria-describedby="" name="TIN" placeholder="TIN">
@@ -152,7 +157,7 @@
                                 </div>
                                 <div class="col">
                                     <label for="exampleInputPassword1">Address</label>
-                                    <input type="text" class="form-control" name="address" placeholder="Address">
+                                    <input type="text" class="form-control" name="address" placeholder="Street name">
                                 </div>
                             </div><br>
                             <div class="row">

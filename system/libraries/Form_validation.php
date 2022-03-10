@@ -396,7 +396,7 @@ class CI_Form_validation {
 		{
 			if ($val !== '')
 			{
-				$str .= $prefix.$val.$suffix."\n";
+				$str .= $prefix.$val.$suffix."";
 			}
 		}
 

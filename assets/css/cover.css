@@ -111,3 +111,6 @@ body {
 	user-select: none;
 }
 
+.form-row {
+	padding-bottom: 1%;
+}

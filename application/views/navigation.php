@@ -10,7 +10,7 @@
              <a class="sidebar-brand d-flex flex-column align-items-center justify-content-center my-3" href="<?php echo base_url()?>dashboard">
                 <div class="sidebar-brand-icon">
                     <i class="fas fa-fw fa-user-tie"></i>
-                    <div class="sidebar-brand-text mx-3">SWCMS:<?php echo $username?></div>
+                    <div class="sidebar-brand-text mx-3">SWCMS:<?php echo $name;?></div>
                 </div>
                 
             </a>
@@ -93,6 +93,21 @@
                         <a class="collapse-item" href="<?php echo base_url()?>municipal/laporan">Municipality/LGU</a>
                         <a class="collapse-item" href="<?php echo base_url()?>transac/laporan">Transactions</a>
                         <a class="collapse-item" href="<?php echo base_url()?>expend/laporan">Expenditure</a>
+                    </div>
+                </div>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSettings"
+                    aria-expanded="true" aria-controls="collapseUtilities">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Settings</span>
+                </a>
+                <div id="collapseSettings" class="collapse" aria-labelledby="headingUtilities"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="<?php echo base_url()?>settings/admin">Add Administrator</a>
+                        <a class="collapse-item" href="<?php echo base_url()?>settings/activityLog">Activity Logs</a>
                     </div>
                 </div>
             </li>
