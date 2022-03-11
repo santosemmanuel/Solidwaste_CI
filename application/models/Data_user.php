@@ -54,7 +54,7 @@ class Data_user extends CI_Model {
 			'middleName' => $user_data['middleName'],
 			'lastName' => $user_data['lastName'],
 			'username' => $user_data['userName'],
-			'password' => md5($user_data['password']),
+			'password' => base64_encode($user_data['password']),
 			'level' => 'admin'
 		);
 		return $this->db->insert('user',$data);
@@ -64,5 +64,22 @@ class Data_user extends CI_Model {
 		$this->db->where('level', "admin");
 		return $this->db->get('user');
 		
+	}
+
+	public function edit_admin($user_data){
+		$data = array(
+			'firstName' => $user_data['firstName'],
+			'middleName' => $user_data['middleName'],
+			'lastName' => $user_data['lastName'],
+			'username' => $user_data['userName'],
+			'password' => base64_encode($user_data['password']),
+		);
+		$this->db->where('user_id', $user_data['userID']);
+		return $this->db->update('user', $data);
+	}
+
+	public function delete_admin($user_id){
+		$this->db->where('user_id', $user_id);
+		return $this->db->delete('user');
 	}
 }

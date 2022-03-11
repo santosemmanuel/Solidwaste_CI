@@ -23,7 +23,7 @@ class Welcome extends CI_Controller{
 		if($this->form_validation->run() != false){
 			$where = array(
 						'username' => $username,
-						'password' => md5($password)
+						'password' => base64_encode($password)
 					);
 			$data = $this->data_user->get_records($where);
 			$d = $this->data_user->get_records($where)->row();

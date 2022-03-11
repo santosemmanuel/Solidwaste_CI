@@ -18,100 +18,116 @@
             <!-- Divider -->
             <hr class="sidebar-divider my-0">
 
-            <!-- Nav Item - Dashboard -->
-            <li class="nav-item">
-                <a class="nav-link" href="<?php echo base_url()?>dashboard">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span></a>
-            </li>
+            <?php if($level == 'admin' || $level == 'superadmin') {?>
+                <!-- Nav Item - Dashboard -->
+                <li class="nav-item">
+                    <a class="nav-link" href="<?php echo base_url()?>dashboard">
+                        <i class="fas fa-fw fa-tachometer-alt"></i>
+                        <span>Dashboard</span></a>
+                </li>
 
-            <!-- Divider -->
-            <!-- <hr class="sidebar-divider"> -->
+                <!-- Divider -->
+                <!-- <hr class="sidebar-divider"> -->
 
-            <li class="nav-item">
-                <a class="nav-link" href="<?php echo base_url()?>wastecat">
-                    <i class="fas fa-trash-alt"></i>
-                    <span>Waste Category</span></a>
-            </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="<?php echo base_url()?>wastecat">
+                        <i class="fas fa-trash-alt"></i>
+                        <span>Waste Category</span></a>
+                </li>
 
-            <!-- <hr class="sidebar-divider"> -->
+                <!-- <hr class="sidebar-divider"> -->
 
-            <li class="nav-item">
-                <a class="nav-link" href="<?php echo base_url()?>municipal">
-                    <i class="fas fa-building"></i>
-                    <span>Municipality/LGU</span></a>
-            </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="<?php echo base_url()?>municipal">
+                        <i class="fas fa-building"></i>
+                        <span>Municipality/LGU</span></a>
+                </li>
 
-            <!-- <hr class="sidebar-divider"> -->
+                <!-- <hr class="sidebar-divider"> -->
 
-            <li class="nav-item">
-                <a class="nav-link" href="<?php echo base_url()?>transac">
-                    <i class="fas fa-receipt fa-2x text-gray-500"></i>
-                    <span>Transactions</span></a>
-            </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="<?php echo base_url()?>transac">
+                        <i class="fas fa-receipt fa-2x text-gray-500"></i>
+                        <span>Transactions</span></a>
+                </li>
 
-            <!-- <hr class="sidebar-divider"> -->
+                <!-- <hr class="sidebar-divider"> -->
 
-            <li class="nav-item">
-                <a class="nav-link" href="<?php echo base_url()?>expend">
-                    <i class="fas fa-fw fa-share"></i>
-                    <span>Expenditure</span></a>
-            </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="<?php echo base_url()?>expend">
+                        <i class="fas fa-fw fa-share"></i>
+                        <span>Expenditure</span></a>
+                </li>
 
-            <!-- <hr class="sidebar-divider"> -->
-
-            <!-- Nav Item - Master Data Collapse Menu -->
-            <!-- <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-                    aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span>Master Data</span>
-                </a>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="---PHP Link---karyawan">Employee</a>
-                        <a class="collapse-item" href="---PHP Link---pelanggan">Customer</a>
-                        <a class="collapse-item" href="---PHP Link---transaksi">Transaction</a>
-                        <a class="collapse-item" href="---PHP Link---pengeluaran">Expenditure</a>
+                <!-- Nav Item - Report Collapse Menu -->
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
+                        aria-expanded="true" aria-controls="collapseUtilities">
+                        <i class="fas fa-fw fa-file-pdf"></i>
+                        <span>Reports Section</span>
+                    </a>
+                    <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
+                        data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <a class="collapse-item" href="<?php echo base_url()?>wastecat/laporan">Waste Category</a>
+                            <a class="collapse-item" href="<?php echo base_url()?>municipal/laporan">Municipality/LGU</a>
+                            <a class="collapse-item" href="<?php echo base_url()?>transac/laporan">Transactions</a>
+                            <a class="collapse-item" href="<?php echo base_url()?>expend/laporan">Expenditure</a>
+                        </div>
                     </div>
-                </div>
-            </li> -->
+                </li>
 
-            
-
-            <!-- Nav Item - Report Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
-                    aria-expanded="true" aria-controls="collapseUtilities">
-                    <i class="fas fa-fw fa-file-pdf"></i>
-                    <span>Reports Section</span>
-                </a>
-                <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
-                    data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="<?php echo base_url()?>wastecat/laporan">Waste Category</a>
-                        <a class="collapse-item" href="<?php echo base_url()?>municipal/laporan">Municipality/LGU</a>
-                        <a class="collapse-item" href="<?php echo base_url()?>transac/laporan">Transactions</a>
-                        <a class="collapse-item" href="<?php echo base_url()?>expend/laporan">Expenditure</a>
+                <?php if ($level == "superadmin") {?>
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSettings"
+                        aria-expanded="true" aria-controls="collapseUtilities">
+                        <i class="fas fa-fw fa-cog"></i>
+                        <span>Settings</span>
+                    </a>
+                    <div id="collapseSettings" class="collapse" aria-labelledby="headingUtilities"
+                        data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <a class="collapse-item" href="<?php echo base_url()?>settings/admin">Administrator's</a>
+                            <a class="collapse-item" href="<?php echo base_url()?>settings/activityLog">Activity Logs</a>
+                        </div>
                     </div>
-                </div>
-            </li>
+                </li>
+                <?php } ?>
+            <?php } else if($level == 'user') { ?>
 
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSettings"
-                    aria-expanded="true" aria-controls="collapseUtilities">
-                    <i class="fas fa-fw fa-cog"></i>
-                    <span>Settings</span>
-                </a>
-                <div id="collapseSettings" class="collapse" aria-labelledby="headingUtilities"
-                    data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="<?php echo base_url()?>settings/admin">Add Administrator</a>
-                        <a class="collapse-item" href="<?php echo base_url()?>settings/activityLog">Activity Logs</a>
-                    </div>
-                </div>
-            </li>
+                <!-- Nav Item - Dashboard -->
+                <li class="nav-item">
+                    <a class="nav-link" href="<?php echo base_url()?>dashboard">
+                        <i class="fas fa-fw fa-tachometer-alt"></i>
+                        <span>Personal Info</span></a>
+                </li>
 
+                <!-- Divider -->
+                <!-- <hr class="sidebar-divider"> -->
+
+                <li class="nav-item">
+                    <a class="nav-link" href="<?php echo base_url()?>wastecat">
+                        <i class="fas fa-trash-alt"></i>
+                        <span>Business Info</span></a>
+                </li>
+
+                <!-- <hr class="sidebar-divider"> -->
+
+                <li class="nav-item">
+                    <a class="nav-link" href="<?php echo base_url()?>municipal">
+                        <i class="fas fa-building"></i>
+                        <span>Waste Info</span></a>
+                </li>
+
+                <!-- <hr class="sidebar-divider"> -->
+
+                <li class="nav-item">
+                    <a class="nav-link" href="<?php echo base_url()?>municipal">
+                        <i class="fas fa-building"></i>
+                        <span>Concerns</span></a>
+                </li>
+
+            <?php }?>
             <!-- Divider -->
             <!-- <hr class="sidebar-divider"> -->
 

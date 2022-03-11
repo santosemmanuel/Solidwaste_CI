@@ -51,7 +51,7 @@ map.on('click', function(env){
 
 $(document).ready(function(){
     $("#alertMessage").hide();
-    
+    // $("#dataTableAdmin").DataTable();
     // Add user
     $("#signUpForm").submit(function(e){
 
@@ -103,10 +103,10 @@ $(document).ready(function(){
     });
     
     //Edit Admin
-    $("#editAdmin").submit(function(e){
+    $(".submiteditAdmin").submit(function(e){
         e.preventDefault();
 
-        var dataForm = $("#editAdmin").serializeArray();
+        var dataForm = $(this).serializeArray();
         $.ajax({
             url: base_url+"settings/editAdmin",
             type: "post",
@@ -116,11 +116,13 @@ $(document).ready(function(){
                 if(data.response == 'success'){
                     location.reload();
                 } else {
-                    $("#alertMessage").show();
-                    $("#alertMessage").html(data.message);
+                    $("#alertMessage"+dataForm[0].value+"").removeAttr('hidden','hidden');
+                    $("#alertMessage"+dataForm[0].value+"").html(data.message);
                 }
             }
         });
         
     });
+
+   
 });
