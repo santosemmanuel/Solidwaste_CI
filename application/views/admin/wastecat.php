@@ -67,9 +67,9 @@
                                         <?php } ?>
                                     </tbody>
                                 </table>
+                            </div>
                         </div>
                     </div>
-
                 </div>
                 <!-- /.container-fluid -->
             </div>
@@ -94,7 +94,7 @@
 
                                 <div class="form-group">
                                     <label class="control-label text-primary">Waste Category </label>
-                                   <select class="form-control" name="name_wastecat" pattern="[A-Za-z]{1,10}" required>
+                                   <select class="form-control" id="wastecat_name" name="name_wastecat" pattern="[A-Za-z]{1,10}" required>
                                         <option value="">--Please Select--</option>
                                         <option value="Biodegrable Waste">Biodegrable Waste</option>
                                         <option value="Residual Waste(Non-biodegradable)">Residual Waste(Non-biodegradable)</option>
@@ -123,11 +123,10 @@
 
                                <div class="form-group">
                                     <label class="control-label text-primary">Specification</label>
-                                   <select class="form-control" name="spec" pattern="[A-Za-z]{1,10}" required>
+                                   <select class="form-control" id="wasteSpecs" name="spec" pattern="[A-Za-z]{1,10}" required disabled>
                                         <option value="">--Please Select--</option>
                                         <option value="peels of vegetables and fruits , paper , Wood">peels of vegetables and Fruits , Paper , Wood</option>
                                         <option value="plastics, glass battles , cans , styrofoam">plastics, glass battles , cans , styrofoam</option>
-                                        <option value="computers , televison, washing machine , aircon ,refrigerator ,light bulb">computers , televison, washing machine , aircon ,refrigerator ,light bulb</option>
                                         <option value="computers , televison, washing machine , aircon ,refrigerator ,light bulb">computers , televison, washing machine , aircon ,refrigerator ,light bulb</option>
                                         <option value="plastic cups , strew , plastic utensils , aluminum cans, mix paper">plastic cups , strew , plastic utensils , aluminum cans, mix paper</option>
                                     </select>

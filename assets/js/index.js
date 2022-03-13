@@ -124,5 +124,10 @@ $(document).ready(function(){
         
     });
 
+    $("#wastecat_name").change(function(){
+        var selectedOption = $("#wastecat_name").prop('selectedIndex');
+        $('#wasteSpecs option').eq(selectedOption).prop('selected', true);
+    })
+
    
 });
