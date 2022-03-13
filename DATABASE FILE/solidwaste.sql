@@ -2,10 +2,10 @@
 -- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Jan 02, 2022 at 09:16 AM
--- Server version: 10.4.21-MariaDB
--- PHP Version: 8.0.10
+-- Host: localhost
+-- Generation Time: Mar 13, 2022 at 10:03 AM
+-- Server version: 10.4.22-MariaDB
+-- PHP Version: 7.4.27
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,6 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `solidwaste`
 --
+CREATE DATABASE IF NOT EXISTS `solidwaste` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `solidwaste`;
 
 -- --------------------------------------------------------
 
@@ -46,7 +48,8 @@ INSERT INTO `expend` (`expend_id`, `total`, `detail`, `start_expend`, `wastecat_
 ('20210805095557', 3000, 'Employee Salary Payment July 2021', '2021-07-02', 'K000'),
 ('20210805095931', 3000, 'Employee Salary Payment August 2021', '2021-08-05', 'K000'),
 ('20220102083511', 70, '4343', '2022-01-02', 'K005'),
-('20220102083949', 800, 'hello', '2022-01-02', 'K005');
+('20220102083949', 800, 'hello', '2022-01-02', 'K005'),
+('20220311010538', 2960, 'Waste Category  March 2022', '2022-03-11', 'K000');
 
 -- --------------------------------------------------------
 
@@ -141,7 +144,9 @@ INSERT INTO `transac` (`transac_id`, `municipal_id`, `wastecat_id`, `weight`, `t
 
 CREATE TABLE `user` (
   `user_id` char(4) NOT NULL,
-  `namauser` varchar(30) DEFAULT NULL,
+  `firstName` varchar(30) DEFAULT NULL,
+  `middleName` varchar(30) NOT NULL,
+  `lastName` varchar(30) NOT NULL,
   `username` varchar(20) DEFAULT NULL,
   `password` varchar(255) DEFAULT NULL,
   `level` char(16) DEFAULT NULL
@@ -151,8 +156,40 @@ CREATE TABLE `user` (
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`user_id`, `namauser`, `username`, `password`, `level`) VALUES
-('U001', 'Liam Moore', 'admin', 'D00F5D5217896FB7FD601412CB890830', 'superuser');
+INSERT INTO `user` (`user_id`, `firstName`, `middleName`, `lastName`, `username`, `password`, `level`) VALUES
+('U001', 'Liam Moore', '', '', 'admin', 'UGFzc3dvcmRAMTIz', 'superadmin'),
+('U002', 'Emmanuel', 'Barbosa', 'Santos', 'FatEman', 'UGFzc3dvcmRAMTIz', 'user'),
+('U003', 'Fatima', 'Tutona', 'Santos', 'fatimaSan2s', '0192023a7bbd73250516f069df18b500', 'user'),
+('U004', 'Emmanuel', 'Barbosa', 'Santos', 'FatEman12', 'UGFzc3dvcmRAMTIz', 'admin'),
+('U006', 'Chad', 'Barbosa', 'Santos', 'chadyboy', 'e6e061838856bf47e1de730719fb2609', 'user');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_info`
+--
+
+CREATE TABLE `user_info` (
+  `user_info_id` char(4) CHARACTER SET latin1 NOT NULL,
+  `phoneNumber` varchar(13) NOT NULL,
+  `businessName` varchar(30) NOT NULL,
+  `businessType` varchar(225) NOT NULL,
+  `annualIncomeTax` varchar(225) NOT NULL,
+  `tin` varchar(30) NOT NULL,
+  `municipality` varchar(30) NOT NULL,
+  `brgy` varchar(30) NOT NULL,
+  `street` varchar(30) NOT NULL,
+  `location` varchar(225) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `user_info`
+--
+
+INSERT INTO `user_info` (`user_info_id`, `phoneNumber`, `businessName`, `businessType`, `annualIncomeTax`, `tin`, `municipality`, `brgy`, `street`, `location`) VALUES
+('U002', '09112233445', 'SweetBox', 'Sole Proprietorship', '3000', '123456789', '', 'Poblacion District I', 'Santa Ana St.', '13902992.774321698, 1229660.4748192518'),
+('U003', '09112233445', 'Lettuce in a Box', 'Sole Proprietorship', '13000', '12344556', '', 'Poblacion District I', 'Santa Ana St.', '13902979.600963261, 1229765.3555022595'),
+('U006', '09112233445', 'Tubaan', 'Sole Proprietorship', '50000', '12344556', '', 'Poblacion District I', 'Santa Ana St.', '13903806.817248339, 1229446.7714639');
 
 -- --------------------------------------------------------
 
@@ -216,6 +253,12 @@ ALTER TABLE `user`
   ADD PRIMARY KEY (`user_id`);
 
 --
+-- Indexes for table `user_info`
+--
+ALTER TABLE `user_info`
+  ADD KEY `user_id` (`user_info_id`);
+
+--
 -- Indexes for table `wastecat`
 --
 ALTER TABLE `wastecat`
@@ -230,6 +273,16 @@ ALTER TABLE `wastecat`
 --
 ALTER TABLE `municipal`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `user_info`
+--
+ALTER TABLE `user_info`
+  ADD CONSTRAINT `user_info_ibfk_1` FOREIGN KEY (`user_info_id`) REFERENCES `user` (`user_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
