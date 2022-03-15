@@ -16,11 +16,14 @@ class Wastecat extends CI_Controller {
 
 	public function index()
 	{
-		$user['username'] = $this->session->userdata('username');
+		$user = array(
+			'name' => $this->session->userdata('name'),
+			'level' => $this->session->userdata('level')
+		);
 		$data['data_wastecat'] = $this->data_wastecat->get_data()->result();
 		$this->load->view('header');
 		$this->load->view('navigation', $user);
-		$this->load->view('wastecat', $data);
+		$this->load->view('admin/wastecat', $data);
 		$this->load->view('footer');
 		$this->load->view('source');
 	}

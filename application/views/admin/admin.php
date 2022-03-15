@@ -10,7 +10,7 @@
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <?php if($_GET['delete'] == "error"){ ?>
+                                <?php if(isset($_GET['delete']) && $_GET['delete'] == "error"){ ?>
                                     <div class="alert alert-danger" role="alert" id="alertMessage">There's an error in deleting an admin.</div>
                                 <?php }?>
                                 <table class="table table-bordered table-hover table-striped" id="dataTableAdmin" width="100%" cellspacing="0">
