@@ -22,7 +22,7 @@ map.on('click', function(env){
     
     map.getLayers().forEach(layer => {
         if (layer.get('name') && layer.get('name') == 'vectorLayer'){
-            map.removeLayer(layer)
+            map.removeLayer(layer);
         }
     });
 
@@ -42,17 +42,15 @@ map.on('click', function(env){
             src: 'https://openlayers.org/en/latest/examples/data/icon.png'
             })
         })
-    })
+    });
     Mapcoordinates = [env.coordinate[0], env.coordinate[1]];
     layer.set('name', 'vectorLayer');
     map.addLayer(layer);
-})
+});
 
 
 $(document).ready(function(){
     $("#alertMessage").hide();
-    // $("#dataTableAdmin").DataTable();
-    // Add user
     $("#signUpForm").submit(function(e){
 
         e.preventDefault();
@@ -77,8 +75,8 @@ $(document).ready(function(){
                     $("#alertMessage").html(data.message);
                 }
             }
-        })
-    })
+        });
+    });
     
     //Add Admin
     $("#submitAdmin").submit(function(e){
@@ -127,7 +125,15 @@ $(document).ready(function(){
     $("#wastecat_name").change(function(){
         var selectedOption = $("#wastecat_name").prop('selectedIndex');
         $('#wasteSpecs option').eq(selectedOption).prop('selected', true);
-    })
+    });
 
-   
+   $("form[name='form_edit_mahasiswa']").each(
+       function(){
+            $(this).find("select[name='name_wastecat']").change(function(){
+                var selectedOption = $(this).prop('selectedIndex');
+                var changeOption = $(this).parent().parent();
+                changeOption.find("select[name='spec'] option").eq(selectedOption).prop('selected', true);
+            });
+       }
+   );
 });

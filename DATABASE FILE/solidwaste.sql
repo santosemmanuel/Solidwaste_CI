@@ -2,10 +2,10 @@
 -- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Mar 13, 2022 at 10:03 AM
--- Server version: 10.4.22-MariaDB
--- PHP Version: 7.4.27
+-- Host: 127.0.0.1
+-- Generation Time: Mar 15, 2022 at 03:17 PM
+-- Server version: 10.4.20-MariaDB
+-- PHP Version: 8.0.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -202,10 +202,6 @@ CREATE TABLE `wastecat` (
   `name_wastecat` varchar(50) NOT NULL,
   `col_day` varchar(10) NOT NULL,
   `spec` text NOT NULL,
-  `source` varchar(15) NOT NULL,
-  `col_fees` int(11) NOT NULL,
-  `col_date` date NOT NULL,
-  `fin_date` date NOT NULL,
   `aktif` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -213,15 +209,9 @@ CREATE TABLE `wastecat` (
 -- Dumping data for table `wastecat`
 --
 
-INSERT INTO `wastecat` (`wastecat_id`, `name_wastecat`, `col_day`, `spec`, `source`, `col_fees`, `col_date`, `fin_date`, `aktif`) VALUES
-('K000', 'Liam Moore', 'Female', '7869 Ralph Street', '096001588696', 90, '2022-01-02', '2022-01-02', 0),
-('K001', 'Cythia Eddy', 'Female', '2902 Drainer Avenue', '08123456792', 1360, '2019-10-06', '2021-01-25', 0),
-('K002', 'Curt Payne', 'Male', '2277 Elsie Drive', '087840927394', 1450, '2019-12-04', '2021-02-22', 0),
-('K003', 'William Fransen', 'Male', '3178 Roy Alley', '08128349834', 1450, '2019-12-10', '2021-03-09', 0),
-('K004', 'Christine Moore', 'Female', '8600 Allace Avenue', '08122334458', 1400, '2020-02-03', '0000-00-00', 1),
-('K005', 'Clea Randolph', 'Female', '3914 Dennison Street', '78500014714', 0, '2021-05-04', '0000-00-00', 1),
-('K006', 'Thomas', 'Male', '4572 Emily Drive', '71400000250', 1560, '2021-08-01', '0000-00-00', 1),
-('W007', 'Female', 'Female', 'sdwd', 'Commerce/Indust', 500, '2022-01-02', '2023-01-02', 0);
+INSERT INTO `wastecat` (`wastecat_id`, `name_wastecat`, `col_day`, `spec`, `aktif`) VALUES
+('W001', 'Biodegrable Waste', 'Tuesday', 'peels of vegetables and fruits , paper , Wood', 1),
+('W002', 'Special Waste', 'Friday', 'computers , televison, washing machine , aircon ,refrigerator ,light bulb', 1);
 
 --
 -- Indexes for dumped tables
