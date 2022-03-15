@@ -132,7 +132,10 @@ class Wastecat extends CI_Controller {
 
 	public function laporan()
 	{
-		$user['username'] = $this->session->userdata('username');
+		$user = array(
+			'name' => $this->session->userdata('name'),
+			'level' => $this->session->userdata('level')
+		);
 		$this->load->view('header');
 		$this->load->view('navigation', $user);
 		$this->load->view('laporan/laporan_filter_wastecat');
@@ -142,7 +145,10 @@ class Wastecat extends CI_Controller {
 
 	public function laporan_filter()
 	{
-		$user['username'] = $this->session->userdata('username');
+		$user = array(
+			'name' => $this->session->userdata('name'),
+			'level' => $this->session->userdata('level')
+		);
 
 		$dari = $this->input->post('dari');
 		$sampai = $this->input->post('sampai');

@@ -16,7 +16,10 @@ class Expend extends CI_Controller {
 
 	public function index()
 	{
-		$user['username'] = $this->session->userdata('username');
+		$user = array(
+			'name' => $this->session->userdata('name'),
+			'level' => $this->session->userdata('level')
+		);
 		$data['data_expend'] = $this->data_expend->get_data()->result();
 		$data['data_wastecat'] = $this->data_wastecat->get_data()->result();
 		$this->load->view('header');
