@@ -16,14 +16,11 @@ class Wastecat extends CI_Controller {
 
 	public function index()
 	{
-		$user = array(
-			'name' => $this->session->userdata('name'),
-			'level' => $this->session->userdata('level')
-		);
+		$user['username'] = $this->session->userdata('username');
 		$data['data_wastecat'] = $this->data_wastecat->get_data()->result();
 		$this->load->view('header');
 		$this->load->view('navigation', $user);
-		$this->load->view('admin/wastecat', $data);
+		$this->load->view('wastecat', $data);
 		$this->load->view('footer');
 		$this->load->view('source');
 	}
@@ -37,6 +34,9 @@ class Wastecat extends CI_Controller {
 		$name_wastecat = $this->input->post('name_wastecat');
 		$col_day = $this->input->post('col_day');
 		$spec = $this->input->post('spec');
+		$source = $this->input->post('source');
+		$col_fees = $this->input->post('col_fees');
+		$col_date = $this->input->post('col_date');
 		$fin_date = $this->input->post('fin_date');
 
 		$aktif = 0;
@@ -54,6 +54,10 @@ class Wastecat extends CI_Controller {
 				'name_wastecat' => $name_wastecat,
 				'col_day' => $col_day,
 				'spec' => $spec,
+				'source' => $source,
+				'col_fees' => $col_fees,
+				'col_date' => $col_date,
+				'fin_date' => $fin_date,
 				'aktif' => $aktif
 			);
 			$aktif = $this->data_wastecat->insert_data($data,'wastecat');
@@ -73,6 +77,9 @@ class Wastecat extends CI_Controller {
 		$name_wastecat = $this->input->post('name_wastecat');
 		$col_day = $this->input->post('col_day');
 		$spec = $this->input->post('spec');
+		$source = $this->input->post('source');
+		$col_fees = $this->input->post('col_fees');
+		$col_date = $this->input->post('col_date');
 		$fin_date = $this->input->post('fin_date');
 
 		$aktif = 0;
@@ -88,6 +95,10 @@ class Wastecat extends CI_Controller {
 			'name_wastecat' => $name_wastecat,
 			'col_day' => $col_day,
 			'spec' => $spec,
+			'source' => $source,
+			'col_fees' => $col_fees,
+			'col_date' => $col_date,
+			'fin_date' => $fin_date,
 			'aktif' => $aktif
 		);
 		$action = $this->data_wastecat->update_data($wastecat_id, $data,'wastecat');
@@ -121,10 +132,7 @@ class Wastecat extends CI_Controller {
 
 	public function laporan()
 	{
-		$user = array(
-			'name' => $this->session->userdata('name'),
-			'level' => $this->session->userdata('level')
-		);
+		$user['username'] = $this->session->userdata('username');
 		$this->load->view('header');
 		$this->load->view('navigation', $user);
 		$this->load->view('laporan/laporan_filter_wastecat');
@@ -134,10 +142,7 @@ class Wastecat extends CI_Controller {
 
 	public function laporan_filter()
 	{
-		$user = array(
-			'name' => $this->session->userdata('name'),
-			'level' => $this->session->userdata('level')
-		);
+		$user['username'] = $this->session->userdata('username');
 
 		$dari = $this->input->post('dari');
 		$sampai = $this->input->post('sampai');

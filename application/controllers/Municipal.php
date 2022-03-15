@@ -15,14 +15,11 @@ class Municipal extends CI_Controller {
 
 	public function index()
 	{
-		$user = array(
-			'name' => $this->session->userdata('name'),
-			'level' => $this->session->userdata('level')
-		);
+		$user['username'] = $this->session->userdata('username');
 		$data['data_municipal'] = $this->data_municipal->get_data()->result();
 		$this->load->view('header');
 		$this->load->view('navigation', $user);
-		$this->load->view('admin/municipal', $data);
+		$this->load->view('municipal', $data);
 		$this->load->view('footer');
 		$this->load->view('source');
 	}
@@ -108,10 +105,7 @@ class Municipal extends CI_Controller {
 
 	public function laporan()
 	{
-		$user = array(
-			'name' => $this->session->userdata('name'),
-			'level' => $this->session->userdata('level')
-		);
+		$user['username'] = $this->session->userdata('username');
 		$this->load->view('header');
 		$this->load->view('navigation', $user);
 		$this->load->view('laporan/laporan_filter_municipal');
@@ -121,10 +115,7 @@ class Municipal extends CI_Controller {
 
 	public function laporan_filter()
 	{
-		$user = array(
-			'name' => $this->session->userdata('name'),
-			'level' => $this->session->userdata('level')
-		);
+		$user['username'] = $this->session->userdata('username');
 		
 		$zipcode = $this->input->post('zipcode');
 

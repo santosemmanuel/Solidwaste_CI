@@ -16,15 +16,12 @@ class Expend extends CI_Controller {
 
 	public function index()
 	{
-		$user = array(
-			'name' => $this->session->userdata('name'),
-			'level' => $this->session->userdata('level')
-		);	
+		$user['username'] = $this->session->userdata('username');
 		$data['data_expend'] = $this->data_expend->get_data()->result();
 		$data['data_wastecat'] = $this->data_wastecat->get_data()->result();
 		$this->load->view('header');
 		$this->load->view('navigation', $user);
-		$this->load->view('admin/expend', $data);
+		$this->load->view('expend', $data);
 		$this->load->view('footer');
 		$this->load->view('source');
 	}
@@ -158,10 +155,7 @@ class Expend extends CI_Controller {
 
 	public function laporan()
 	{
-		$user = array(
-			'name' => $this->session->userdata('name'),
-			'level' => $this->session->userdata('level')
-		);
+		$user['username'] = $this->session->userdata('username');
 		$this->load->view('header');
 		$this->load->view('navigation', $user);
 		$this->load->view('laporan/laporan_filter_expend');
@@ -171,10 +165,7 @@ class Expend extends CI_Controller {
 
 	public function laporan_filter()
 	{
-		$user = array(
-			'name' => $this->session->userdata('name'),
-			'level' => $this->session->userdata('level')
-		);
+		$user['username'] = $this->session->userdata('username');
 
 		$dari = $this->input->post('dari');
 		$sampai = $this->input->post('sampai');
