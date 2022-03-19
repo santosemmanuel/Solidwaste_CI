@@ -16,7 +16,9 @@
                                             <th>#</th>
                                             <th>ID</th>
                                             <th>Waste Category & Collection Day <sup>(Monday/Tuesday/Wednesday/Thursday/Friday/Saturday/Sunday)</sup></th>
+                                            <th>Collection Date</th>
                                             <th>Specification</th>
+                                            <th>Collection by kg.</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -44,7 +46,9 @@
                                                     <span class="badge badge-info">Pending</span>
                                                 <?php } ?>
                                             </td>
+                                            <td><?php echo $wastecat->col_date; ?></td>
                                             <td><?php echo $wastecat->spec ?></td>
+                                            <td><?php echo $wastecat->collection_kg ?></td>
                                             <td class="action-icons">
                                                 <a href="#" data-toggle="modal" data-target="#editWastecat<?php echo $wastecat->wastecat_id ?>"> 
                                                     <i title="ubah" class="fas fa-edit text-lg text-info"></i>
@@ -83,7 +87,14 @@
                                     <label class="control-label text-primary">ID</label>
                                     <input type="text" class="form-control" placeholder="ID " autofocus name="wastecat_id" required readonly value="<?php echo $kode ?>">
                                 </div>
-
+                                <div class="form-group">
+                                    <label class="control-label text-primary">Date of Collection</label>
+                                    <input type="text" class="form-control" placeholder="Collection Date" name="wastecat_date" id="datepicker" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label text-primary">Collection Day</label>
+                                    <input type="text" class="form-control" placeholder="Collection Day" name="wastecat_day" id="datepicker2" required>
+                                </div>
                                 <div class="form-group">
                                     <label class="control-label text-primary">Waste Category </label>
                                    <select class="form-control" id="wastecat_name" name="name_wastecat" pattern="[A-Za-z]{1,10}" required>
@@ -92,36 +103,21 @@
                                         <option value="Residual Waste">Residual Waste(Non-biodegradable)</option>
                                         <option value="Special Waste">Special Waste(Electro waste)</option>
                                         <option value="Recyclable Waste">Recyclable Waste</option>
-                                
                                     </select>
                                 </div>
-
                                 <div class="form-group">
-                                    <label class="control-label text-primary">Collection Day</label>
-                                    <select class="form-control" name="col_day" pattern="[A-Za-z]{1,10}" required>
-                                        <option value="">--Please Select--</option>
-                                        <option value="Monday">Monday</option>
-                                        <option value="Tuesday">Tuesday</option>
-                                        <option value="Wednesday">Wednesday</option>
-                                        <option value="Thursday">Thursday</option>
-                                        <option value="Friday">Friday</option>
-                                        <option value="Saturday">Saturday</option>
-                                        <option value="Sunday">Sunday</option>
-                                    </select>
-                                    <div class="invalid-feedback">
-                                    Choose Collection Schedule!
-                                    </div>
-                                </div>
-
-                               <div class="form-group">
                                     <label class="control-label text-primary">Specification</label>
-                                   <select class="form-control" id="wasteSpecs" name="spec" pattern="[A-Za-z]{1,10}" required readonly="true">
+                                    <select class="form-control" id="wasteSpecs" name="spec" pattern="[A-Za-z]{1,10}" required readonly="true">
                                         <option value="">--Please Select--</option>
                                         <option value="peels of vegetables and fruits , paper , Wood">peels of vegetables and Fruits , Paper , Wood</option>
                                         <option value="plastics, glass battles , cans , styrofoam">plastics, glass battles , cans , styrofoam</option>
                                         <option value="computers , televison, washing machine , aircon ,refrigerator ,light bulb">computers , televison, washing machine , aircon ,refrigerator ,light bulb</option>
                                         <option value="plastic cups , strew , plastic utensils , aluminum cans, mix paper">plastic cups , strew , plastic utensils , aluminum cans, mix paper</option>
                                     </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label text-primary">Daily Kg. Collection</label>
+                                    <input type="text" class="form-control" placeholder="Collection by Kg." name="wastecat_kg" required>
                                 </div>
                             </div>
                             <div class="modal-footer d-flex">
@@ -152,7 +148,14 @@
                                     <label class="control-label text-primary">ID</label>
                                     <input type="text" class="form-control" placeholder="Waste ID" autofocus name="wastecat_id" value="<?php echo $wastecat->wastecat_id ?>" readonly>
                                 </div>
-
+                                <div class="form-group">
+                                    <label class="control-label text-primary">Date of Collection</label>
+                                    <input type="text" class="form-control" placeholder="Collection Date" value="<?= $wastecat->col_date?>" name="wastecat_date" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label text-primary">Collection Day</label>
+                                    <input type="text" class="form-control" placeholder="Collection Day" value="<?= $wastecat->col_day?>" name="wastecat_day" required>
+                                </div>
                                 <div class="form-group">
                                     <label class="control-label text-primary">Waste Category</label>
                                      <select class="form-control" name="name_wastecat" pattern="[A-Za-z]{1,10}" required>
@@ -161,25 +164,7 @@
                                         <option value="Residual Waste" <?php if ($wastecat->name_wastecat === 'Residual Waste') { echo "selected"; } ?>>Residual Waste</option>
                                         <option value="Special Waste" <?php if ($wastecat->name_wastecat === 'Special Waste') { echo "selected"; } ?>>Special Waste</option>
                                         <option value="Recyclable Waste" <?php if ($wastecat->name_wastecat === 'Recyclable Waste') { echo "selected"; } ?>>Recyclable Waste</option>
-                                          
                                     </select>
-                                </div>
-
-                                <div class="form-group">
-                                    <label class="control-label text-primary">Collection Day</label>
-                                    <select class="form-control" name="col_day" pattern="[A-Za-z]{1,10}" required>
-                                        <option value="">--Please Select--</option>
-                                        <option value="Monday" <?php if ($wastecat->col_day === 'Monday') { echo "selected"; } ?>>Monday</option>
-                                        <option value="Tuesday" <?php if ($wastecat->col_day === 'Tuesday') { echo "selected"; } ?>>Tuesday</option>
-                                        <option value="Wednesday" <?php if ($wastecat->col_day === 'Wednesday') { echo "selected"; } ?>>Wednesday</option>
-                                        <option value="Thursday" <?php if ($wastecat->col_day === 'Thursday') { echo "selected"; } ?>>Thursday</option>
-                                          <option value="Friday" <?php if ($wastecat->col_day === 'Friday') { echo "selected"; } ?>>Friday</option>
-                                           <option value="Saturday" <?php if ($wastecat->col_day === 'Saturday') { echo "selected"; } ?>>Saturday</option>
-                                            <option value="Sunday" <?php if ($wastecat->col_day === 'Sunday') { echo "selected"; } ?>>Sunday</option>
-                                    </select>
-                                    <div class="invalid-feedback">
-                                    Choose the Collection Day!
-                                    </div>
                                 </div>
 
                                  <div class="form-group">
@@ -199,6 +184,10 @@
                                             plastic cups , strew , plastic utensils , aluminum cans, mix paper
                                         </option>
                                     </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label text-primary">Daily Kg. Collection</label>
+                                    <input type="text" class="form-control" placeholder="Collection by Kg." value="<?= $wastecat->collection_kg ?>" name="wastecat_kg" required>
                                 </div>
                             </div>
                             <div class="modal-footer d-flex">

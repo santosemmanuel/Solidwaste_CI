@@ -35,12 +35,11 @@ class Wastecat extends CI_Controller {
 		
 		$wastecat_id = $this->input->post('wastecat_id');
 		$name_wastecat = $this->input->post('name_wastecat');
-		$col_day = $this->input->post('col_day');
+		$col_day = $this->input->post('wastecat_day');
+		$col_date = $this->input->post('wastecat_date');
 		$spec = $this->input->post('spec');
-		$source = $this->input->post('source');
-		$col_fees = $this->input->post('col_fees');
-		$col_date = $this->input->post('col_date');
 		$fin_date = $this->input->post('fin_date');
+		$col_kg = $this->input->post('wastecat_kg');
 
 		$aktif = 0;
 
@@ -57,10 +56,8 @@ class Wastecat extends CI_Controller {
 				'name_wastecat' => $name_wastecat,
 				'col_day' => $col_day,
 				'spec' => $spec,
-				'source' => $source,
-				'col_fees' => $col_fees,
 				'col_date' => $col_date,
-				'fin_date' => $fin_date,
+				'collection_kg' => $col_kg,
 				'aktif' => $aktif
 			);
 			$aktif = $this->data_wastecat->insert_data($data,'wastecat');
@@ -78,12 +75,11 @@ class Wastecat extends CI_Controller {
 		
 		$wastecat_id = $this->input->post('wastecat_id');
 		$name_wastecat = $this->input->post('name_wastecat');
-		$col_day = $this->input->post('col_day');
+		$col_day = $this->input->post('wastecat_day');
+		$col_date = $this->input->post('wastecat_date');
 		$spec = $this->input->post('spec');
-		$source = $this->input->post('source');
-		$col_fees = $this->input->post('col_fees');
-		$col_date = $this->input->post('col_date');
 		$fin_date = $this->input->post('fin_date');
+		$col_kg = $this->input->post('wastecat_kg');
 
 		$aktif = 0;
 
@@ -98,10 +94,8 @@ class Wastecat extends CI_Controller {
 			'name_wastecat' => $name_wastecat,
 			'col_day' => $col_day,
 			'spec' => $spec,
-			'source' => $source,
-			'col_fees' => $col_fees,
 			'col_date' => $col_date,
-			'fin_date' => $fin_date,
+			'collection_kg' => $col_kg,
 			'aktif' => $aktif
 		);
 		$action = $this->data_wastecat->update_data($wastecat_id, $data,'wastecat');

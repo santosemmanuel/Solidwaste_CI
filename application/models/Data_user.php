@@ -13,26 +13,34 @@ class Data_user extends CI_Model {
 	}
 
 	public function save_user_data($user_data) {
-		$numOfUser = $this->db->count_all('user');
-		$userId = "U00".($numOfUser + 1);
 
+		$query = $this->db->select('user_id')->order_by('user_id','DESC')->limit(1)->get('user');
+		$lastId = $query->result();
+		$lastIdNumber = substr($lastId[0]->user_id, -1);
+		$userIdNumber = (int)$lastIdNumber;
+		$userId = "U00".($userIdNumber+ 1);
+		
 		$data = array(
 			'user_id' => $userId,
 			'firstName' => $user_data['firstName'],
 			'middleName' => $user_data['middleName'],
 			'lastName' => $user_data['lastName'],
 			'username' => $user_data['userName'],
-			'password' => md5($user_data['password']),
+			'password' => base64_encode($user_data['password']),
 			'level' => 'user'
 		);
+
+		$businessName = (isset($user_data['businessName']))? $user_data['businessName'] : "null";
+		$businessType = (isset($user_data['businessType']))? $user_data['businessType'] : "null";
+		$businessPermit = (isset($user_data['businessPermit']))? $user_data['businessPermit'] : "null";
+
 		$data_info = array(
 			'user_info_id' => $userId,
 			'phoneNumber' => $user_data['contactNumber'],
-			'businessName' => $user_data['businessName'],
-			'businessType' => $user_data['businessType'],
-			'annualIncomeTax' => $user_data['ITR'],
-			'tin' => $user_data['TIN'],
-			'municipality' => '',
+			'businessName' => $businessName,
+			'businessType' => $businessType,
+			'permitNumber' => $businessPermit,
+			'realEstate' => $user_data['realEstate'],
 			'brgy' => $user_data['barangay'],
 			'street' => $user_data['address'],
 			'location' => $user_data['coordinates']
@@ -43,11 +51,16 @@ class Data_user extends CI_Model {
 		} else {
 			return false;
 		}
+
 	}
 
 	public function save_admin($user_data){
-		$numOfUser = $this->db->count_all('user');
-		$userId = "U00".($numOfUser + 1);
+
+		$query = $this->db->select('user_id')->order_by('user_id','DESC')->limit(1)->get('user');
+		$lastId = $query->result();
+		$lastIdNumber = (int) substr($lastId[0]->user_id, -1);
+		$userId = "U00".($lastIdNumber+ 1);
+
 		$data = array(
 			'user_id' => $userId,
 			'firstName' => $user_data['firstName'],
@@ -58,6 +71,7 @@ class Data_user extends CI_Model {
 			'level' => 'admin'
 		);
 		return $this->db->insert('user',$data);
+		
 	}
 
 	public function get_admin(){
@@ -82,4 +96,5 @@ class Data_user extends CI_Model {
 		$this->db->where('user_id', $user_id);
 		return $this->db->delete('user');
 	}
+
 }

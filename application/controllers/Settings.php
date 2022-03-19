@@ -32,12 +32,11 @@ class Settings extends CI_Controller {
 
 	public function addAdmin(){
 		if ($this->input->is_ajax_request()) {
-
 			if ($this->adminValidation() != FALSE) {
-				if($this->data_user->save_admin($this->input->post())){
+				if ($this->data_user->save_admin($this->input->post())) {
 					$data = array('response' => 'success');
 				} else {
-					$data= array('response' => 'error', 'message' => 'Data Failed');
+					$data = array('response' => 'error', 'message' => 'Data Failed');
 				}
 			} else {
 				$data = array('response' => 'error', 'message' => validation_errors());

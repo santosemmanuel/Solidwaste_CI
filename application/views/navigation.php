@@ -43,22 +43,6 @@
                         <span>Municipality/LGU</span></a>
                 </li>
 
-                <!-- <hr class="sidebar-divider"> -->
-
-                <li class="nav-item">
-                    <a class="nav-link" href="<?php echo base_url()?>transac">
-                        <i class="fas fa-receipt fa-2x text-gray-500"></i>
-                        <span>Transactions</span></a>
-                </li>
-
-                <!-- <hr class="sidebar-divider"> -->
-
-                <li class="nav-item">
-                    <a class="nav-link" href="<?php echo base_url()?>expend">
-                        <i class="fas fa-fw fa-share"></i>
-                        <span>Expenditure</span></a>
-                </li>
-
                 <!-- Nav Item - Report Collapse Menu -->
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
@@ -71,8 +55,6 @@
                         <div class="bg-white py-2 collapse-inner rounded">
                             <a class="collapse-item" href="<?php echo base_url()?>wastecat/laporan">Waste Category</a>
                             <a class="collapse-item" href="<?php echo base_url()?>municipal/laporan">Municipality/LGU</a>
-                            <a class="collapse-item" href="<?php echo base_url()?>transac/laporan">Transactions</a>
-                            <a class="collapse-item" href="<?php echo base_url()?>expend/laporan">Expenditure</a>
                         </div>
                     </div>
                 </li>
@@ -97,7 +79,7 @@
 
                 <!-- Nav Item - Dashboard -->
                 <li class="nav-item">
-                    <a class="nav-link" href="<?php echo base_url()?>dashboard">
+                    <a class="nav-link" href="<?php echo base_url()?>personalInfo">
                         <i class="fas fa-fw fa-tachometer-alt"></i>
                         <span>Personal Info</span></a>
                 </li>
@@ -106,7 +88,7 @@
                 <!-- <hr class="sidebar-divider"> -->
 
                 <li class="nav-item">
-                    <a class="nav-link" href="<?php echo base_url()?>wastecat">
+                    <a class="nav-link" href="<?php echo base_url()?>businessInfo">
                         <i class="fas fa-trash-alt"></i>
                         <span>Business Info</span></a>
                 </li>
@@ -114,7 +96,7 @@
                 <!-- <hr class="sidebar-divider"> -->
 
                 <li class="nav-item">
-                    <a class="nav-link" href="<?php echo base_url()?>municipal">
+                    <a class="nav-link" href="<?php echo base_url()?>wasteInfo">
                         <i class="fas fa-building"></i>
                         <span>Waste Info</span></a>
                 </li>
@@ -122,7 +104,7 @@
                 <!-- <hr class="sidebar-divider"> -->
 
                 <li class="nav-item">
-                    <a class="nav-link" href="<?php echo base_url()?>municipal">
+                    <a class="nav-link" href="<?php echo base_url()?>concerns">
                         <i class="fas fa-building"></i>
                         <span>Concerns</span></a>
                 </li>

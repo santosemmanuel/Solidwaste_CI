@@ -57,9 +57,10 @@ class Welcome extends CI_Controller{
 			$this->form_validation->set_rules('userName', 'User Name', 'required');
 			$this->form_validation->set_rules('password', 'Password', 'required');
 			$this->form_validation->set_rules('reTypePassword', 'Password Confirmation', 'required|matches[password]');
-			$this->form_validation->set_rules('businessName', 'Business Name', 'required');
-			$this->form_validation->set_rules('ITR', 'Annual Income Tax Return', 'required');
-			$this->form_validation->set_rules('TIN', 'Tax Identification Number', 'required');
+			if ($this->input->post('realEstate') != 'residential') {
+				$this->form_validation->set_rules('businessName', 'Business Name', 'required');
+				$this->form_validation->set_rules('businessPermit', 'Business Permit Number', 'required');
+			}
 			$this->form_validation->set_rules('address', 'Address', 'required');
 			$this->form_validation->set_rules('coordinates', 'Location on the Map', 'required');
 		
@@ -69,6 +70,7 @@ class Welcome extends CI_Controller{
 				} else {
 					$data= array('response' => 'error', 'message' => 'Data Failed');
 				}
+				
 			} else {
 				$data = array('response' => 'error', 'message' => validation_errors());
 			}

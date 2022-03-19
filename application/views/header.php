@@ -24,10 +24,10 @@
     <!-- Custom styles for this template-->
     <link href="<?php echo base_url().'assets/css/sb-admin-2.min.css' ?>" rel="stylesheet">
     <link href="<?php echo base_url().'assets/css/bootstrap.min.css' ?>" rel="stylesheet">
+    <link rel="stylesheet" href="<?php echo base_url().'assets/css/jquery-ui.min.css'?>">
     
     <!-- Datatables-->
     <link href="<?php echo base_url().'assets/vendor/datatables/dataTables.bootstrap4.min.css' ?>" rel="stylesheet">
-
   
     <link rel="stylesheet" href="<?php echo base_url().'assets/css/ol.css' ?>">
     <style>

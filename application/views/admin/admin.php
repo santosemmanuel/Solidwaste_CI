@@ -94,7 +94,7 @@
                                     </div>
                                     <div class="col-md-4 mb-3">
                                         <label for="validationCustom05">Re-type Password</label>
-                                        <input type="passwordu" class="form-control" name="reTypePassword" placeholder="Re-Type Password">
+                                        <input type="password" class="form-control" name="reTypePassword" placeholder="Re-Type Password">
                                     </div>
                                 </div>
                             </div>

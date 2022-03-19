@@ -117,30 +117,12 @@
                         </div>
                         <div class="form-row">
                             <div class="col">
-                                <label for="exampleInputEmail1">Business Name</label>
-                                <input type="text" class="form-control" aria-describedby="" name="businessName" placeholder="Business Name">
-                            </div>
-                            <div class="col">
-                                <label for="exampleInputPassword1">Business Type</label>
-                                <select class="form-control" name="businessType">
-                                    <option>Sole Proprietorship</option>
-                                    <option>Partnership</option>
-                                    <option>Limited Partnership</option>
-                                    <option>Corporation</option>
-                                    <option>limited liability company (LLC)</option>
-                                    <option>Non-profit</option>
-                                    <option>Co-op</option>
+                                <label for="exampleInputPassword1">Real Estate Type</label>
+                                <select class="form-control" name="realEstate" id="realEstate">
+                                    <option value="residential">Residential</option>
+                                    <option value="commercial">Commercial</option>
+                                    <option value="industrial">Industrial</option>
                                 </select>
-                            </div>
-                            <div class="col">
-                                <label for="exampleInputPassword1">Annual Income Tax Return</label>
-                                <input type="number" class="form-control" name="ITR" placeholder="Annual Income Tax Return">
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="col-3">
-                                <label for="exampleInputEmail1">TIN</label>
-                                <input type="text" class="form-control" aria-describedby="" name="TIN" placeholder="TIN">
                             </div>
                             <div class="col">
                                 <label for="exampleInputPassword1">Select Brgy.</label>
@@ -160,7 +142,31 @@
                                 <label for="exampleInputPassword1">Address</label>
                                 <input type="text" class="form-control" name="address" placeholder="Street name">
                             </div>
+                        </div>
+
+                        <div class="form-row" id="commercialIndustry" style="display:none">
+                            <div class="col">
+                                <label for="exampleInputEmail1">Business Name</label>
+                                <input type="text" class="form-control" aria-describedby="" name="businessName" placeholder="Business Name">
+                            </div>
+                            <div class="col">
+                                <label for="exampleInputPassword1">Business Type</label>
+                                <select class="form-control" name="businessType">
+                                    <option>Sole Proprietorship</option>
+                                    <option>Partnership</option>
+                                    <option>Limited Partnership</option>
+                                    <option>Corporation</option>
+                                    <option>limited liability company (LLC)</option>
+                                    <option>Non-profit</option>
+                                    <option>Co-op</option>
+                                </select>
+                            </div>
+                            <div class="col">
+                                <label for="exampleInputPassword1">Business Permit Number</label>
+                                <input type="number" class="form-control" name="businessPermit" placeholder="Annual Income Tax Return">
+                            </div>
                         </div><br>
+                       
                         <div class="row">
                             <div id="map" class="map"></div>
                         </div>
