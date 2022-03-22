@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Municipal extends CI_Controller {
+class Usersection extends CI_Controller {
 
 	function __construct(){
 		parent::__construct();
@@ -9,77 +9,69 @@ class Municipal extends CI_Controller {
 		if ($this->session->userdata('status') != "login") {
 			redirect(base_url().'welcome?pesan=belumlogin');
 		}
-		$this->load->library('form_validation');
-		$this->load->model('data_municipal');
+		$this->load->model("data_usersection");
+		$this->load->model("data_user");
 	}
 
-	public function index()
-	{
+	public function index(){
 		$user = array(
 			'name' => $this->session->userdata('name'),
 			'level' => $this->session->userdata('level')
 		);
-		$data['data_municipal'] = $this->data_municipal->get_data()->result();
+		$data['data_usersection'] = $this->data_usersection->get_data()->result();
 		$this->load->view('header');
 		$this->load->view('navigation', $user);
-		$this->load->view('admin/municipal', $data);
+		$this->load->view('admin/usersection', $data);
 		$this->load->view('footer');
 		$this->load->view('source');
 	}
 
-	public function add()
-	{
-		$info['datatype'] = 'municipal';
-		$info['operation'] = 'Input';
-		
-		$municipal_id = $this->input->post('municipal_id');
-		$name_municipal = $this->input->post('name_municipal');
-		$zipcode = $this->input->post('zipcode');
-		$province = $this->input->post('province');
-		$barangay = $this->input->post('barangay');
-
-		$this->load->view('header');
-
-		$records = $this->data_municipal->get_records($municipal_id)->result();
-		if (count($records) == 0) {
-			$data = array(
-				'municipal_id' => $municipal_id,
-				'name_municipal' => $name_municipal,
-				'zipcode' => $zipcode,
-				'province' => $province,
-				'barangay' => $barangay
-			);
-			$action = $this->data_municipal->insert_data($data,'municipal');
-			$this->load->view('notifications/insert_success', $info);	
-		} else {
-			$this->load->view('notifications/insert_failed', $info);
-		}
-		$this->load->view('source');	
-	}
-
-	public function edit()
-	{
-		$info['datatype'] = 'municipal';
+	public function edit(){
+		$info['datatype'] = 'usersection';
 		$info['operation'] = 'Ubah';
 		
-		$municipal_id = $this->input->post('municipal_id');
-		$name_municipal = $this->input->post('name_municipal');
-		$zipcode = $this->input->post('zipcode');
-		$province = $this->input->post('province');
+		$user_id = $this->uri->segment('3');
+		$firstName = $this->input->post('firstName');
+		$middleName = $this->input->post('middleName');
+		$lastName = $this->input->post('lastName');
+		$contactNumber = $this->input->post('contactNumber');
+		$username = $this->input->post('userName');
+		$password = $this->input->post('password');
+		$realEstate = $this->input->post('realEstate');
 		$barangay = $this->input->post('barangay');
+		$address = $this->input->post('address');
+		$coordinate = $this->input->post('coordinate');
 
-		$this->load->view('header');
+		if($this->input->post('businessName') != ""){ $businessName = $this->input->post('businessName'); } else { $businessName = "null"; };
+		if($this->input->post('businessType') != ""){ $businessType = $this->input->post('businessType'); } else { $businessType = "null"; };
+		if($this->input->post('businessPermit') != ""){ $businessPermit = $this->input->post('businessPermit'); } else { $businessPermit = "null"; };
 
 		$data = array(
-			'municipal_id' => $municipal_id,
-			'name_municipal' => $name_municipal,
-			'zipcode' => $zipcode,
-			'province' => $province,
-			'barangay' => $barangay
+			'firstName' => $firstName,
+			'middleName' => $middleName,
+			'lastName' => $lastName,
+			'username' => $username,
+			'password' => base64_encode($password),
+			'level' => 'user'
 		);
-		$action = $this->data_municipal->update_data($municipal_id, $data,'municipal');
 
-		if ($action) {
+		$data_info = array(
+			'phoneNumber' => $contactNumber,
+			'businessName' => $businessName,
+			'businessType' => $businessType,
+			'permitNumber' => $businessPermit,
+			'realEstate' => $realEstate,
+			'brgy' => $barangay,
+			'street' => $address,
+			'location' => $coordinate
+		);
+
+		$user_action = $this->data_user->update_data(array('user_id' => $user_id), $data,'user');
+		$user_info_action = $this->data_user->update_data(array('user_info_id' => $user_id), $data_info, 'user_info');
+		
+		$this->load->view('header');
+
+		if ($user_action && $user_info_action) {
 			$this->load->view('notifications/insert_success', $info);
 		} else {
 			$this->load->view('notifications/insert_failed', $info);
@@ -90,13 +82,13 @@ class Municipal extends CI_Controller {
 
 	public function delete()
 	{
-		$info['datatype'] = 'municipal';
+		$info['datatype'] = 'usersection';
 
-		$municipal_id = $this->uri->segment('3');
+		$user_id = $this->uri->segment('3');
 
 		$this->load->view('header');
 
-		$action = $this->data_municipal->delete_data($municipal_id, 'municipal');
+		$action = $this->data_usersection->delete_data($user_id);
 		if ($action) {
 			$this->load->view('notifications/delete_success', $info);
 		} else {
@@ -178,5 +170,9 @@ class Municipal extends CI_Controller {
 		$this->dompdf->load_html($html);
 		$this->dompdf->render();
 		$this->dompdf->stream("Municipal_Data.pdf", array('Attachment'=>0));
+	}
+
+	function get_ajaxData(){
+		echo json_encode($this->data_usersection->get_data()->result());
 	}
 }

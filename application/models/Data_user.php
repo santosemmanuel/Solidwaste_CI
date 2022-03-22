@@ -54,6 +54,11 @@ class Data_user extends CI_Model {
 
 	}
 
+	public function update_data($id, $data, $table){
+		$this->db->where($id);
+		return $this->db->update($table, $data);
+	}
+
 	public function save_admin($user_data){
 
 		$query = $this->db->select('user_id')->order_by('user_id','DESC')->limit(1)->get('user');

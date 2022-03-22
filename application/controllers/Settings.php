@@ -47,7 +47,6 @@ class Settings extends CI_Controller {
 
 	public function editAdmin(){
 		if($this->input->is_ajax_request()){
-		
 			if ($this->adminValidation() != FALSE) {
 				if($this->data_user->edit_admin($this->input->post())){
 					$data = array('response' => 'success');

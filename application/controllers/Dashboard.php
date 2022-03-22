@@ -11,9 +11,6 @@ class Dashboard extends CI_Controller {
 			redirect(base_url().'welcome?pesan=belumlogin');
 		}
 		$this->load->model('data_wastecat');
-		$this->load->model('data_municipal');
-		$this->load->model('data_transac');
-		$this->load->model('data_expend');
 	}
 
 	public function index()
@@ -22,17 +19,9 @@ class Dashboard extends CI_Controller {
 			'name' => $this->session->userdata('name'),
 			'level' => $this->session->userdata('level')
 		);
-		$total_pendapatan = $this->data_transac->total_income_year();
-		$total_expend = $this->data_expend->total_spend_year();
-		$total_keuntungan = $total_pendapatan - $total_expend;
+	
 		$data = array(
 					'n_wastecat' => $this->data_wastecat->count_rows(),
-					'n_municipal' => $this->data_municipal->count_rows(),
-					'n_transac' => $this->data_transac->count_rows(),
-					'n_transac_aktif' => $this->data_transac->count_active(),
-					'total_pendapatan' => $total_pendapatan ,
-					'total_expend' => $total_expend,
-					'total_keuntungan' => $total_keuntungan
 				);
 
 		$this->load->view('header');

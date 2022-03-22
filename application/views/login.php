@@ -14,7 +14,6 @@
                 </nav>
             </div>
         </header>
-
         <main role="" class="">
             <div class="row">
                 <div class="col">
@@ -70,7 +69,7 @@
     </div>
     <!-- Sign Up -->
     <div class="modal fade bd-example-modal-lg" id="signUpModal" tabindex="-1" width="100" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-xl">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content" style="color: black">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLongTitle">Sign Up</h5>
@@ -163,7 +162,7 @@
                             </div>
                             <div class="col">
                                 <label for="exampleInputPassword1">Business Permit Number</label>
-                                <input type="number" class="form-control" name="businessPermit" placeholder="Annual Income Tax Return">
+                                <input type="number" class="form-control" name="businessPermit" placeholder="Business Permit Number">
                             </div>
                         </div><br>
                        

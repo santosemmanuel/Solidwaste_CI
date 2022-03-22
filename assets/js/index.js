@@ -2,7 +2,7 @@ $("#signUpModal").on("shown.bs.modal", function () {
 	map.updateSize();
 });
 
-const map = new ol.Map({
+var map = new ol.Map({
 	target: "map",
 	layers: [
 		new ol.layer.Tile({
@@ -116,7 +116,10 @@ $(document).ready(function () {
 			data: dataForm,
 			success: function (data) {
 				if (data.response == "success") {
-					location.reload();
+					toastr.success("Admin has successfully been add.");
+					setTimeout(function () {
+						location.reload();
+					}, 2000);
 				} else {
 					$("#alertMessage").show();
 					$("#alertMessage").html(data.message);
@@ -137,7 +140,10 @@ $(document).ready(function () {
 			data: dataForm,
 			success: function (data) {
 				if (data.response == "success") {
-					location.reload();
+					toastr.success("An Admin has successfully been edit.");
+					setTimeout(function () {
+						location.reload();
+					}, 2000);
 				} else {
 					$("#alertMessage" + dataForm[0].value + "").removeAttr(
 						"hidden",
@@ -161,6 +167,7 @@ $(document).ready(function () {
 			$("#datepicker2").val($.datepicker.formatDate("DD", date));
 		},
 	};
+
 	var currentDate = new Date();
 	$("#datepicker2").val($.datepicker.formatDate("DD", currentDate));
 	$("#datepicker").datepicker(pickerOpts1).datepicker("setDate", currentDate);
@@ -190,6 +197,18 @@ $(document).ready(function () {
 		$(this).find("input[name='wastecat_date']").datepicker(pickerOpts2);
 	});
 
+	$("form[name='editUserModal']").each(function () {
+		$(this)
+			.find("select[name='realEstate']")
+			.change(function () {
+				if ($(this).val() == "residential") {
+					$(this).parent().parent().parent().find(".commercialIndustry").hide();
+				} else {
+					$(this).parent().parent().parent().find(".commercialIndustry").show();
+				}
+			});
+	});
+
 	$("#realEstate").change(function () {
 		if ($(this).val() == "residential") {
 			$("#commercialIndustry").hide();
@@ -197,4 +216,127 @@ $(document).ready(function () {
 			$("#commercialIndustry").show();
 		}
 	});
+
+	$.get(base_url + "usersection/get_ajaxData", function (data) {
+		var dataLength = JSON.parse(data);
+		let map = [];
+		for (let index = 0; index < dataLength.length; index++) {
+			var location = dataLength[index].location.split(", ");
+			iconFeature1 = new ol.Feature({
+				geometry: new ol.geom.Point([location[0], location[1]]),
+			});
+			map1 = new ol.Map({
+				target: "viewMap" + dataLength[index].user_id,
+				layers: [
+					new ol.layer.Tile({
+						minZoom: 10,
+						source: new ol.source.OSM(),
+					}),
+				],
+				view: new ol.View({
+					center: [13903066.89804018, 1229275.2830421156],
+					zoom: 15,
+					minZoom: 11,
+				}),
+			});
+			var layer = new ol.layer.Vector({
+				source: new ol.source.Vector({
+					features: [iconFeature1],
+				}),
+				style: new ol.style.Style({
+					image: new ol.style.Icon({
+						anchor: [0.5, 46],
+						anchorXUnits: "fraction",
+						anchorYUnits: "pixels",
+						src: "https://openlayers.org/en/latest/examples/data/icon.png",
+					}),
+				}),
+			});
+			layer.set("name", "vector");
+			map1.addLayer(layer);
+			map.push(map1);
+		}
+		for (let index = 0; index < dataLength.length; index++) {
+			$("#viewBusiness"+dataLength[index].user_id).on("shown.bs.modal", function() {
+				map[index].updateSize();
+			});
+		}
+	});
+
+	$.get(base_url + "usersection/get_ajaxData", function (data) {
+		var dataLength = JSON.parse(data);
+		let map = [];
+		for (let index = 0; index < dataLength.length; index++) {
+			var location = dataLength[index].location.split(", ");
+			iconFeature1 = new ol.Feature({
+				geometry: new ol.geom.Point([location[0], location[1]]),
+			});
+			map1 = new ol.Map({
+				target: "viewMap1" + dataLength[index].user_id,
+				layers: [
+					new ol.layer.Tile({
+						minZoom: 10,
+						source: new ol.source.OSM(),
+					}),
+				],
+				view: new ol.View({
+					center: [13903066.89804018, 1229275.2830421156],
+					zoom: 15,
+					minZoom: 11,
+				}),
+			});
+			var layer = new ol.layer.Vector({
+				source: new ol.source.Vector({
+					features: [iconFeature1],
+				}),
+				style: new ol.style.Style({
+					image: new ol.style.Icon({
+						anchor: [0.5, 46],
+						anchorXUnits: "fraction",
+						anchorYUnits: "pixels",
+						src: "https://openlayers.org/en/latest/examples/data/icon.png",
+					}),
+				}),
+			});
+			layer.set("name", "vector");
+			$("#editMunicipal"+dataLength[index].user_id).find("input[name='coordinate']").val(location[0]+", "+location[1]);
+			map1.addLayer(layer);
+			map.push(map1);
+		}
+		for (let index = 0; index < dataLength.length; index++) {
+			$("#editMunicipal"+dataLength[index].user_id).on("shown.bs.modal", function() {
+				map[index].updateSize();
+				map[index].on("click", function (env) {
+					map[index].getLayers().forEach((layer) => {
+						if (layer.get("name") && layer.get("name") == "vectorLayer" || layer.get("name") && layer.get("name") == "vector") {
+							map[index].removeLayer(layer);
+						}
+					});
+				
+					const iconFeature = new ol.Feature({
+						geometry: new ol.geom.Point([env.coordinate[0], env.coordinate[1]]),
+					});
+				
+					var layer = new ol.layer.Vector({
+						source: new ol.source.Vector({
+							features: [iconFeature],
+						}),
+						style: new ol.style.Style({
+							image: new ol.style.Icon({
+								anchor: [0.5, 46],
+								anchorXUnits: "fraction",
+								anchorYUnits: "pixels",
+								src: "https://openlayers.org/en/latest/examples/data/icon.png",
+							}),
+						}),
+					});
+					layer.set("name", "vectorLayer");
+					$("#editMunicipal"+dataLength[index].user_id).find("input[name='coordinate']").val(env.coordinate[0]+", "+env.coordinate[1]);
+					map[index].addLayer(layer);
+				});
+			});
+		}
+	});
+
+
 });

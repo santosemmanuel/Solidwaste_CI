@@ -38,9 +38,9 @@
                 <!-- <hr class="sidebar-divider"> -->
 
                 <li class="nav-item">
-                    <a class="nav-link" href="<?php echo base_url()?>municipal">
+                    <a class="nav-link" href="<?php echo base_url()?>usersection">
                         <i class="fas fa-building"></i>
-                        <span>Municipality/LGU</span></a>
+                        <span>User's Section</span></a>
                 </li>
 
                 <!-- Nav Item - Report Collapse Menu -->
