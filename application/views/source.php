@@ -9,7 +9,7 @@
     <script src="<?php echo base_url().'assets/vendor/jquery/jquery-ui.min.js'?>"></script>
     <!-- Costum Javascript code -->
     <script>var base_url = "<?= base_url()?>";</script>
-   
+    <script src="<?php echo base_url()."assets/vendor/fullcalendar/main.js"?>"></script>
     <!-- Core plugin JavaScript-->
     <script src="<?php echo base_url().'assets/vendor/jquery-easing/jquery.easing.min.js' ?>"></script>
 
@@ -23,7 +23,17 @@
     <!-- Page level custom scripts for Tables-->
     <script src="<?php echo base_url().'assets/js/demo/datatables-demo.js' ?>"></script>
     <script src="<?php echo base_url().'assets/js/index.js'?>"></script>
-    
+    <script>
+
+document.addEventListener('DOMContentLoaded', function() {
+  var calendarEl = document.getElementById('calendar');
+  var calendar = new FullCalendar.Calendar(calendarEl, {
+    initialView: 'dayGridMonth'
+  });
+  calendar.render();
+});
+
+</script>
 </body>
 
 </html>

@@ -2,16 +2,13 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Settings extends CI_Controller {
+class Collectionsched extends CI_Controller {
 
 	function __construct(){
 		parent::__construct();
 		// cek sesi login
 		if ($this->session->userdata('status') != "login") {
 			redirect(base_url().'welcome?pesan=belumlogin');
-		}
-		if ($this->session->userdata('level') == "user"){
-			show_404();
 		}
 		$this->load->model('data_user');
 		$this->load->library('form_validation');
@@ -25,11 +22,14 @@ class Settings extends CI_Controller {
     }
 
 	public function index(){
-        $data['adminUsers'] = $this->data_user->get_admin()->result();
+        $data['driverData'] = $this->data_user->getDriver()->result();
+		$data['truckData'] = $this->data_user->getTruck()->result();
         $this->load->view('header');
 		$this->load->view('navigation', $this->user());
-		$this->load->view('admin/settings', $data);
+		$this->load->view('admin/collectsched', $data);
 		$this->load->view('footer');
 		$this->load->view('source');
 	}
+
+
 }

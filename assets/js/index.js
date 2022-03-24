@@ -110,7 +110,7 @@ $(document).ready(function () {
 
 		var dataForm = $("#submitAdmin").serializeArray();
 		$.ajax({
-			url: base_url + "settings/addAdmin",
+			url: base_url + "admin/addAdmin",
 			type: "post",
 			dataType: "json",
 			data: dataForm,
@@ -134,7 +134,7 @@ $(document).ready(function () {
 
 		var dataForm = $(this).serializeArray();
 		$.ajax({
-			url: base_url + "settings/editAdmin",
+			url: base_url + "admin/editAdmin",
 			type: "post",
 			dataType: "json",
 			data: dataForm,
@@ -338,5 +338,102 @@ $(document).ready(function () {
 		}
 	});
 
+	$("#dataTable1").DataTable();
 
+	//Add Driver
+	$("#submitDriver").on('submit', function(e){
+		e.preventDefault();
+		var driverData = $(this).serializeArray();
+		$.ajax({
+			url: base_url + "drivertruck/addDriver",
+			type: "post",
+			dataType: "json",
+			data: driverData,
+			success: function (data) {
+				if (data.response == "success") {
+					toastr.success("Driver successfully added.");
+					setTimeout(function () {
+						location.reload();
+					}, 2000);
+				} else {
+					$("#alertMessage").html(data.message).show();
+				}
+			},
+		});
+	});
+
+	//Edit Driver
+	$(".editDriverForm").submit(function (e) {
+		e.preventDefault();
+
+		var dataForm = $(this).serializeArray();
+		$.ajax({
+			url: base_url + "drivertruck/editDriver",
+			type: "post",
+			dataType: "json",
+			data: dataForm,
+			success: function (data) {
+				if (data.response == "success") {
+					toastr.success("An Admin has successfully been edit.");
+					setTimeout(function () {
+						location.reload();
+					}, 2000);
+				} else {
+					$("#alertMessage" + dataForm[0].value + "").removeAttr(
+						"hidden",
+						"hidden"
+					);
+					$("#alertMessage" + dataForm[0].value + "").html(data.message);
+				}
+			},
+		});
+	});
+
+	//Add Truck
+	$("#submitTruck").on('submit', function(e){
+		e.preventDefault();
+		var driverData = $(this).serializeArray();
+		$.ajax({
+			url: base_url + "drivertruck/addTruck",
+			type: "post",
+			dataType: "json",
+			data: driverData,
+			success: function (data) {
+				if (data.response == "success") {
+					toastr.success("Truck successfully added.");
+					setTimeout(function () {
+						location.reload();
+					}, 2000);
+				} else {
+					$("#alertMessage1").html(data.message).removeAttr("hidden","hidden");
+				}
+			},
+		});
+	});
+
+	$(".editTruck").on('submit', function(e){
+		e.preventDefault();
+
+		var dataForm = $(this).serializeArray();
+		$.ajax({
+			url: base_url + "drivertruck/editTruck",
+			type: "post",
+			dataType: "json",
+			data: dataForm,
+			success: function (data) {
+				if (data.response == "success") {
+					toastr.success("An Admin has successfully been edit.");
+					setTimeout(function () {
+						location.reload();
+					}, 2000);
+				} else {
+					$("#alertMessage" + dataForm[0].value + "").removeAttr(
+						"hidden",
+						"hidden"
+					);
+					$("#alertMessage" + dataForm[0].value + "").html(data.message);
+				}
+			},
+		});
+	});
 });

@@ -28,7 +28,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css">
     <!-- Datatables-->
     <link href="<?php echo base_url().'assets/vendor/datatables/dataTables.bootstrap4.min.css' ?>" rel="stylesheet">
-  
+    <link rel="stylesheet" href="<?php echo base_url().'assets/vendor/fullcalendar/main.css'?>">
     <link rel="stylesheet" href="<?php echo base_url().'assets/css/ol.css' ?>">
     <style>
       .map{

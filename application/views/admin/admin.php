@@ -9,11 +9,11 @@
                                 class="fas fa-plus fa-sm text-white-500"></i>Add Administrator</a>
                         </div>
                         <div class="card-body">
-                            <div class="table-responsive">
-                                <?php if(isset($_GET['delete']) && $_GET['delete'] == "error"){ ?>
+                            <?php if(isset($_GET['delete']) && $_GET['delete'] == "error"){ ?>
                                     <div class="alert alert-danger" role="alert" id="alertMessage">There's an error in deleting an admin.</div>
                                 <?php }?>
-                                <table class="table table-bordered table-hover table-striped" id="dataTableAdmin" width="100%" cellspacing="0">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-hover table-striped" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr class="text-primary">
                                             <th>#</th>
@@ -23,7 +23,7 @@
                                             <th>Last Name</th>
                                             <th>Username</th>
                                             <th>Password</th>
-                                            <th colspan="2">Action</th>
+                                            <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -39,12 +39,14 @@
                                                 <td><?= $value->lastName ?></td>
                                                 <td><?= $value->username ?></td>
                                                 <td><?= base64_decode($value->password) ?></td>
-                                                <td><a href="#" data-toggle="modal" data-target="#editAdmin<?= $value->user_id ?>"> 
+                                                <td class="action-icons">
+                                                    <a href="#" data-toggle="modal" data-target="#editAdmin<?= $value->user_id ?>"> 
                                                         <i title="ubah" class="fas fa-edit text-lg text-info"></i>
-                                                    </a></td>
-                                                <td> <a href="#" data-toggle="modal" data-target="#deleteAdmin<?= $value->user_id ?>"> 
+                                                    </a>
+                                                    <a href="#" data-toggle="modal" data-target="#deleteAdmin<?= $value->user_id ?>"> 
                                                         <i title="hapus" class="fas fa-trash text-lg text-danger"></i>
-                                                    </a></td>
+                                                    </a>
+                                                </td>
                                             </tr>
                                         <?php }?>
                                     </tbody>
@@ -175,7 +177,7 @@
                         </div>
                         <div class="modal-footer d-flex">
                             <button type="button" class="flex-fill btn btn-danger btn-user" data-dismiss="modal">Cancel</button>
-                            <a href="<?php echo base_url()."settings/deleteAdmin/".$value->user_id; ?>" type="submit" class="flex-fill btn btn-warning btn-user">Delete</a>
+                            <a href="<?php echo base_url()."admin/deleteAdmin/".$value->user_id; ?>" type="submit" class="flex-fill btn btn-warning btn-user">Delete</a>
                         </div>
                     </div>
                 </div>

@@ -35,15 +35,26 @@
                         <span>Waste Category</span></a>
                 </li>
 
+                <li class="nav-item">
+                    <a class="nav-link" href="<?php echo base_url()?>collectionsched">
+                        <i class="fas fa-calendar"></i>
+                        <span>Collection Schedule</span></a>
+                </li>
+
                 <!-- <hr class="sidebar-divider"> -->
 
                 <li class="nav-item">
                     <a class="nav-link" href="<?php echo base_url()?>usersection">
-                        <i class="fas fa-building"></i>
+                        <i class="fas fa-users"></i>
                         <span>User's Section</span></a>
                 </li>
 
                 <!-- Nav Item - Report Collapse Menu -->
+                <li class="nav-item">
+                    <a class="nav-link" href="<?php echo base_url()?>drivertruck">
+                        <i class="fas fa-truck"></i>
+                        <span>Driver's and Truck Section</span></a>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
                         aria-expanded="true" aria-controls="collapseUtilities">
@@ -58,8 +69,13 @@
                         </div>
                     </div>
                 </li>
-
                 <?php if ($level == "superadmin") {?>
+                <li class="nav-item">
+                    <a class="nav-link" href="<?php echo base_url()?>admin">
+                    <i class="fas fa-user-shield"></i>
+                        <span>Administrator Section</span></a>
+                </li>
+                <?php } ?>
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSettings"
                         aria-expanded="true" aria-controls="collapseUtilities">
@@ -69,12 +85,10 @@
                     <div id="collapseSettings" class="collapse" aria-labelledby="headingUtilities"
                         data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
-                            <a class="collapse-item" href="<?php echo base_url()?>settings/admin">Administrator's</a>
                             <a class="collapse-item" href="<?php echo base_url()?>settings/activityLog">Activity Logs</a>
                         </div>
                     </div>
                 </li>
-                <?php } ?>
             <?php } else if($level == 'user') { ?>
 
                 <!-- Nav Item - Dashboard -->

@@ -102,4 +102,105 @@ class Data_user extends CI_Model {
 		return $this->db->delete('user');
 	}
 
+	public function saveDriver($driver_data){
+		$query = $this->db->select('user_id')->order_by('user_id','DESC')->limit(1)->get('user');
+		$lastId = $query->result();
+		$lastIdNumber = substr($lastId[0]->user_id, -1);
+		$userIdNumber = (int)$lastIdNumber;
+		$userId = "U00".($userIdNumber+ 1);
+
+		$data = array(
+			'user_id' => $userId,
+			'firstName' => $driver_data['firstName'],
+			'middleName' => $driver_data['middleName'],
+			'lastName' => $driver_data['lastName'],
+			'username' => $driver_data['userName'],
+			'password' => base64_encode($driver_data['password']),
+			'level' => 'driver'
+		);
+
+		$driver_info = array(
+			'driver_info_id' => $userId,
+			'phoneNumber' => $driver_data['phoneNumber'],
+			'driversLicense' => $driver_data['driversLicense'],
+			'brgy' => $driver_data['barangay'],
+			'street' => $driver_data['address'],
+		);
+
+		if($this->db->insert('user', $data) && $this->db->insert('driver_info', $driver_info)){
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public function getDriver(){
+		$this->db->select('*');
+		$this->db->from('user');
+		$this->db->join('driver_info','user.user_id = driver_info.driver_info_id');
+		$this->db->where('user.level','driver');
+		return $this->db->get();
+	}
+
+	public function deleteDriver($driver_id){
+		if($this->db->delete('driver_info', array('driver_info_id' => $driver_id)) && $this->db->delete('user', array('user_id' => $driver_id))){
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public function editDriver($driver_data){
+		$data = array(
+			'firstName' => $driver_data['firstName'],
+			'middleName' => $driver_data['middleName'],
+			'lastName' => $driver_data['lastName'],
+			'username' => $driver_data['userName'],
+			'password' => base64_encode($driver_data['password']),
+			'level' => 'driver'
+		);
+
+		$driver_info = array(
+			'phoneNumber' => $driver_data['phoneNumber'],
+			'driversLicense' => $driver_data['driversLicense'],
+			'brgy' => $driver_data['barangay'],
+			'street' => $driver_data['address'],
+		);
+
+		if($this->update_data(array('user_id' => $driver_data['driverID']), $data, 'user') && $this->update_data(array('driver_info_id' => $driver_data['driverID']), $driver_info, 'driver_info')){
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public function addTruck($truck_data){
+		$data = array(
+			'plate_no' => $truck_data['plateNumber'],
+			'truck_model' => $truck_data['truckModel'],
+			'truck_color' => $truck_data['truckColor'],
+			'truck_no' => 1,
+		);
+		return $this->db->insert('truck', $data);
+	}
+
+	public function getTruck(){
+		return $this->db->get('truck');
+	}
+
+	public function deleteTruck($truck_id){
+		return $this->db->delete('truck', array('id' => $truck_id));
+	}
+
+	public function editTruck($truck_data){
+		$data = array(
+			'plate_no' => $truck_data['plateNumber'],
+			'truck_model' => $truck_data['truckModel'],
+			'truck_color' => $truck_data['truckColor'],
+			'truck_no' => 1,
+		);
+		$this->db->where(array('id' => $truck_data['truckID']));
+		return $this->db->update('truck', $data);
+	}
+
 }
