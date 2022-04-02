@@ -11,7 +11,9 @@ class Collectionsched extends CI_Controller {
 			redirect(base_url().'welcome?pesan=belumlogin');
 		}
 		$this->load->model('data_user');
+		$this->load->model('data_wastecat');
 		$this->load->library('form_validation');
+		$this->load->model('data_collection');
 	}
 
     public function user(){
@@ -24,6 +26,8 @@ class Collectionsched extends CI_Controller {
 	public function index(){
         $data['driverData'] = $this->data_user->getDriver()->result();
 		$data['truckData'] = $this->data_user->getTruck()->result();
+		$data['barangayData'] = $this->data_wastecat->getBarangay()->result();
+		$data['collectionID'] = $this->data_collection->get_data()->result();
         $this->load->view('header');
 		$this->load->view('navigation', $this->user());
 		$this->load->view('admin/collectsched', $data);
@@ -31,5 +35,58 @@ class Collectionsched extends CI_Controller {
 		$this->load->view('source');
 	}
 
+	public function getData(){
+		$data = array(
+			'driverData' => $this->data_user->getDriver()->result(),
+			'truckData' => $this->data_user->getTruck()->result(),
+			'barangayData' => $this->data_wastecat->getBarangay()->result()
+		);
 
+		echo json_encode($data);
+	}
+
+	public function addCollectionSched(){
+
+		$collectionID = $this->input->post('collectionID');
+		$collectionDate = $this->input->post('collectionDate');
+
+		$collection = array(
+			'collection_id' => $collectionID,
+			'collection_date' => $collectionDate,
+			'remarks' => 'pending'
+		);
+
+		if($this->data_collection->add_collection($collection)){
+			$driver = $this->input->post('driver');
+			$truck = $this->input->post('truck');
+			$location = $this->input->post('brgy');
+			for($i = 0; $i < count($driver); $i++){
+				for($count = 0; $count < count($location[$i]); $count++){
+					$dataLocation = array(
+						'collection_id' => $collectionID,
+						'truck_id' => (int)$truck[$i][0],
+						'driver_id' => $driver[$i][0],
+						'brgy_id' => (int)$location[$i][$count],
+						'kg' => 0
+					);
+					$this->data_collection->add_location($dataLocation);
+				}
+			}
+		}
+
+		$info['datatype'] = 'collectionsched';
+		$info['operation'] = 'Input';
+		$this->load->view('header');
+		$this->load->view('notifications/insert_success', $info);
+		$this->load->view('source');
+	}
+
+	public function getCollection(){
+		$query = $this->data_collection->get_data()->result();
+		$newArray = array();
+		foreach($query as $value){
+			array_push($newArray, array('title'=> $value->remarks, 'start' => $value->collection_date));
+		}
+		echo json_encode($newArray);
+	}
 }

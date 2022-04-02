@@ -16,3 +16,97 @@
                 <!-- /.container-fluid -->
             </div>
             <!-- End of Main Content -->
+				<div class="modal fade bd-example-modal-lg" id="collectSched" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+					<div class="modal-dialog modal-lg" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="exampleModalLabel">Add Collection Sched</h5>
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							<form method="post" action="<?php echo base_url()."collectionSched/addCollectionSched"?>" id="collectSchedForm">
+								<div class="modal-body">
+									<div class="form-row">
+										<?php
+											$kode = '';
+											$n_collectID = count($collectionID);
+											if ($n_collectID == 0) {
+												$kode = 'C001';
+											} else {
+												$last_id = (int) substr($collectionID[$n_collectID-1]->collection_id, 3, 1);
+												$kode = 'C00'.($last_id+1);
+											}
+										?>
+										<div class="form-group col-md-6">
+											<label>Collection ID</label>
+											<input type="text" class="form-control" name="collectionID" value="<?= $kode ;?>" readonly>
+										</div>
+										<div class="form-group col-md-6">
+											<label>Date</label>
+											<input type="text" class="form-control" name="collectionDate">
+										</div>
+									</div>
+									<div class="btn-group" role="group" aria-label="Basic example">
+										<button type="button" id="addAssign" class="btn btn-success">+</button>
+										<button type="button" id="removeAssign" class="btn btn-danger">-</button>
+									</div>
+									<hr>
+									<div class="assignCopy">
+										<div class="form-row">
+											<div class="form-group col-md-4">
+												<label for="inputAddress">Assign Driver</label>
+												<select name="driver[0][]" id="" class="form-control">
+													<option value="">Select Driver</option>
+													<?php foreach($driverData as $driver) {?>
+															<option value="<?= $driver->user_id?>">
+																<?php echo $driver->lastName.", ".$driver->firstName;?>
+															</option>
+													<?php }?>
+												</select>
+											</div>
+											<div class="form-group col-md-4">
+												<label for="inputAddress2">Assign Truck</label>
+												<select name="truck[0][]" id="" class="form-control">
+													<option value="">Select Truck</option>
+													<?php foreach($truckData as $truck) {?>
+														<option value="<?= $truck->id ?>">
+															<?php echo $truck->truck_no."-".$truck->truck_model.",".$truck->truck_color;?>
+														</option>
+													<?php } ?>
+												</select>
+											</div>
+											<div class="form-group col-md-4">
+												<label for="inputAddress2">Assign Location</label>
+												<select name="brgy[0][]" class="selectpicker" multiple>
+													<option value="1">
+														Poblacion District I														</option>
+													<option value="2">
+														Poblacion District II														</option>
+													<option value="3">
+														Poblacion District III														</option>
+													<option value="4">
+														Poblacion District IV														</option>
+													<option value="5">
+														Poblacion District V														</option>
+													<option value="6">
+														Poblacion District VI														</option>
+													<option value="7">
+														Poblacion District VII														</option>
+													<option value="8">
+														Poblacion District VIII														</option>
+													<option value="9">
+														Poblacion District IX														</option>
+												</select>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+									<button type="submit" class="btn btn-primary">Save changes</button>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>

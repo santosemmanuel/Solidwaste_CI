@@ -37,4 +37,7 @@ class Data_wastecat extends CI_Model {
 		return $this->db->delete($table);
 	}
 
+	public function getBarangay(){
+		return $this->db->get('barangay');
+	}
 }

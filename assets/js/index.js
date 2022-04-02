@@ -47,8 +47,27 @@ map.on("click", function (env) {
 	map.addLayer(layer);
 });
 
+$('#collectSched').hide();
+
+document.addEventListener('DOMContentLoaded', function() {
+
+});
+
 $(document).ready(function () {
 	$("#alertMessage").hide();
+	
+	var calendarEl = document.getElementById('calendar');
+	var calendar = new FullCalendar.Calendar(calendarEl, {
+		events: base_url + "collectionsched/getCollection",
+		initialView: 'dayGridMonth',
+		dateClick: function(info) {
+			$('#collectSched').modal('show');
+			$('#collectSched').find('.modal-body input[name="collectionDate"]').val(JSON.stringify(info.dateStr));
+		}
+
+	});
+	calendar.render();
+
 	$("#signUpForm").submit(function (e) {
 		e.preventDefault();
 		var dataForm = {
@@ -436,4 +455,27 @@ $(document).ready(function () {
 			},
 		});
 	});
+
+	var counter = 0;
+	$('#addAssign').click(function(){
+		var copy = "<div class='copy"+counter+"'>";
+		copy += $(".assignCopy").html();
+		copy += "</div>";
+		$(".assignCopy").after(copy);
+		$('.copy'+counter).find('.bootstrap-select button:first').remove();
+		$('.copy'+counter).find('select:last').selectpicker();
+		$('.copy'+counter).find("select[name='driver["+counter+"][]']").attr("name","driver["+(counter+1)+"][]");
+		$('.copy'+counter).find("select[name='truck["+counter+"][]']").attr("name","truck["+(counter+1)+"][]");
+		$('.copy'+counter).find("select[name='brgy["+counter+"][]']").attr("name","brgy["+(counter+1)+"][]");
+		counter++;
+	})
+
+	$('#removeAssign').click(function(){
+		counter--;
+		$('#collectSchedForm .modal-body').find(".copy"+counter).remove();
+	})
+
 });
+
+
+

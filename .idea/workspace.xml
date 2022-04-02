@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="36c22611-a081-4326-9ebb-9104805eb9a1" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/application/controllers/Collectionsched.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/Collectionsched.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/controllers/Wastecat.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/Wastecat.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/models/Data_collection.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/models/Data_collection.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/models/Data_wastecat.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/models/Data_wastecat.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/admin/collectsched.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/admin/collectsched.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/header.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/header.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/source.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/source.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/index.js" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
+    <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
+    <execution />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="composer.json" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="26qW4Z5w1osVtJ3V1TCIBMbtzIc" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+    <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="36c22611-a081-4326-9ebb-9104805eb9a1" name="Default Changelist" comment="" />
+      <created>1648151418478</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1648151418478</updated>
+      <workItem from="1648151430335" duration="233000" />
+      <workItem from="1648453797173" duration="993000" />
+      <workItem from="1648469965400" duration="6493000" />
+      <workItem from="1648523140003" duration="16945000" />
+      <workItem from="1648556410679" duration="4534000" />
+      <workItem from="1648563102905" duration="3871000" />
+      <workItem from="1648600344900" duration="8282000" />
+      <workItem from="1648643528942" duration="1383000" />
+      <workItem from="1648645846614" duration="4708000" />
+      <workItem from="1648690973043" duration="11544000" />
+      <workItem from="1648719875228" duration="3643000" />
+      <workItem from="1648731428816" duration="778000" />
+      <workItem from="1648735454042" duration="9879000" />
+      <workItem from="1648902241959" duration="7139000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="114" y="57" key="SettingsEditor" timestamp="1648453930347">
+      <screen x="62" y="0" width="1304" height="768" />
+    </state>
+    <state x="114" y="57" key="SettingsEditor/62.0.1304.768@62.0.1304.768" timestamp="1648453930347" />
+    <state x="370" y="172" key="run.anything.popup" timestamp="1648882654998">
+      <screen x="62" y="0" width="1304" height="768" />
+    </state>
+    <state x="370" y="172" key="run.anything.popup/62.0.1304.768@62.0.1304.768" timestamp="1648882654998" />
+    <state x="377" y="89" key="search.everywhere.popup" timestamp="1648905939049">
+      <screen x="62" y="0" width="1304" height="768" />
+    </state>
+    <state x="377" y="89" key="search.everywhere.popup/62.0.1304.768@62.0.1304.768" timestamp="1648905939049" />
+  </component>
+</project>
