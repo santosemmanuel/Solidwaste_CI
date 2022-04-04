@@ -15,4 +15,16 @@ class Data_collection extends CI_Model {
 		return $this->db->insert('location',$dataLocation);
 	}
 
+	public function delete_collection($collectionId){
+		$tables = array('location','collection');
+		$this->db->where('collection_id', $collectionId);
+		return $this->db->delete($tables);
+	}
+
+	public function get_collectionLocation(){
+		/*
+		 * QUERY: SELECT * FROM collection INNER JOIN location ON collection.collection_id = location.collection_id
+		 * WHERE collection.collection_id = 'C001';
+		 */
+	}
 }

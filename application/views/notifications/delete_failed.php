@@ -4,7 +4,7 @@
     	<div class="alert-container">
 			<div class="alert alert-light text-dark alert-dismissible fade show w-75 m-auto" role="alert" >
 				<h3 class="alert-heading my-2 text-danger font-weight-bold">Clear Data Failed!</h3>
-				<button type="button" class="close" data-dismiss="alert" aria-label="Close" onclick=location.href="<?php echo base_url().$datatype.'/form_add'?>">
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close" onclick=location.href="<?php echo base_url().$datatype;?>">
 					<span aria-hidden="true">&times;</span>
 				</button>
 				<p class="lead">Data failed to be deleted from the database.</p>

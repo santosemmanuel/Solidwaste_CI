@@ -49,10 +49,6 @@ map.on("click", function (env) {
 
 $('#collectSched').hide();
 
-document.addEventListener('DOMContentLoaded', function() {
-
-});
-
 $(document).ready(function () {
 	$("#alertMessage").hide();
 	
@@ -62,11 +58,27 @@ $(document).ready(function () {
 		initialView: 'dayGridMonth',
 		dateClick: function(info) {
 			$('#collectSched').modal('show');
-			$('#collectSched').find('.modal-body input[name="collectionDate"]').val(JSON.stringify(info.dateStr));
+			$('#collectSched').find('.modal-body input[name="collectionDate"]').val(info.dateStr);
+		},
+		eventClick: function (info) {
+			$('#collectEditSubmitDelete').modal('show');
+			$('#delSchedButton').attr('data-whatever', info.event.id);
+			$('#editSchedButton').attr('data-whatever', info.event.id);
 		}
-
 	});
 	calendar.render();
+	
+	$('#delSchedButton').click(function() {
+		$("#deleteSched").modal("show");
+		var dataId = $(this).attr('data-whatever');
+		$('#deleteSched').find('input[name="schedID"]').val(dataId);
+	});
+
+	$('#editSchedButton').click(function() {
+		$("#editSched").modal("show");
+		var dataId = $(this).attr('data-whatever');
+		$('#deleteSched').find('input[name="schedID"]').val(dataId);
+	});
 
 	$("#signUpForm").submit(function (e) {
 		e.preventDefault();

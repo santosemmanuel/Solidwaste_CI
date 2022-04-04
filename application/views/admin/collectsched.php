@@ -110,3 +110,67 @@
 						</div>
 					</div>
 				</div>
+
+				<div class="modal fade bd-example-modal-lg" id="collectEditSubmitDelete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+					<div class="modal-dialog modal-lg" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="exampleModalLabel">Collection Sched</h5>
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+								<div class="modal-body">
+									<p>Select a function for this sched or event.</p>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+									<button type="button" id="editSchedButton" data-toggle="modal" data-target="#editSched" class="btn btn-primary">Edit</button>
+									<button type="button" id="delSchedButton" data-toggle="modal" data-target="#deleteSched" class="btn btn-danger">Delete</button>
+									<button type="button" class="btn btn-success">Finish</button>
+								</div>
+						</div>
+					</div>
+				</div>
+				<div class="modal fade bd-example-modal-lg" id="deleteSched" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+					<div class="modal-dialog modal-lg" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="exampleModalLabel">Collection Sched</h5>
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							<div class="modal-body">
+								<p>Are you sure you want to delete this Sched?</p>
+								<form action="<?php echo base_url()."collectionsched/deleteCollection"?>" method="post">
+									<input type="hidden" name="schedID" />
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+								<button type="submit" class="btn btn-danger">Delete</button>
+							</div>
+								</form>
+						</div>
+					</div>
+				</div>
+				<div class="modal fade bd-example-modal-lg" id="editSched" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+					<div class="modal-dialog modal-lg" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="exampleModalLabel">Collection Sched</h5>
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							<div class="modal-body">
+
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+								<button type="submit" class="btn btn-primary">Edit</button>
+							</div>
+							</form>
+						</div>
+					</div>
+				</div>

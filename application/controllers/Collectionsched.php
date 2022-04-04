@@ -85,8 +85,26 @@ class Collectionsched extends CI_Controller {
 		$query = $this->data_collection->get_data()->result();
 		$newArray = array();
 		foreach($query as $value){
-			array_push($newArray, array('title'=> $value->remarks, 'start' => $value->collection_date));
+			if($value->remarks == "pending"){
+				$colorRemarks = "orange";
+			} else if ($value->remarks == "finish"){
+				$colorRemarks = "green";
+			}
+			array_push($newArray, array('id'=> $value->collection_id, 'title'=> $value->remarks, 'start' => $value->collection_date, 'color' => $colorRemarks, 'selectable' => false));
 		}
 		echo json_encode($newArray);
+	}
+
+	public function deleteCollection(){
+		$info['datatype'] = 'collectionsched';
+		$info['operation'] = 'delete';
+		$this->load->view('header');
+
+		if(!$this->data_collection->delete_collection($this->input->post('schedID'))){
+			$this->load->view('notifications/delete_success', $info);
+		} else {
+			$this->load->view('notifications/delete_failed', $info);
+		}
+		$this->load->view('source');
 	}
 }
