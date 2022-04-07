@@ -25,7 +25,7 @@
 									<span aria-hidden="true">&times;</span>
 								</button>
 							</div>
-							<form method="post" action="<?php echo base_url()."collectionSched/addCollectionSched"?>" id="collectSchedForm">
+							<form method="post" action="<?php echo base_url()."collectionsched/addCollectionSched"?>" id="collectSchedForm">
 								<div class="modal-body">
 									<div class="form-row">
 										<?php
@@ -44,7 +44,7 @@
 										</div>
 										<div class="form-group col-md-6">
 											<label>Date</label>
-											<input type="text" class="form-control" name="collectionDate">
+											<input type="text" class="form-control" name="collectionDate" readonly>
 										</div>
 									</div>
 									<div class="btn-group" role="group" aria-label="Basic example">
@@ -125,9 +125,9 @@
 								</div>
 								<div class="modal-footer">
 									<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-									<button type="button" id="editSchedButton" data-toggle="modal" data-target="#editSched" class="btn btn-primary">Edit</button>
+									<button type="button" id="editSchedButton" data-toggle="modal" data-target="#editCollectSched" class="btn btn-primary">Edit</button>
 									<button type="button" id="delSchedButton" data-toggle="modal" data-target="#deleteSched" class="btn btn-danger">Delete</button>
-									<button type="button" class="btn btn-success">Finish</button>
+									<button type="button" id="finishCollection" data-toggle="modal" data-target="#finishSched" class="btn btn-success">Finish</button>
 								</div>
 						</div>
 					</div>
@@ -154,23 +154,124 @@
 						</div>
 					</div>
 				</div>
-				<div class="modal fade bd-example-modal-lg" id="editSched" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+				<div class="modal fade bd-example-modal-lg" id="editCollectSched" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 					<div class="modal-dialog modal-lg" role="document">
 						<div class="modal-content">
 							<div class="modal-header">
-								<h5 class="modal-title" id="exampleModalLabel">Collection Sched</h5>
+								<h5 class="modal-title" id="exampleModalLabel">Edit Collection Sched</h5>
 								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 									<span aria-hidden="true">&times;</span>
 								</button>
 							</div>
-							<div class="modal-body">
-
-							</div>
-							<div class="modal-footer">
-								<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-								<button type="submit" class="btn btn-primary">Edit</button>
-							</div>
+							<form method="post" action="<?php echo base_url()."collectionsched/editCollectionSched"?>" id="editCollectSchedForm">
+								<div class="modal-body">
+									<div class="form-row">
+										<div class="form-group col-md-6">
+											<label>Collection ID</label>
+											<input type="text" class="form-control" name="collectionID" readonly>
+										</div>
+										<div class="form-group col-md-6">
+											<label>Date</label>
+											<input type="text" class="form-control" name="collectionDate" readonly>
+										</div>
+									</div>
+									<div class="btn-group" role="group" aria-label="Basic example">
+										<button type="button" id="addAssignedit" class="btn btn-success">+</button>
+										<button type="button" id="removeAssignedit" class="btn btn-danger">-</button>
+									</div>
+									<hr>
+									<div class="assignCopyEdit">
+										<div class="form-row">
+											<div class="form-group col-md-4">
+												<label for="inputAddress">Assign Driver</label>
+												<select name="driver[0][]" id="" class="form-control">
+													<option value="">Select Driver</option>
+													<?php foreach($driverData as $driver) {?>
+														<option value="<?= $driver->user_id?>">
+															<?php echo $driver->lastName.", ".$driver->firstName;?>
+														</option>
+													<?php }?>
+												</select>
+											</div>
+											<div class="form-group col-md-4">
+												<label for="inputAddress2">Assign Truck</label>
+												<select name="truck[0][]" id="" class="form-control">
+													<option value="">Select Truck</option>
+													<?php foreach($truckData as $truck) {?>
+														<option value="<?= $truck->id ?>">
+															<?php echo $truck->truck_no."-".$truck->truck_model.",".$truck->truck_color;?>
+														</option>
+													<?php } ?>
+												</select>
+											</div>
+											<div class="form-group col-md-4">
+												<label for="inputAddress2">Assign Location</label>
+												<select name="brgy[0][]" class="selectpicker" multiple>
+													<option value="1">
+														Poblacion District I														</option>
+													<option value="2">
+														Poblacion District II														</option>
+													<option value="3">
+														Poblacion District III														</option>
+													<option value="4">
+														Poblacion District IV														</option>
+													<option value="5">
+														Poblacion District V														</option>
+													<option value="6">
+														Poblacion District VI														</option>
+													<option value="7">
+														Poblacion District VII														</option>
+													<option value="8">
+														Poblacion District VIII														</option>
+													<option value="9">
+														Poblacion District IX														</option>
+												</select>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+									<button type="submit" class="btn btn-primary">Save changes</button>
+								</div>
 							</form>
 						</div>
 					</div>
 				</div>
+				<div class="modal fade bd-example-modal-lg" id="finishSched" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+					<div class="modal-dialog modal-lg" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="exampleModalLabel">Finish Collection Sched</h5>
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							<form method="post" id="finishCollectSchedForm">
+								<div class="modal-body">
+									<div class="form-row">
+										<div class="form-group col-md-6">
+											<label>Collection ID</label>
+											<input type="text" class="form-control" name="collectionID" readonly>
+										</div>
+										<div class="form-group col-md-6">
+											<label>Date</label>
+											<input type="text" class="form-control" name="collectionDate" readonly>
+										</div>
+									</div><hr>
+									<div class="accordion" id="accordionExample">
+
+									</div><br>
+									<p><strong>Total Kg Collected: </strong><span id="totalKG" style="  display: inline-block;"></span></p>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+									<button type="submit" class="btn btn-success">Save changes</button>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+
+

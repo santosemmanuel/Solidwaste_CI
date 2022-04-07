@@ -32,7 +32,8 @@ class Collectionsched extends CI_Controller {
 		$this->load->view('navigation', $this->user());
 		$this->load->view('admin/collectsched', $data);
 		$this->load->view('footer');
-		$this->load->view('source');
+		$calendar['calendarJs'] = "assets/js/calendar_function.js";
+		$this->load->view('source', $calendar);
 	}
 
 	public function getData(){
@@ -105,6 +106,94 @@ class Collectionsched extends CI_Controller {
 		} else {
 			$this->load->view('notifications/delete_failed', $info);
 		}
+		$this->load->view('source');
+	}
+
+	public function get_collectionLocation(){
+		$collectionID = $this->input->post('data');
+		$collectionLocationData = $this->data_collection->get_distinctDriver($collectionID)->result();
+		$arr = array();
+		$counter = 0;
+		for($i = 0; $i < count($collectionLocationData); $i++){
+			array_push($arr, array(
+				'driver' => $collectionLocationData[$i]->driver_id,
+				'date' => $collectionLocationData[$i]->collection_date,
+				'collectionId' => $collectionLocationData[$i]->collection_id,
+				'truck' => $collectionLocationData[$i]->truck_id
+			));
+			$location = $this->data_collection->get_locationByIDs($collectionID, $collectionLocationData[$i]->driver_id)->result();
+			$temp = array();
+			foreach($location as $value){ array_push($temp, $value->brgy_id); }
+			array_push($arr[$counter], $temp);
+			$counter++;
+		}
+		echo json_encode($arr);
+
+	}
+
+	public function get_DriverTruckCollection(){
+		$collectionID = $this->input->post('data');
+		$collectionLocationData = $this->data_collection->get_distinctDriver($collectionID)->result();
+		$arr = array();
+		$counter = 0;
+		for($i = 0; $i < count($collectionLocationData); $i++){
+			$location = $this->data_user->getDriverTruckById($collectionLocationData[$i]->driver_id, $collectionLocationData[$i]->truck_id, $collectionLocationData[$i]->collection_id)->result();
+			array_push($arr, array(
+				'driver' => $collectionLocationData[$i]->driver_id,
+				'driverName' => $location[0]->lastName.", ".$location[0]->firstName,
+				'date' => $collectionLocationData[$i]->collection_date,
+				'collectionId' => $collectionLocationData[$i]->collection_id,
+				'truck' => $collectionLocationData[$i]->truck_id,
+				'truckColor' => $location[0]->truck_color,
+				'truckName' => $location[0]->truck_model
+			));
+			$barangay = $this->data_collection->get_locationBrgy($location[0]->collection_id, $location[0]->driver_id)->result();
+			$temp = array();
+			foreach($barangay as $value){
+				array_push($temp, array(
+					'brgyId' => $value->brgy_id,
+					'brgyName' => $value->barangay
+				));
+			}
+			array_push($arr[$counter], $temp);
+			$counter++;
+		}
+
+		echo json_encode($arr);
+	}
+
+	public function get_locationByIDs(){
+		$collectionID = $this->input->post('collectID');
+		$driverID = $this->input->post('driverID');
+		$locationByIDs = $this->data_collection->get_locationByIDs($collectionID, $driverID)->result();
+		echo json_encode($locationByIDs);
+	}
+
+	public function editCollectionSched(){
+
+		$collectionID = $this->input->post('collectionID');
+		if($this->data_collection->delete_location($collectionID)){
+			$driver = $this->input->post('driver');
+			$truck = $this->input->post('truck');
+			$location = $this->input->post('brgy');
+			for($i = 0; $i < count($driver); $i++){
+				for($count = 0; $count < count($location[$i]); $count++){
+					$dataLocation = array(
+						'collection_id' => $collectionID,
+						'truck_id' => (int)$truck[$i][0],
+						'driver_id' => $driver[$i][0],
+						'brgy_id' => (int)$location[$i][$count],
+						'kg' => 0
+					);
+					$this->data_collection->add_location($dataLocation);
+				}
+			}
+		}
+
+		$info['datatype'] = 'collectionsched';
+		$info['operation'] = 'Input';
+		$this->load->view('header');
+		$this->load->view('notifications/insert_success', $info);
 		$this->load->view('source');
 	}
 }

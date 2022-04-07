@@ -21,7 +21,12 @@
     <script src="<?php echo base_url().'assets/js/demo/datatables-demo.js' ?>"></script>
 	<script src="<?php echo base_url().'assets/vendor/bootstrap-select/js/bootstrap-select.min.js'?>"></script>
 	<script src="<?php echo base_url()."assets/vendor/fullcalendar/main.js"?>"></script>
-    <script src="<?php echo base_url().'assets/js/index.js'?>"></script>
+	<?php if(isset($calendarJs)){?>
+		<script src="<?php echo base_url()."assets/js/calendar_function.js"?>"></script>
+	<?php } ?>
+	<script src="<?php echo base_url().'assets/js/index.js'?>"></script>
+
+
 </body>
 
 </html>

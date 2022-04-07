@@ -13,15 +13,8 @@ class Data_user extends CI_Model {
 	}
 
 	public function save_user_data($user_data) {
-
-		$query = $this->db->select('user_id')->order_by('user_id','DESC')->limit(1)->get('user');
-		$lastId = $query->result();
-		$lastIdNumber = substr($lastId[0]->user_id, -1);
-		$userIdNumber = (int)$lastIdNumber;
-		$userId = "U00".($userIdNumber+ 1);
 		
 		$data = array(
-			'user_id' => $userId,
 			'firstName' => $user_data['firstName'],
 			'middleName' => $user_data['middleName'],
 			'lastName' => $user_data['lastName'],
@@ -29,6 +22,8 @@ class Data_user extends CI_Model {
 			'password' => base64_encode($user_data['password']),
 			'level' => 'user'
 		);
+		$this->db->insert('user', $data);
+		$userId = $this->db->insert_id();
 
 		$businessName = (isset($user_data['businessName']))? $user_data['businessName'] : "null";
 		$businessType = (isset($user_data['businessType']))? $user_data['businessType'] : "null";
@@ -46,7 +41,7 @@ class Data_user extends CI_Model {
 			'location' => $user_data['coordinates']
 		);
 		
-		if($this->db->insert('user', $data) && $this->db->insert('user_info', $data_info)){
+		if($this->db->insert('user_info', $data_info)){
 			return true;
 		} else {
 			return false;
@@ -60,14 +55,7 @@ class Data_user extends CI_Model {
 	}
 
 	public function save_admin($user_data){
-
-		$query = $this->db->select('user_id')->order_by('user_id','DESC')->limit(1)->get('user');
-		$lastId = $query->result();
-		$lastIdNumber = (int) substr($lastId[0]->user_id, -1);
-		$userId = "U00".($lastIdNumber+ 1);
-
 		$data = array(
-			'user_id' => $userId,
 			'firstName' => $user_data['firstName'],
 			'middleName' => $user_data['middleName'],
 			'lastName' => $user_data['lastName'],
@@ -103,14 +91,7 @@ class Data_user extends CI_Model {
 	}
 
 	public function saveDriver($driver_data){
-		$query = $this->db->select('user_id')->order_by('user_id','DESC')->limit(1)->get('user');
-		$lastId = $query->result();
-		$lastIdNumber = substr($lastId[0]->user_id, -1);
-		$userIdNumber = (int)$lastIdNumber;
-		$userId = "U00".($userIdNumber+ 1);
-
 		$data = array(
-			'user_id' => $userId,
 			'firstName' => $driver_data['firstName'],
 			'middleName' => $driver_data['middleName'],
 			'lastName' => $driver_data['lastName'],
@@ -118,6 +99,8 @@ class Data_user extends CI_Model {
 			'password' => base64_encode($driver_data['password']),
 			'level' => 'driver'
 		);
+		$this->db->insert('user', $data);
+		$userId = $this->db->insert_id();
 
 		$driver_info = array(
 			'driver_info_id' => $userId,
@@ -127,7 +110,7 @@ class Data_user extends CI_Model {
 			'street' => $driver_data['address'],
 		);
 
-		if($this->db->insert('user', $data) && $this->db->insert('driver_info', $driver_info)){
+		if($this->db->insert('driver_info', $driver_info)){
 			return true;
 		} else {
 			return false;
@@ -140,6 +123,14 @@ class Data_user extends CI_Model {
 		$this->db->join('driver_info','user.user_id = driver_info.driver_info_id');
 		$this->db->where('user.level','driver');
 		return $this->db->get();
+	}
+
+	public function getDriverTruckById($driverId, $truckId, $collectionId){
+		return $this->db->query("SELECT DISTINCT * FROM truck INNER JOIN (SELECT location.collection_id, user.user_id, 
+								user.firstName, user.lastName, location.truck_id, location.driver_id FROM location 
+								INNER JOIN user ON location.driver_id = user.user_id WHERE location.collection_id = '".$collectionId."') 
+								AS driver ON driver.truck_id = truck.id WHERE truck.id = ".(int)$truckId." AND 
+								driver.driver_id = '".$driverId."'");
 	}
 
 	public function deleteDriver($driver_id){
@@ -179,7 +170,7 @@ class Data_user extends CI_Model {
 			'plate_no' => $truck_data['plateNumber'],
 			'truck_model' => $truck_data['truckModel'],
 			'truck_color' => $truck_data['truckColor'],
-			'truck_no' => 1,
+			'truck_no' => $truck_data['truckNumber'],
 		);
 		return $this->db->insert('truck', $data);
 	}
@@ -197,7 +188,6 @@ class Data_user extends CI_Model {
 			'plate_no' => $truck_data['plateNumber'],
 			'truck_model' => $truck_data['truckModel'],
 			'truck_color' => $truck_data['truckColor'],
-			'truck_no' => 1,
 		);
 		$this->db->where(array('id' => $truck_data['truckID']));
 		return $this->db->update('truck', $data);

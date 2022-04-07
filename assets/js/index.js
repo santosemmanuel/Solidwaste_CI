@@ -51,34 +51,6 @@ $('#collectSched').hide();
 
 $(document).ready(function () {
 	$("#alertMessage").hide();
-	
-	var calendarEl = document.getElementById('calendar');
-	var calendar = new FullCalendar.Calendar(calendarEl, {
-		events: base_url + "collectionsched/getCollection",
-		initialView: 'dayGridMonth',
-		dateClick: function(info) {
-			$('#collectSched').modal('show');
-			$('#collectSched').find('.modal-body input[name="collectionDate"]').val(info.dateStr);
-		},
-		eventClick: function (info) {
-			$('#collectEditSubmitDelete').modal('show');
-			$('#delSchedButton').attr('data-whatever', info.event.id);
-			$('#editSchedButton').attr('data-whatever', info.event.id);
-		}
-	});
-	calendar.render();
-	
-	$('#delSchedButton').click(function() {
-		$("#deleteSched").modal("show");
-		var dataId = $(this).attr('data-whatever');
-		$('#deleteSched').find('input[name="schedID"]').val(dataId);
-	});
-
-	$('#editSchedButton').click(function() {
-		$("#editSched").modal("show");
-		var dataId = $(this).attr('data-whatever');
-		$('#deleteSched').find('input[name="schedID"]').val(dataId);
-	});
 
 	$("#signUpForm").submit(function (e) {
 		e.preventDefault();
@@ -343,11 +315,11 @@ $(document).ready(function () {
 							map[index].removeLayer(layer);
 						}
 					});
-				
+
 					const iconFeature = new ol.Feature({
 						geometry: new ol.geom.Point([env.coordinate[0], env.coordinate[1]]),
 					});
-				
+
 					var layer = new ol.layer.Vector({
 						source: new ol.source.Vector({
 							features: [iconFeature],
@@ -453,7 +425,7 @@ $(document).ready(function () {
 			data: dataForm,
 			success: function (data) {
 				if (data.response == "success") {
-					toastr.success("An Admin has successfully been edit.");
+					toastr.success("Truck has successfully been edit.");
 					setTimeout(function () {
 						location.reload();
 					}, 2000);
@@ -468,24 +440,6 @@ $(document).ready(function () {
 		});
 	});
 
-	var counter = 0;
-	$('#addAssign').click(function(){
-		var copy = "<div class='copy"+counter+"'>";
-		copy += $(".assignCopy").html();
-		copy += "</div>";
-		$(".assignCopy").after(copy);
-		$('.copy'+counter).find('.bootstrap-select button:first').remove();
-		$('.copy'+counter).find('select:last').selectpicker();
-		$('.copy'+counter).find("select[name='driver["+counter+"][]']").attr("name","driver["+(counter+1)+"][]");
-		$('.copy'+counter).find("select[name='truck["+counter+"][]']").attr("name","truck["+(counter+1)+"][]");
-		$('.copy'+counter).find("select[name='brgy["+counter+"][]']").attr("name","brgy["+(counter+1)+"][]");
-		counter++;
-	})
-
-	$('#removeAssign').click(function(){
-		counter--;
-		$('#collectSchedForm .modal-body').find(".copy"+counter).remove();
-	})
 
 });
 

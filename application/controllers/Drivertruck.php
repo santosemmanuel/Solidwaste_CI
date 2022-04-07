@@ -78,6 +78,13 @@ class Drivertruck extends CI_Controller {
 		}
 	}
 
+	public function getDriverTruckById(){
+		$driverId = $this->input->post('driver');
+		$truckId = $this->input->post('truck');
+		$collectionId = $this->input->post('collection');
+		echo json_encode($this->data_user->getDriverTruckById($driverId, $truckId, $collectionId)->result());
+	}
+
 	public function addTruck(){
 		if ($this->input->is_ajax_request()) {
 			if ($this->truckValidation() != FALSE) {

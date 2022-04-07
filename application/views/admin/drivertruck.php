@@ -116,7 +116,6 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
                 <!-- /.container-fluid -->
             </div>
@@ -215,7 +214,11 @@
                             <div class="modal-body">
                             <div class="alert alert-danger" role="alert" id="alertMessage1" hidden="hidden"></div>
                                 <div class="form-row">
-                                    <div class="col-md-4 mb-3">
+									<div class="col-md-2 mb-3">
+										<label for="validationCustom01">Truck Number</label>
+										<input type="text" class="form-control" name="truckNumber" value="<?php echo count($truckData) + 1;?>" readonly>
+									</div>
+                                    <div class="col-md-3 mb-3">
                                         <label for="validationCustom01">Plate Number</label>
                                         <input type="text" class="form-control" name="plateNumber" placeholder="Plate Number">
                                     </div>
@@ -223,8 +226,8 @@
                                         <label for="validationCustom02">Truck Model</label>
                                         <input type="text" class="form-control" name="truckModel" placeholder="Truck Model">
                                     </div>
-                                    <div class="col-md-4 mb-3">
-                                        <label for="validationCustom02">Truck Color or Identification</label>
+                                    <div class="col-md-3 mb-3">
+                                        <label for="validationCustom02">Truck Color/Identification</label>
                                         <input type="text" class="form-control" name="truckColor" placeholder="Truck Color">
                                     </div>
                                 </div>
@@ -422,4 +425,3 @@
            
             
 
-            

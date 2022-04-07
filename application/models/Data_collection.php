@@ -21,10 +21,39 @@ class Data_collection extends CI_Model {
 		return $this->db->delete($tables);
 	}
 
-	public function get_collectionLocation(){
-		/*
-		 * QUERY: SELECT * FROM collection INNER JOIN location ON collection.collection_id = location.collection_id
-		 * WHERE collection.collection_id = 'C001';
-		 */
+	public function get_collectionLocation($collectID){
+		return $this->db->select('*')->from('collection')
+							->join('location', 'collection.collection_id = location.collection_id')
+							->where(array('collection.collection_id' => $collectID))
+							->get();
+
+	}
+
+	public function get_distinctDriver($collectionId){
+		return $this->db->distinct()->select('driver_id, location.collection_id, collection.collection_date, truck_id')
+									->from('location')
+									->join('collection', 'collection.collection_id = location.collection_id')
+									->where(array('location.collection_id' => $collectionId))
+									->get();
+	}
+
+	public function get_locationByIDs($collectionID, $driverID){
+		return $this->db->select('brgy_id')->from('location')
+							->where(array('collection_id' => $collectionID, 'driver_id' => $driverID))
+							->get();
+	}
+
+	public function get_locationBrgy($collectionID, $driverID){
+		return $this->db->select('barangay.id, barangay.barangay, location.brgy_id')
+						->from('location')
+						->join('barangay', 'barangay.id = location.brgy_id')
+						->where(array('collection_id' => $collectionID, 'driver_id' => $driverID))
+						->get();
+	}
+
+	public function delete_location($collectionID){
+		$this->db->where(array('collection_id' => $collectionID));
+		return $this->db->delete('location');
+
 	}
 }
