@@ -12,7 +12,7 @@ class Welcome extends CI_Controller{
 	function index() {
 		$this->load->view('header');
 		$this->load->view('login');
-		$this->load->view('source');
+		$this->load->view('source', array('js'	 => ''));
 	}
 
 	function login() {
@@ -85,6 +85,6 @@ class Welcome extends CI_Controller{
 		$this->session->sess_destroy();
 		$this->load->view('header');
 		$this->load->view('notifications/logout_success');
-		$this->load->view('source');
+		$this->load->view('source',array('js'=>''));
 	}
 }

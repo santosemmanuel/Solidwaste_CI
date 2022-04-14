@@ -7,6 +7,21 @@ class Data_user extends CI_Model {
 		return $this->db->get('user');
 	}
 
+	public function get_userById($userId){
+		return $this->db->select()->from('user')->join('user_info','user.user_id = user_info.user_info_id')
+			->where(array('user.user_id' => $userId))->get();
+	}
+
+	public function get_driverById($userId){
+		return $this->db->select()->from('user')->join('driver_info','user.user_id = driver_info.driver_info_id')
+			->where(array('user.user_id' => $userId))->get();
+	}
+
+	public function get_admin(){
+		$this->db->where(array('level' => 'admin'));
+		return $this->db->get('user');
+	}
+
 	public function get_records($where){
 		$this->db->where($where);
 		return $this->db->get('user');
@@ -52,42 +67,6 @@ class Data_user extends CI_Model {
 	public function update_data($id, $data, $table){
 		$this->db->where($id);
 		return $this->db->update($table, $data);
-	}
-
-	public function save_admin($user_data){
-		$data = array(
-			'firstName' => $user_data['firstName'],
-			'middleName' => $user_data['middleName'],
-			'lastName' => $user_data['lastName'],
-			'username' => $user_data['userName'],
-			'password' => base64_encode($user_data['password']),
-			'level' => 'admin'
-		);
-		return $this->db->insert('user',$data);
-		
-	}
-
-	public function get_admin(){
-		$this->db->where('level', "admin");
-		return $this->db->get('user');
-		
-	}
-
-	public function edit_admin($user_data){
-		$data = array(
-			'firstName' => $user_data['firstName'],
-			'middleName' => $user_data['middleName'],
-			'lastName' => $user_data['lastName'],
-			'username' => $user_data['userName'],
-			'password' => base64_encode($user_data['password']),
-		);
-		$this->db->where('user_id', $user_data['userID']);
-		return $this->db->update('user', $data);
-	}
-
-	public function delete_admin($user_id){
-		$this->db->where('user_id', $user_id);
-		return $this->db->delete('user');
 	}
 
 	public function saveDriver($driver_data){

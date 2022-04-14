@@ -12,13 +12,12 @@
                     <i class="fas fa-fw fa-user-tie"></i>
                     <div class="sidebar-brand-text mx-3">SWCMS:<?php echo $name;?></div>
                 </div>
-                
             </a>
 
             <!-- Divider -->
             <hr class="sidebar-divider my-0">
 
-            <?php if($level == 'admin' || $level == 'superadmin') {?>
+            <?php if($level == 'admin') {?>
                 <!-- Nav Item - Dashboard -->
                 <li class="nav-item">
                     <a class="nav-link" href="<?php echo base_url()?>dashboard">
@@ -33,12 +32,6 @@
                     <a class="nav-link" href="<?php echo base_url()?>wastecat">
                         <i class="fas fa-trash-alt"></i>
                         <span>Waste Category</span></a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" href="<?php echo base_url()?>collectionsched">
-                        <i class="fas fa-calendar"></i>
-                        <span>Collection Schedule</span></a>
                 </li>
 
                 <!-- <hr class="sidebar-divider"> -->
@@ -69,13 +62,6 @@
                         </div>
                     </div>
                 </li>
-                <?php if ($level == "superadmin") {?>
-                <li class="nav-item">
-                    <a class="nav-link" href="<?php echo base_url()?>admin">
-                    <i class="fas fa-user-shield"></i>
-                        <span>Administrator Section</span></a>
-                </li>
-                <?php } ?>
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSettings"
                         aria-expanded="true" aria-controls="collapseUtilities">
@@ -93,19 +79,12 @@
 
                 <!-- Nav Item - Dashboard -->
                 <li class="nav-item">
-                    <a class="nav-link" href="<?php echo base_url()?>personalInfo">
+                    <a class="nav-link" href="<?php echo base_url()?>dashboard">
                         <i class="fas fa-fw fa-tachometer-alt"></i>
-                        <span>Personal Info</span></a>
+                        <span>Dashboard</span></a>
                 </li>
 
                 <!-- Divider -->
-                <!-- <hr class="sidebar-divider"> -->
-
-                <li class="nav-item">
-                    <a class="nav-link" href="<?php echo base_url()?>businessInfo">
-                        <i class="fas fa-trash-alt"></i>
-                        <span>Business Info</span></a>
-                </li>
 
                 <!-- <hr class="sidebar-divider"> -->
 

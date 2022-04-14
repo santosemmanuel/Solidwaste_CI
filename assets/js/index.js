@@ -158,22 +158,30 @@ $(document).ready(function () {
 		});
 	});
 
-	$("#wastecat_name").change(function () {
-		var selectedOption = $("#wastecat_name").prop("selectedIndex");
-		$("#wasteSpecs option").eq(selectedOption).prop("selected", true);
-	});
+	// var pickerOpts1 = {
+	// 	dateFormat: "yy-mm-dd",
+	// 	onSelect: function (dateText, inst) {
+	// 		var date = $(this).datepicker("getDate");
+	// 		$("#datepicker2").val($.datepicker.formatDate("DD", date));
+	// 	},
+	// };
 
-	var pickerOpts1 = {
-		dateFormat: "yy-mm-dd",
-		onSelect: function (dateText, inst) {
-			var date = $(this).datepicker("getDate");
-			$("#datepicker2").val($.datepicker.formatDate("DD", date));
-		},
-	};
+	function formatDate(date) {
+		var d = new Date(date),
+			month = '' + (d.getMonth() + 1),
+			day = '' + d.getDate(),
+			year = d.getFullYear();
+
+		if (month.length < 2)
+			month = '0' + month;
+		if (day.length < 2)
+			day = '0' + day;
+
+		return [year, month, day].join('-');
+	}
 
 	var currentDate = new Date();
-	$("#datepicker2").val($.datepicker.formatDate("DD", currentDate));
-	$("#datepicker").datepicker(pickerOpts1).datepicker("setDate", currentDate);
+	$("#datepicker").val(formatDate(currentDate));
 
 	$("form[name='form_edit_mahasiswa']").each(function () {
 		$(this)
@@ -440,7 +448,72 @@ $(document).ready(function () {
 		});
 	});
 
+	$("#wasteReportForm").find("#dateByWeek").datepicker({});
+	$("#wasteReportForm").find("select[name='reportCat']").change(function(){
+		switch ($(this).val()) {
+			case 'daily':
+				dailyCalendar();
+				break;
+			case 'weekly':
+				weeklyCalendar();
+				break;
+			case 'monthly':
+				monthlyCalendar();
+				break;
+			default:
+		}
+	});
 
+	function weeklyCalendar() {
+		$("#wasteReportForm").find("#dateByWeek").addClass("week-picker");
+		var startDate;
+		var endDate;
+
+		var selectCurrentWeek = function () {
+			window.setTimeout(function () {
+				$('.week-picker').find('.ui-datepicker-current-day a').addClass('ui-state-active')
+			}, 1);
+		}
+
+		$('.week-picker').datepicker({
+			showOtherMonths: true,
+			selectOtherMonths: true,
+			onSelect: function (dateText, inst) {
+				var date = $(this).datepicker('getDate');
+				startDate = new Date(date.getFullYear(), date.getMonth(), date.getDate() - date.getDay());
+				endDate = new Date(date.getFullYear(), date.getMonth(), date.getDate() - date.getDay() + 6);
+				var dateFormat = inst.settings.dateFormat || $.datepicker._defaults.dateFormat;
+
+				var dateByWeek = $.datepicker.formatDate(dateFormat, startDate, inst.settings) + " - " +
+					$.datepicker.formatDate(dateFormat, endDate, inst.settings);
+				$("#dateByWeek").val(dateByWeek);
+				selectCurrentWeek();
+			},
+			beforeShowDay: function (date) {
+				var cssClass = '';
+				if (date >= startDate && date <= endDate)
+					cssClass = 'ui-datepicker-current-day';
+				return [true, cssClass];
+			},
+			onChangeMonthYear: function (year, month, inst) {
+				selectCurrentWeek();
+			}
+		});
+
+		$('.week-picker .ui-datepicker-calendar tr').live('mousemove', function () {
+			$(this).find('td a').addClass('ui-state-hover');
+		});
+		$('.week-picker .ui-datepicker-calendar tr').live('mouseleave', function () {
+			$(this).find('td a').removeClass('ui-state-hover');
+		});
+	}
+
+	function dailyCalendar() {
+		$("#wasteReportForm").find("#dateByWeek").removeClass("week-picker");
+		$("#wasteReportForm").find("#dateByWeek").datepicker({});
+	}
+
+	function monthlyCalendar() {}
 });
 
 
