@@ -1,5 +1,11 @@
 $(document).ready(function(){
 
+
+	$("#wasteCatForm").find("select[name='name_wastecat']").change(function () {
+		var selectedOption = $("#wasteCatForm").find("select[name='name_wastecat']").prop("selectedIndex");
+		$("#wasteCatForm").find("#wasteSpecs option").eq(selectedOption).prop("selected", true);
+	});
+
 var map1 = new ol.Map({
 	target: "dashboardMapDriver",
 	layers: [
@@ -83,9 +89,5 @@ map1.on('click',function(evt){
 
 setInterval(getRequestDriver, 2000);
 
-	$("#wasteCatForm").find("select[name='name_wastecat']").change(function () {
-		var selectedOption = $("#wasteCatForm").find("select[name='name_wastecat']").prop("selectedIndex");
-		$("#wasteCatForm").find("#wasteSpecs option").eq(selectedOption).prop("selected", true);
-	});
 
 });

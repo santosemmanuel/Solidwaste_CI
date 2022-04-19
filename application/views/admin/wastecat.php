@@ -14,38 +14,35 @@
 									<option value="weekly">Weekly</option>
 									<option value="monthly">Monthly</option>
 								</select>
-
 								<div class="input-group mb-2 mr-sm-2">
-									<input type="text" class="form-control" id="dateByWeek" placeholder="Select Date">
+									<input type="text" class="form-control week-picker" name="dateWaste" id="dateByWeek"  autocomplete="off" placeholder="Select Date">
 								</div>
-
 								<button type="submit" class="btn btn-primary mb-2">Submit</button>
-							</form><br>
-                            <div class="table-responsive">
+							</form>
+							<div class="float-right">
+								<button type="button" id="printTable" class="btn btn-info">
+									<i class="fas fa-print"></i> Print
+								</button>
+								<button type="button" id="pdfTable" class="btn btn-info">
+									<i class="fas fa-file-pdf"></i> Export PDF
+								</button>
+							</div>
+							<br>
+                            <br><div class="table-responsive">
                                 <table class="table table-bordered table-hover table-striped" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr class="text-primary">
-                                            <th>#</th>
-                                            <th>ID</th>
-                                            <th>Waste Category</th>
-                                            <th>Specification</th>
-                                            <th>Collection by kg.</th>
+                                            <th width="200">Date</th>
+                                            <th>Biodegrable Waste</th>
+                                            <th>Residual Waste</th>
+                                            <th>Special Waste</th>
+											<th>Recyclable Waste</th>
+											<th>Total</th>
                                         </tr>
                                     </thead>
                                    
                                     <tbody>
-                                        <?php
-                                            $no = 1;
-                                            foreach ($data_wastecat as $wastecat) {
-                                        ?>
-                                        <tr>
-                                            <th><?php echo $no++ ?></th>
-                                            <td><?php echo $wastecat->wastecat_id ?></td>
-                                            <td><?php echo $wastecat->name_wastecat; ?></td>
-                                            <td><?php echo $wastecat->spec ?></td>
-                                            <td></td>
-                                        </tr>
-                                        <?php } ?>
+
                                     </tbody>
                                 </table>
                             </div>

@@ -44,41 +44,40 @@
 	<h1>Waste Category Data Report</h1>
 	<?php 
 		echo '<p>Active Waste Collection on time range</p>';
-		echo '<p>From: '.$dari.'<span>To: '.$sampai.'</span></p>';
 	?>
     <table>
-		<tr>
-			<th class="center" id="no">#</th>
-            <th class="center">ID</th>
-            <th>Waste Category</th>
-            <th>Collection Day</th>
-            <th>Specification</th>
-            <th>Source of Wastes</th>
-            <th>Collection Fees Per Year</th>
-            <th>Collection Date</th>
-            <th>Finish Date</th>
-		</tr>
-		<?php
-            $no = 1;
-            foreach ($data_wastecat as $wastecat) {
-        ?>
-        <tr>
-            <th class="center"><?php echo $no++ ?></th>
-            <td class="center"><?php echo $wastecat->wastecat_id ?></td>
-            <td><?php echo $wastecat->name_wastecat ?></td>
-            <td><?php echo $wastecat->col_day ?></td>
-            <td><?php echo $wastecat->spec ?></td>
-            <td><?php echo $wastecat->source ?></td>
-            <td>₱<?php echo $wastecat->col_fees ?></td>
-            <td><?php echo $wastecat->col_date ?></td>
-            <td><?php if ($wastecat->fin_date == '0000-00-00') { echo '-'; } else { echo $wastecat->fin_date; } ?></td>
-		</tr>
-		<?php 
-			}
-		?>
+		<thead>
+			<tr>
+				<th width="200">Date</th>
+				<th>Biodegrable Waste</th>
+				<th>Residual Waste</th>
+				<th>Special Waste</th>
+				<th>Recyclable Waste</th>
+				<th>Total</th>
+			</tr>
+		</thead>
+		<tbody>
+			<?php foreach($printWaste as $waste){ ?>
+				<td><?= $waste ?></td>
+			<?php } ?>
+		</tbody>
 	</table>
 	<p>Note: Year-month-day time format (yyyy-mm-dd)</p>
 	<script type="text/javascript">
+		var css = '@page { size: landscape; }',
+				head = document.head || document.getElementsByTagName('head')[0],
+				style = document.createElement('style');
+
+		style.type = 'text/css';
+		style.media = 'print';
+
+		if (style.styleSheet){
+			style.styleSheet.cssText = css;
+		} else {
+			style.appendChild(document.createTextNode(css));
+		}
+
+		head.appendChild(style);
 		window.print();
 	</script>
 </body></html>

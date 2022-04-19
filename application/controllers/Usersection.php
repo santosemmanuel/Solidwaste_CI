@@ -132,19 +132,6 @@ class Usersection extends CI_Controller {
 //		$this->load->view('source');
 //	}
 
-//	function print() {
-//
-//		$zipcode = $this->uri->segment('3');
-//
-//		$data['zipcode'] = $zipcode;
-//		if ($zipcode == "Semua") {
-//			$data['data_municipal'] = $this->data_municipal->get_data()->result();
-//		} else {
-//			$data['data_municipal'] = $this->db->query("select * from municipal where zipcode = '$zipcode'")->result();
-//		}
-//
-//		$this->load->view('print/municipal', $data);
-//	}
 //
 //	function cetak_pdf() {
 //		$this->load->library('dompdf_gen');
@@ -160,15 +147,7 @@ class Usersection extends CI_Controller {
 //		}
 //
 //		$this->load->view('pdf/municipal', $data);
-//
-//		$paper_size = 'A4';
-//		$orientation = 'landscape';
-//		$html = $this->output->get_output();
-//		$this->dompdf->set_paper($paper_size, $orientation);
-//
-//		$this->dompdf->load_html($html);
-//		$this->dompdf->render();
-//		$this->dompdf->stream("Municipal_Data.pdf", array('Attachment'=>0));
+
 //	}
 //
 //	function get_ajaxData(){

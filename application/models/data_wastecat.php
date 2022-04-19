@@ -40,4 +40,9 @@ class Data_wastecat extends CI_Model {
 	public function getBarangay(){
 		return $this->db->get('barangay');
 	}
+
+	public function getDailyWaste($data){
+		return $this->db->select("IF(SUM(waste_kg) IS NULL, 0, SUM(waste_kg)) AS total_kg")
+			->where($data)->get('request');
+	}
 }

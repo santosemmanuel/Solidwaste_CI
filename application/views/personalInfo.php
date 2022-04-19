@@ -121,7 +121,7 @@
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
-			<form name="form_add_mahasiswa" action="<?php echo base_url().'dashboard/addRequest' ?>" method="post" class="user needs-validation mx-3 mb-4" novalidate>
+			<form name="form_add_mahasiswa" action="<?php echo base_url().'dashboard/addRequest' ?>" method="post" class="user needs-validation mx-3 mb-4" id="requestForm" novalidate>
 				<div class="modal-body">
 					<div class="form-row">
 						<label for="exampleFormControlTextarea1">Example textarea</label>

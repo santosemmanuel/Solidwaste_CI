@@ -1,5 +1,22 @@
 $(document).ready(function(){
 
+	function formatDate(date) {
+		var d = new Date(date),
+			month = '' + (d.getMonth() + 1),
+			day = '' + d.getDate(),
+			year = d.getFullYear();
+
+		if (month.length < 2)
+			month = '0' + month;
+		if (day.length < 2)
+			day = '0' + day;
+
+		return [year, month, day].join('-');
+	}
+
+	var currentDate = new Date();
+	$("#requestForm").find("#datepicker").val(formatDate(currentDate));
+
 	const container = document.getElementById('popup');
 	const content = document.getElementById('popup-content');
 	const closer = document.getElementById('popup-closer');
@@ -104,24 +121,6 @@ $(document).ready(function(){
 	});
 
 	setInterval(getRequestAdmin, 2000);
-
-	function formatDate(date) {
-		var d = new Date(date),
-			month = '' + (d.getMonth() + 1),
-			day = '' + d.getDate(),
-			year = d.getFullYear();
-
-		if (month.length < 2)
-			month = '0' + month;
-		if (day.length < 2)
-			day = '0' + day;
-
-		return [year, month, day].join('-');
-	}
-
-	var currentDate = new Date();
-	$("#datepicker").val(formatDate(currentDate));
-
 
 });
 

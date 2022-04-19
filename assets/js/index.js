@@ -448,24 +448,9 @@ $(document).ready(function () {
 		});
 	});
 
-	$("#wasteReportForm").find("#dateByWeek").datepicker({});
+	$(".week-picker").datepicker();
 	$("#wasteReportForm").find("select[name='reportCat']").change(function(){
-		switch ($(this).val()) {
-			case 'daily':
-				dailyCalendar();
-				break;
-			case 'weekly':
-				weeklyCalendar();
-				break;
-			case 'monthly':
-				monthlyCalendar();
-				break;
-			default:
-		}
-	});
-
-	function weeklyCalendar() {
-		$("#wasteReportForm").find("#dateByWeek").addClass("week-picker");
+		var setCalendar;
 		var startDate;
 		var endDate;
 
@@ -474,46 +459,134 @@ $(document).ready(function () {
 				$('.week-picker').find('.ui-datepicker-current-day a').addClass('ui-state-active')
 			}, 1);
 		}
+		$("#dateByWeek").val("");
+		switch ($(this).val()) {
+			case 'daily':
+				setCalendar = {};
+				break;
+			case 'weekly':
+				setCalendar = {
+					showOtherMonths: true,
+					selectOtherMonths: true,
+					onSelect: function (dateText, inst) {
+						var date = $(this).datepicker('getDate');
+						startDate = new Date(date.getFullYear(), date.getMonth(), date.getDate() - date.getDay());
+						endDate = new Date(date.getFullYear(), date.getMonth(), date.getDate() - date.getDay() + 6);
+						var dateFormat = inst.settings.dateFormat || $.datepicker._defaults.dateFormat;
 
-		$('.week-picker').datepicker({
-			showOtherMonths: true,
-			selectOtherMonths: true,
-			onSelect: function (dateText, inst) {
-				var date = $(this).datepicker('getDate');
-				startDate = new Date(date.getFullYear(), date.getMonth(), date.getDate() - date.getDay());
-				endDate = new Date(date.getFullYear(), date.getMonth(), date.getDate() - date.getDay() + 6);
-				var dateFormat = inst.settings.dateFormat || $.datepicker._defaults.dateFormat;
+						var dateByWeek = $.datepicker.formatDate(dateFormat, startDate, inst.settings) + "-" +
+							$.datepicker.formatDate(dateFormat, endDate, inst.settings);
+						$("#dateByWeek").val(dateByWeek);
+						selectCurrentWeek();
+					},
+					beforeShowDay: function (date) {
+						var cssClass = '';
+						if (date >= startDate && date <= endDate)
+							cssClass = 'ui-datepicker-current-day';
+						return [true, cssClass];
+					},
+					onChangeMonthYear: function (year, month, inst) {
+						selectCurrentWeek();
+					}
+				};
+				break;
+			case 'monthly':
+				setCalendar = {
+					changeMonth: true,
+					changeYear: true,
+					showButtonPanel: true,
+					dateFormat: 'MM/yy',
+					onClose: function(dateText, inst) {
+						$(this).datepicker('setDate', new Date(inst.selectedYear, inst.selectedMonth, 1));
+					}
+				};
+				break;
+			default:
+		}
+		$("#dateByWeek").datepicker("destroy");
+		$('.week-picker').datepicker(setCalendar);
 
-				var dateByWeek = $.datepicker.formatDate(dateFormat, startDate, inst.settings) + " - " +
-					$.datepicker.formatDate(dateFormat, endDate, inst.settings);
-				$("#dateByWeek").val(dateByWeek);
-				selectCurrentWeek();
-			},
-			beforeShowDay: function (date) {
-				var cssClass = '';
-				if (date >= startDate && date <= endDate)
-					cssClass = 'ui-datepicker-current-day';
-				return [true, cssClass];
-			},
-			onChangeMonthYear: function (year, month, inst) {
-				selectCurrentWeek();
+	});
+	
+	$("#wasteReportForm").on('submit', function(e){
+		e.preventDefault();
+		var wasteReportType = $(this).find("select[name='reportCat']").val();
+		var dataForm = $(this).find("input[name='dateWaste']").val();
+
+		var dataFromForm = setData(wasteReportType, dataForm);
+
+		$.ajax({
+			url: base_url+"wastecat/getWasteReport",
+			data: dataFromForm,
+			type: 'post',
+			dataType: 'json',
+			success: function(data){
+				var inputData = "<td>"+data[0]+"</td>"
+								+"<td>"+data[1]+"</td>"
+								+"<td>"+data[2]+"</td>"
+								+"<td>"+data[3]+"</td>"
+								+"<td>"+data[4]+"</td>"
+								+"<td><strong>"+data[5]+"</strong></td>";
+				$("#dataTable tbody").html(inputData);
+			}
+
+		});
+	});
+
+	function dateToISOSTring(dateToConvert){
+		dateToConvert.setDate(dateToConvert.getDate() + 1);
+		return dateToConvert.toISOString().split('T')[0];
+	}
+
+	$('#printTable').click(function(){
+		var wasteReportType = $("#wasteReportForm").find("select[name='reportCat']").val();
+		var dataForm = $("#wasteReportForm").find("input[name='dateWaste']").val();
+
+		var dataToPrint = setData(wasteReportType, dataForm);
+		$.ajax({
+			url:base_url+"wastecat/printTable",
+			data: dataToPrint,
+			type: 'post',
+			success: function(data){
+				if(data){
+					window.location.href = base_url+"wastecat/printPage/print";
+				}
 			}
 		});
+	})
 
-		$('.week-picker .ui-datepicker-calendar tr').live('mousemove', function () {
-			$(this).find('td a').addClass('ui-state-hover');
+	$('#pdfTable').click(function(){
+		var wasteReportType = $("#wasteReportForm").find("select[name='reportCat']").val();
+		var dataForm = $("#wasteReportForm").find("input[name='dateWaste']").val();
+
+		var dataToPrint = setData(wasteReportType, dataForm);
+		$.ajax({
+			url:base_url+"wastecat/printTable",
+			data: dataToPrint,
+			type: 'post',
+			success: function(data){
+				if(data){
+					window.location.href = base_url+"wastecat/printPage/pdf";
+				}
+			}
 		});
-		$('.week-picker .ui-datepicker-calendar tr').live('mouseleave', function () {
-			$(this).find('td a').removeClass('ui-state-hover');
-		});
-	}
+	})
 
-	function dailyCalendar() {
-		$("#wasteReportForm").find("#dateByWeek").removeClass("week-picker");
-		$("#wasteReportForm").find("#dateByWeek").datepicker({});
+	function setData(wasteReportType, dataForm){
+		var dataFromForm = {};
+		if(wasteReportType == 'daily'){
+			dataFromForm = {type:wasteReportType, dataItem:dateToISOSTring(new Date(dataForm))};
+		} else if (wasteReportType == 'weekly'){
+			var dateFromWeek = dataForm.split('-');
+			dataFromForm = {type:wasteReportType,
+				dataItem:[dateToISOSTring(new Date(dateFromWeek[0])),
+					dateToISOSTring(new Date(dateFromWeek[1]))]};
+		} else if (wasteReportType == 'monthly'){
+			var dateFromMonth = dataForm.split('/');
+			dataFromForm = {type:wasteReportType, dataItem:[dateFromMonth[0], dateFromMonth[1]]};
+		}
+		return dataFromForm;
 	}
-
-	function monthlyCalendar() {}
 });
 
 
