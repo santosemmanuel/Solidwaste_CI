@@ -4,12 +4,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Data_usersection extends CI_Model {
 
 	public function get_data() {
-		
-		$this->db->select('*');
-		$this->db->from('user');
-		$this->db->join('user_info','user.user_id = user_info.user_info_id');
-		$this->db->where('user.level','user');
-		return $this->db->get();
+
+		return $this->db->query("SELECT * FROM (SELECT * FROM user_info INNER JOIN barangay ON 
+								user_info.brgy = barangay.id) AS UB INNER JOIN user ON user.user_id = UB.user_info_id 
+								WHERE user.level = 'user'");
+
 	}
 
 	public function delete_data($user_id){

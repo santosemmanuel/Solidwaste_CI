@@ -27,8 +27,12 @@
 					</ul>
 					<?php }?>
 					<a href="#" class="btn btn-light">Show more</a>
-					<a href="#" class="btn btn-info">Edit</a>
-					<a href="#" class="btn btn-danger">Delete / Deativate Account</a>
+					<a href="#" data-toggle="modal" class="btn btn-info" data-target="#editPersonal">
+						<i title="ubah" class="fas fa-edit text-lg text-info"></i> Edit
+					</a>
+					<a href="#" data-toggle="modal" class="btn btn-danger" data-target="#deletePersonal">
+						<i title="hapus" class="fas fa-trash text-lg text-danger"></i> Delete / Deativate Account
+					</a>
 				</div>
 			</div>
 		</div>
@@ -131,6 +135,135 @@
 				<div class="modal-footer d-flex">
 					<button type="button" class="flex-fill btn btn-danger btn-user" data-dismiss="modal">Cancel</button>
 					<button type="submit" class="flex-fill btn btn-success btn-user">Save</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="editPersonal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="formEditMunicipal" aria-hidden="true">
+	<div class="modal-dialog modal-lg modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title font-weight-bold text-primary mx-3 mt-3" id="formEditMunicipalLabel">Change User Data</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<form method="post" action="<?php echo base_url()."usersection/editPersonal/".$user_data[0]->user_id;?>" name="editUserModal">
+					<div class="form-row">
+						<div class="col">
+							<label for="exampleInputEmail1">First Name</label>
+							<input type="text" class="form-control" aria-describedby="" name="firstName" placeholder="First Name" value="<?= $user_data[0]->firstName ?>">
+						</div>
+						<div class="col">
+							<label for="exampleInputPassword1">Middle Name</label>
+							<input type="text" class="form-control" name="middleName" placeholder="Middle Name" value="<?= $user_data[0]->middleName ?>">
+						</div>
+					</div>
+					<div class="form-row">
+						<div class="col">
+							<label for="exampleInputPassword1">Last Name</label>
+							<input type="text" class="form-control" name="lastName" placeholder="Last Name" value="<?= $user_data[0]->lastName ?>">
+						</div>
+						<div class="col">
+							<label for="exampleInputPassword1">Contact Number</label>
+							<input type="text" class="form-control" name="contactNumber" placeholder="(e.g. 09123456789)" value="<?= $user_data[0]->phoneNumber ?>">
+						</div>
+					</div>
+					<div class="form-row">
+						<div class="col">
+							<label for="exampleInputEmail1">Username</label>
+							<input type="text" class="form-control" aria-describedby="" name="userName" placeholder="Username" value="<?= $user_data[0]->username ?>">
+						</div>
+						<div class="col">
+							<label for="exampleInputPassword1">Password</label>
+							<input type="password" class="form-control" name="password" placeholder="Password" value="<?php echo base64_decode($user_data[0]->password) ?>">
+						</div>
+						<div class="col">
+							<label for="exampleInputPassword1">Re-type Password</label>
+							<input type="password" class="form-control" name="reTypePassword" placeholder="Re-type Password">
+						</div>
+					</div>
+					<div class="form-row">
+						<div class="col">
+							<label for="exampleInputPassword1">Real Estate Type</label>
+							<select class="form-control" name="realEstate">
+								<option value="residential" <?php if ($user_data[0]->realEstate == 'residential'){ echo "selected"; }?> >Residential</option>
+								<option value="commercial" <?php if ($user_data[0]->realEstate == 'commercial'){ echo "selected"; }?>>Commercial</option>
+								<option value="industrial" <?php if ($user_data[0]->realEstate == 'industrial'){ echo "selected"; }?>>Industrial</option>
+							</select>
+						</div>
+						<div class="col">
+							<label for="exampleInputPassword1">Select Brgy.</label>
+							<select class="form-control" name="barangay">
+								<option <?php if ($user_data[0]->brgy == 1){ echo "selected"; }?> value="1">Poblacion District I</option>
+								<option <?php if ($user_data[0]->brgy == 2){ echo "selected"; }?> value="2">Poblacion District II</option>
+								<option <?php if ($user_data[0]->brgy == 3){ echo "selected"; }?> value="3">Poblacion District III</option>
+								<option <?php if ($user_data[0]->brgy == 4){ echo "selected"; }?> value="4">Poblacion District IV</option>
+								<option <?php if ($user_data[0]->brgy == 5){ echo "selected"; }?> value="5">Poblacion District V</option>
+								<option <?php if ($user_data[0]->brgy == 6){ echo "selected"; }?> value="6">Poblacion District VI</option>
+								<option <?php if ($user_data[0]->brgy == 7){ echo "selected"; }?> value="7">Poblacion District VII</option>
+								<option <?php if ($user_data[0]->brgy == 8){ echo "selected"; }?> value="8">Poblacion District VIII</option>
+								<option <?php if ($user_data[0]->brgy == 9){ echo "selected"; }?> value="9">Poblacion District IX</option>
+							</select>
+						</div>
+						<div class="col">
+							<label for="exampleInputPassword1">Address</label>
+							<input type="text" class="form-control" name="address" placeholder="Street name" value="<?= $user_data[0]->street?>">
+						</div>
+					</div>
+
+					<div class="form-row commercialIndustry" style="<?php if ($user_data[0]->realEstate == 'residential'){ echo 'display:none';}?>">
+						<div class="col">
+							<label for="exampleInputEmail1">Business Name</label>
+							<input type="text" class="form-control" aria-describedby="" name="businessName" placeholder="Business Name" value="<?= $user_data[0]->businessName?>">
+						</div>
+						<div class="col">
+							<label for="exampleInputPassword1">Business Type</label>
+							<select class="form-control" name="businessType">
+								<option <?php if ($user_data[0]->businessType == 'Sole Proprietorship'){ echo "selected"; }?>>Sole Proprietorship</option>
+								<option <?php if ($user_data[0]->businessType == 'Partnership'){ echo "selected"; }?>>Partnership</option>
+								<option <?php if ($user_data[0]->businessType == 'Limited Partnership'){ echo "selected"; }?>>Limited Partnership</option>
+								<option <?php if ($user_data[0]->businessType == 'Corporation'){ echo "selected"; }?>>Corporation</option>
+								<option <?php if ($user_data[0]->businessType == 'limited liability company'){ echo "selected"; }?>>limited liability company (LLC)</option>
+								<option <?php if ($user_data[0]->businessType == 'Non-profit'){ echo "selected"; }?>>Non-profit</option>
+								<option <?php if ($user_data[0]->businessType == 'Co-op'){ echo "selected"; }?>>Co-op</option>
+							</select>
+						</div>
+						<div class="col">
+							<label for="exampleInputPassword1">Business Permit Number</label>
+							<input type="number" class="form-control" name="businessPermit" placeholder="Business Permit Number" value="<?= $user_data[0]->permitNumber?>">
+						</div>
+					</div><br>
+
+					<div class="row">
+						<div id="viewMap1<?= $user_data[0]->user_id ?>" class="map"></div>
+						<input type="hidden" name="coordinate" value="">
+					</div>
+			</div>
+			<div class="modal-footer d-flex">
+				<button type="button" class="flex-fill btn btn-danger btn-user" data-dismiss="modal">Cancel</button>
+				<button type="submit" class="flex-fill btn btn-success btn-user">Save</button>
+			</div>
+			</form>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="deletePersonal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="formEditMunicipal" aria-hidden="true">
+	<div class="modal-dialog modal-lg modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title font-weight-bold text-primary mx-3 mt-3" id="formEditMunicipalLabel">Delete User Data</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<form name="form_edit_mahasiswa" action="<?php echo base_url().'usersection/deletePersonal/'.$user_data[0]->user_id ?>" method="post" class="user needs-validation mx-3 mb-4" novalidate>
+				<br><p>Are you sure you want to delete <strong><?php echo $user_data[0]->lastName.", ".$user_data[0]->firstName." ".$user_data[0]->middleName?></strong>?</p>
+				<div class="modal-footer d-flex">
+					<button type="button" class="flex-fill btn btn-danger btn-user" data-dismiss="modal">Cancel</button>
+					<button type="submit" class="flex-fill btn btn-warning btn-user">Delete</button>
 				</div>
 			</form>
 		</div>

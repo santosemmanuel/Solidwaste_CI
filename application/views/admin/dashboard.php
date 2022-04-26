@@ -37,7 +37,35 @@
 								</div>
 							</div>
 						</div>
-                    </div>
+                    </div><br>
+					<div class="row">
+						<div class="col-12">
+							<div class="card">
+								<div class="card-body">
+									<div class="float-right">
+										<button type="button" id="printChart" class="btn btn-info">
+											<i class="fas fa-print"></i> Print
+										</button>
+										<button type="button" id="pdfChart" class="btn btn-info">
+											<i class="fas fa-file-pdf"></i> Export PDF
+										</button>
+									</div>
+									<form class="form-inline" method="post" id="chartReport">
+										<select class="form-control mb-2 mr-sm-2" id="inlineFormInputName2" name="reportCat">
+											<option value="daily">Daily</option>
+											<option value="weekly">Weekly</option>
+											<option value="monthly">Monthly</option>
+										</select>
+										<div class="input-group mb-2 mr-sm-2">
+											<input type="text" class="form-control week-picker" name="dateWaste" id="dateByWeek"  autocomplete="off" placeholder="Select Date">
+										</div>
+										<button type="submit" class="btn btn-primary mb-2">Submit</button>
+									</form>
+								<canvas id="myChart"></canvas>
+								</div>
+							</div>
+						</div>
+					</div>
                 </div>
                 <!-- /.container-fluid -->
             </div>

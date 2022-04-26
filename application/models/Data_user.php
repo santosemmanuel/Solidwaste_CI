@@ -172,4 +172,8 @@ class Data_user extends CI_Model {
 		return $this->db->update('truck', $data);
 	}
 
+	public function get_barangay(){
+		return $this->db->get("barangay");
+	}
+
 }

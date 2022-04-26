@@ -26,5 +26,15 @@ class Data_request extends CI_Model {
 			->where('remarks !=','done')->where('driver_id', $driverID)->get();
 	}
 
+	public function get_chartDataReport($dataReport){
+			$queryWithWhere = "SELECT request.waste_id, IF(SUM(request.waste_kg) IS NULL, 0, SUM(request.waste_kg)) 
+									AS sum_kg, request.date_pickup, request.remarks, UT.brgy FROM request INNER JOIN 
+									(SELECT user.level, user_info.brgy, user.user_id FROM user INNER JOIN user_info ON 
+									user.user_id = user_info.user_info_id WHERE user.level = 'user') AS UT ON 
+									request.user_id = UT.user_id WHERE ";
+			$queryWithWhere .= $dataReport;
+			return $this->db->query($queryWithWhere);
+	}
+
 
 }

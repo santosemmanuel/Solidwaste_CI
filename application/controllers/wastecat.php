@@ -66,7 +66,7 @@ class Wastecat extends CI_Controller {
 
 			foreach ($wasteCat as $category){
 				$data = array('MONTHNAME(date_pickup)' => $monthReport[0],
-					'waste_id' => $category->wastecat_id, 'remarks'=> 'done');
+					'waste_id' => $category->wastecat_id, 'remarks'=> 'done', 'YEAR(date_pickup)' => $monthReport[1]);
 				$resultwaste = $this->data_wastecat->getDailyWaste($data)->result();
 				array_push($resultCountWaste, (int)$resultwaste[0]->total_kg);
 			}

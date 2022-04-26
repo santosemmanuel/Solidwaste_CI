@@ -65,7 +65,6 @@
                 </div>
             </center>
         </footer>
-
     </div>
     <!-- Sign Up -->
     <div class="modal fade bd-example-modal-lg" id="signUpModal" tabindex="-1" width="100" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
@@ -126,15 +125,15 @@
                             <div class="col">
                                 <label for="exampleInputPassword1">Select Brgy.</label>
                                 <select class="form-control" name="barangay">
-                                    <option>Poblacion District I</option>
-                                    <option>Poblacion District II</option>
-                                    <option>Poblacion District III</option>
-                                    <option>Poblacion District IV</option>
-                                    <option>Poblacion District V</option>
-                                    <option>Poblacion District VI</option>
-                                    <option>Poblacion District VII</option>
-                                    <option>Poblacion District VIII</option>
-                                    <option>Poblacion District IX</option>
+                                    <option value="1">Poblacion District I</option>
+                                    <option value="2">Poblacion District II</option>
+                                    <option value="3">Poblacion District III</option>
+                                    <option value="4">Poblacion District IV</option>
+                                    <option value="5">Poblacion District V</option>
+                                    <option value="6">Poblacion District VI</option>
+                                    <option value="7">Poblacion District VII</option>
+                                    <option value="8">Poblacion District VIII</option>
+                                    <option value="9">Poblacion District IX</option>
                                 </select>
                             </div>
                             <div class="col">

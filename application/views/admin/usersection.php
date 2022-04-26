@@ -26,14 +26,13 @@
                                         <?php
                                             $no = 1;
                                             $kode = '';
-                                            //print_r($data_usersection);
                                             foreach ($data_usersection as $usersection) {
                                         ?>
                                         <tr>
                                             <th><?php echo $no++ ?></th>
                                             <td><?php echo $usersection->user_id ?></td>
                                             <td><?php echo $usersection->lastName.", ".$usersection->firstName." ".$usersection->middleName ?></td>
-                                            <td><?php echo $usersection->brgy ?></td>
+                                            <td><?php echo $usersection->barangay ?></td>
                                             <td><?php echo $usersection->street ?></td>
                                             <td class="action-icons">
                                                 <a href="#" data-toggle="modal" data-target="#viewBusiness<?php echo $usersection->user_id ?>"> 
@@ -120,15 +119,15 @@
                                     <div class="col">
                                         <label for="exampleInputPassword1">Select Brgy.</label>
                                         <select class="form-control" name="barangay">
-                                            <option <?php if ($usersection->brgy == 'Poblacion District I'){ echo "selected"; }?> >Poblacion District I</option>
-                                            <option <?php if ($usersection->brgy == 'Poblacion District II'){ echo "selected"; }?>>Poblacion District II</option>
-                                            <option <?php if ($usersection->brgy == 'Poblacion District III'){ echo "selected"; }?>>Poblacion District III</option>
-                                            <option <?php if ($usersection->brgy == 'Poblacion District IV'){ echo "selected"; }?>>Poblacion District IV</option>
-                                            <option <?php if ($usersection->brgy == 'Poblacion District V'){ echo "selected"; }?>>Poblacion District V</option>
-                                            <option <?php if ($usersection->brgy == 'Poblacion District VI'){ echo "selected"; }?>>Poblacion District VI</option>
-                                            <option <?php if ($usersection->brgy == 'Poblacion District VII'){ echo "selected"; }?>>Poblacion District VII</option>
-                                            <option <?php if ($usersection->brgy == 'Poblacion District VIII'){ echo "selected"; }?>>Poblacion District VIII</option>
-                                            <option <?php if ($usersection->brgy == 'Poblacion District IX'){ echo "selected"; }?>>Poblacion District IX</option>
+                                            <option <?php if ($usersection->brgy == 1){ echo "selected"; }?> value="1">Poblacion District I</option>
+                                            <option <?php if ($usersection->brgy == 2){ echo "selected"; }?> value="2">Poblacion District II</option>
+                                            <option <?php if ($usersection->brgy == 3){ echo "selected"; }?> value="3">Poblacion District III</option>
+                                            <option <?php if ($usersection->brgy == 4){ echo "selected"; }?> value="4">Poblacion District IV</option>
+                                            <option <?php if ($usersection->brgy == 5){ echo "selected"; }?> value="5">Poblacion District V</option>
+                                            <option <?php if ($usersection->brgy == 6){ echo "selected"; }?> value="6">Poblacion District VI</option>
+                                            <option <?php if ($usersection->brgy == 7){ echo "selected"; }?> value="7">Poblacion District VII</option>
+                                            <option <?php if ($usersection->brgy == 8){ echo "selected"; }?> value="8">Poblacion District VIII</option>
+                                            <option <?php if ($usersection->brgy == 9){ echo "selected"; }?> value="9">Poblacion District IX</option>
                                         </select>
                                     </div>
                                     <div class="col">
@@ -230,4 +229,3 @@
 
             
 
-            

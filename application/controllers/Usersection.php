@@ -22,12 +22,19 @@ class Usersection extends CI_Controller {
 		$this->load->view('navigation', $user);
 		$this->load->view('admin/usersection', $data);
 		$this->load->view('footer');
-		$this->load->view('source');
+		$this->load->view('source', array('js' => ''));
 	}
 
 	public function edit(){
-		$info['datatype'] = 'usersection';
-		$info['operation'] = 'Ubah';
+		$user = $this->uri->segment('4');
+		if(isset($user)){
+			$info['datatype'] = 'dashboard';
+			$info['operation'] = 'Ubah';
+		} else {
+			$info['datatype'] = 'usersection';
+			$info['operation'] = 'Ubah';
+		}
+
 		
 		$user_id = $this->uri->segment('3');
 		$firstName = $this->input->post('firstName');
@@ -97,6 +104,22 @@ class Usersection extends CI_Controller {
 		$this->load->view('source');
 	}
 
+	public function deletePersonal(){
+		$user_id = $this->uri->segment('3');
+		$action  = $this->data_usersection->delete_data($user_id);
+		if($action){
+			redirect(base_url().'welcome/logout');
+		}
+	}
+
+	public function editPersonal(){
+
+	}
+
+	function get_ajaxData(){
+		echo json_encode($this->data_usersection->get_data()->result());
+	}
+
 //	public function laporan()
 //	{
 //		$user = array(
@@ -150,7 +173,5 @@ class Usersection extends CI_Controller {
 
 //	}
 //
-//	function get_ajaxData(){
-//		echo json_encode($this->data_usersection->get_data()->result());
-//	}
+
 }

@@ -122,5 +122,63 @@ $(document).ready(function(){
 
 	setInterval(getRequestAdmin, 2000);
 
+	$("#datepickerChart").datepicker({dateFormat: "yy-mm-dd"});
+	$("#chartReport").find("select[name='reportCat']").change(function(){
+		var setCalendar;
+		var startDate;
+		var endDate;
+
+		var selectCurrentWeek = function () {
+			window.setTimeout(function () {
+				$('.week-picker').find('.ui-datepicker-current-day a').addClass('ui-state-active')
+			}, 1);
+		}
+		$("#dateByWeek").val("");
+		switch ($(this).val()) {
+			case 'daily':
+				setCalendar = {};
+				break;
+			case 'weekly':
+				setCalendar = {
+					showOtherMonths: true,
+					selectOtherMonths: true,
+					onSelect: function (dateText, inst) {
+						var date = $(this).datepicker('getDate');
+						startDate = new Date(date.getFullYear(), date.getMonth(), date.getDate() - date.getDay());
+						endDate = new Date(date.getFullYear(), date.getMonth(), date.getDate() - date.getDay() + 6);
+						var dateFormat = inst.settings.dateFormat || $.datepicker._defaults.dateFormat;
+
+						var dateByWeek = $.datepicker.formatDate(dateFormat, startDate, inst.settings) + "-" +
+							$.datepicker.formatDate(dateFormat, endDate, inst.settings);
+						$("#dateByWeek").val(dateByWeek);
+						selectCurrentWeek();
+					},
+					beforeShowDay: function (date) {
+						var cssClass = '';
+						if (date >= startDate && date <= endDate)
+							cssClass = 'ui-datepicker-current-day';
+						return [true, cssClass];
+					},
+					onChangeMonthYear: function (year, month, inst) {
+						selectCurrentWeek();
+					}
+				};
+				break;
+			case 'monthly':
+				setCalendar = {
+					changeMonth: true,
+					changeYear: true,
+					showButtonPanel: true,
+					dateFormat: 'MM/yy',
+					onClose: function(dateText, inst) {
+						$(this).datepicker('setDate', new Date(inst.selectedYear, inst.selectedMonth, 1));
+					}
+				};
+				break;
+			default:
+		}
+		$("#dateByWeek").datepicker("destroy");
+		$('.week-picker').datepicker(setCalendar);
+	});
 });
 

@@ -28,14 +28,22 @@ class Pdf extends DOMPDF
 	public function load_view($view, $data = array())
 	{
 		$dompdf = new Dompdf();
+		$options = new \Dompdf\Options();
 		$html = $this->ci()->load->view($view, $data, TRUE);
 
 		$dompdf->loadHtml($html);
 
 		// (Optional) Setup the paper size and orientation
-		$dompdf->setPaper('A4', 'landscape');
-
+		$options->set('isPhpEnabled', true);
+		$options->set('enable-javascript', true);
+		$options->set('images', true);
+		$options->set('javascript-delay', 13000); // page load is quick but even a high number doesn't help
+		$options->set('enable-smart-shrinking', true);
+		$options->set('no-stop-slow-scripts', true);
+		//$dompdf->set('enable-javascript', true);
+		$dompdf->setOptions($options);
 		// Render the HTML as PDF
+		$dompdf->setPaper('A4', 'landscape');
 		$dompdf->render();
 		$time = time();
 

@@ -11,6 +11,7 @@ class Dashboard extends CI_Controller {
 		}
 		$this->load->model('data_user');
 		$this->load->model('data_request');
+		$this->load->model('data_wastecat');
 	}
 
 	public function index()
@@ -27,7 +28,8 @@ class Dashboard extends CI_Controller {
 			$data = array(
 				'user_data' => $this->data_user->get_admin($this->session->userdata('user_id'))->result(),
 				'truck_data' => $this->data_user->getTruck()->result(),
-				'driver_data' => $this->data_user->getDriver()->result()
+				'driver_data' => $this->data_user->getDriver()->result(),
+				'wastecat_data' => $this->data_wastecat->get_data()->result()
 			);
 		} else if ($this->session->userdata('level') == 'driver'){
 			$page = 'driverInfo';
@@ -119,6 +121,91 @@ class Dashboard extends CI_Controller {
 		}
 
 		$this->load->view('source');
+	}
+
+	public function getChartDataReport(){
+
+		$reportArray = $this->chartDataReport($this->input->post('type'), $this->input->post('dataItem'));
+		echo json_encode($reportArray);
+		
+	}
+
+	public function printTable() {
+		$this->session->unset_userdata('chartToPrint');
+		$this->session->unset_userdata('chartDate');
+		$this->session->unset_userdata('chartType');
+		$resultWasteToPrint = $this->chartDataReport($this->input->post('type'), $this->input->post('dataItem'));
+		$data['chartToPrint'] = $resultWasteToPrint;
+		$data['chartDate'] = $this->input->post('dataItem');
+		$data['chartType'] = $this->input->post('type');
+		$this->session->set_userdata($data);
+		echo true;
+	}
+
+	public function printPage($page){
+
+		$data['report'] = $this->session->userdata('chartToPrint');
+		$data['chartType'] = $this->session->userdata('chartType');
+		$data['chartDate'] = $this->session->userdata('chartDate');
+		if($page == 'pdf') {
+			$this->load->library('pdf');
+			$this->pdf->load_view('pdf/dashboardReport', $data);
+		} else {
+			$this->load->view('print/dashboardReport', $data);
+		}
+
+	}
+
+	public function printPdfChart(){
+
+		$reportDate =  $this->uri->segment(3);
+		$reportWaste = $this->uri->segment(4);
+		$outputType = $this->uri->segment(5);
+		$barangayResult = $this->data_user->get_barangay()->result();
+		$reportArray = array();
+
+		foreach($barangayResult as $barangay){
+			$resultDataReport = $this->data_request->get_chartDataReport($barangay->id, $reportWaste, $reportDate)->result();
+			$reportArray[] = array('barangay' => $barangay->id, 'totalWaste' => (int)$resultDataReport[0]->sum_kg);
+		}
+
+		if($outputType == 'print'){
+			$this->load->view('print/dashboardReport', array('report' => $reportArray));
+		} else if ($outputType == 'pdf'){
+			$this->load->library('pdf');
+			$this->pdf->load_view('pdf/dashboardReport', array('report' => $reportArray));
+		}
+
+	}
+
+	private function chartDataReport($type, $dataItem){
+
+		$wasteData = $this->data_wastecat->get_data()->result();
+		$brgyData = $this->data_user->get_barangay()->result();
+		$resultCountWaste = array();
+		$queryWhereDate = "";
+
+		if($type == 'daily'){
+			$queryWhereDate .= "request.date_pickup = '{$dataItem}'";
+		} else if ($type == 'weekly'){
+			$queryWhereDate = "request.date_pickup BETWEEN '{$dataItem[0]}' AND '{$dataItem[1]}'";
+		} else if ($type == 'monthly'){
+			$queryWhereDate = "MONTHNAME(request.date_pickup) = '{$dataItem[0]}' AND YEAR(request.date_pickup) = '{$dataItem[1]}'";
+		}
+
+		foreach ($wasteData as $waste){
+			$temp = array();
+			foreach ($brgyData as $brgy){
+				$queryWhere = "request.waste_id = {$waste->wastecat_id} AND UT.brgy = {$brgy->id} AND ";
+				$queryWhere .= $queryWhereDate;
+				$resultDataReport = $this->data_request->get_chartDataReport($queryWhere)->result();
+				$temp[] = array('barangay' => $brgy->id, 'totalWaste' => (int)$resultDataReport[0]->sum_kg);
+			}
+			array_push($resultCountWaste, $temp);
+		}
+
+		return $resultCountWaste;
+
 	}
 
 }

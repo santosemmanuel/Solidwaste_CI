@@ -20,12 +20,17 @@
     <!-- Page level custom scripts for Tables-->
     <script src="<?php echo base_url().'assets/js/demo/datatables-demo.js' ?>"></script>
 	<script src="<?php echo base_url().'assets/vendor/bootstrap-select/js/bootstrap-select.min.js'?>"></script>
-	<script src="<?php echo base_url()."assets/vendor/fullcalendar/main.js"?>"></script>
-	<?php
-		if(isset($js)){ ?>
-			<script src="<?php echo base_url().$js?>"></script>
+	<script src="<?php echo base_url().'assets/vendor/fullcalendar/main.js'?>"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.js"></script>
+	<script src="<?php echo base_url().'assets/js/chartscript.js'?>"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.6.347/pdf.min.js"
+			integrity="sha512-Z8CqofpIcnJN80feS2uccz+pXWgZzeKxDsDNMD/dJ6997/LSRY+W4NmEt9acwR+Gt9OHN0kkI1CTianCwoqcjQ=="
+			crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.debug.js" type="text/javascript"></script>
+	<?php if(isset($js)){ ?>
+			<script src="<?php echo base_url().$js; ?>"></script>
 	<?php} else {?>
-	<script src="<?php echo base_url().'assets/js/index.js'?>"></script>
+			<script src="<?php echo base_url().'assets/js/index.js'; ?>"></script>
 	<?php }?>
 
 
