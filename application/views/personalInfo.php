@@ -26,12 +26,14 @@
 						<li class="list-inline-item"><strong>Business Type:</strong> <?= $user_data[0]->businessType?></li>
 					</ul>
 					<?php }?>
-					<a href="#" class="btn btn-light">Show more</a>
-					<a href="#" data-toggle="modal" class="btn btn-info" data-target="#editPersonal">
-						<i title="ubah" class="fas fa-edit text-lg text-info"></i> Edit
+					<a href="#" data-toggle="modal" data-target="#viewBusiness<?php echo $user_data[0]->user_id ?>" class="btn btn-light">
+						Show more
+					</a>
+					<a href="#" data-toggle="modal" class="btn btn-info" data-target="#editPersonal<?= $user_data[0]->user_id?>">
+						<i class="fas fa-edit text-lg"></i> Edit
 					</a>
 					<a href="#" data-toggle="modal" class="btn btn-danger" data-target="#deletePersonal">
-						<i title="hapus" class="fas fa-trash text-lg text-danger"></i> Delete / Deativate Account
+						<i class="fas fa-trash text-lg"></i> Delete / Deativate Account
 					</a>
 				</div>
 			</div>
@@ -45,7 +47,7 @@
 				<div class="card" >
 					<div class="card-body">
 						<h5 class="card-title">List of Request(s)</h5>
-						<table class="table">
+						<table class="table" id="requestTable">
 							<thead>
 							<tr>
 								<th scope="col">#</th>
@@ -55,24 +57,7 @@
 							</tr>
 							</thead>
 							<tbody>
-							<tr>
-								<th scope="row">1</th>
-								<td>Mark</td>
-								<td>Otto</td>
-								<td>@mdo</td>
-							</tr>
-							<tr>
-								<th scope="row">2</th>
-								<td>Jacob</td>
-								<td>Thornton</td>
-								<td>@fat</td>
-							</tr>
-							<tr>
-								<th scope="row">3</th>
-								<td>Larry</td>
-								<td>the Bird</td>
-								<td>@twitter</td>
-							</tr>
+
 							</tbody>
 						</table>
 					</div>
@@ -140,7 +125,7 @@
 		</div>
 	</div>
 </div>
-<div class="modal fade" id="editPersonal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="formEditMunicipal" aria-hidden="true">
+<div class="modal fade" id="editPersonal<?= $user_data[0]->user_id ?>" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="formEditMunicipal" aria-hidden="true">
 	<div class="modal-dialog modal-lg modal-dialog-centered">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -150,7 +135,7 @@
 				</button>
 			</div>
 			<div class="modal-body">
-				<form method="post" action="<?php echo base_url()."usersection/editPersonal/".$user_data[0]->user_id;?>" name="editUserModal">
+				<form method="post" action="<?php echo base_url()."usersection/edit/".$user_data[0]->user_id."/1";?>" name="editUserModal">
 					<div class="form-row">
 						<div class="col">
 							<label for="exampleInputEmail1">First Name</label>
@@ -266,6 +251,29 @@
 					<button type="submit" class="flex-fill btn btn-warning btn-user">Delete</button>
 				</div>
 			</form>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="viewBusiness<?php echo $user_data[0]->user_id ?>" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="formEditMunicipal" aria-hidden="true">
+	<div class="modal-dialog modal-lg modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title font-weight-bold text-primary mx-3 mt-3" id="formEditMunicipalLabel">User Info Data</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<div class="viewUserMap">
+					<ul class="list-inline">
+						<li class="list-inline-item"><strong>Barangay/Poblacion:</strong> <?= $user_data[0]->barangay?></li>
+						<li class="list-inline-item"><strong>Street:</strong> <?php echo $user_data[0]->password ?></li>
+					</ul><hr>
+					<div class="row">
+						<div id="viewMap<?= $user_data[0]->user_id ?>" class="map"></div>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>

@@ -8,8 +8,9 @@ class Data_user extends CI_Model {
 	}
 
 	public function get_userById($userId){
-		return $this->db->select()->from('user')->join('user_info','user.user_id = user_info.user_info_id')
-			->where(array('user.user_id' => $userId))->get();
+		return $this->db->query("SELECT * FROM (SELECT * FROM user_info INNER JOIN barangay ON 
+								user_info.brgy = barangay.id) AS UB INNER JOIN user ON user.user_id = UB.user_info_id 
+								WHERE user.level = 'user' AND user.user_id = {$userId}");
 	}
 
 	public function get_driverById($userId){

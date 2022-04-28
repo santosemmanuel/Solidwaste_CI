@@ -2,26 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="36c22611-a081-4326-9ebb-9104805eb9a1" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/application/views/pdf/dashboardReport.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/application/views/print/dashboardReport.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/js/chartscript.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/Solidwaste_CI.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Solidwaste_CI.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/js/user.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/application/controllers/Dashboard.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/Dashboard.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/application/controllers/Usersection.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/Usersection.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/controllers/Wastecat.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/Wastecat.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/libraries/Pdf.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/libraries/Pdf.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/controllers/WasteInfo.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/WasteInfo.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/application/models/Data_request.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/models/Data_request.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/application/models/Data_user.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/models/Data_user.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/models/Data_usersection.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/models/Data_usersection.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/views/admin/dashboard.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/admin/dashboard.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/views/admin/usersection.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/admin/usersection.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/views/login.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/login.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/application/views/personalInfo.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/personalInfo.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/application/views/source.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/source.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/wasteInfo.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/wasteInfo.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/js/dashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/dashboard.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -163,6 +154,10 @@
       <workItem from="1650948017844" duration="366000" />
       <workItem from="1650978946979" duration="2030000" />
       <workItem from="1650982430951" duration="2646000" />
+      <workItem from="1650996066069" duration="972000" />
+      <workItem from="1651000318180" duration="9805000" />
+      <workItem from="1651108055521" duration="7045000" />
+      <workItem from="1651126651284" duration="3921000" />
     </task>
     <servers />
   </component>
@@ -196,10 +191,10 @@
     </state>
     <state x="370" y="172" key="run.anything.popup/62.0.1304.768@62.0.1304.768" timestamp="1648882654998" />
     <state x="372" y="172" key="run.anything.popup/64.0.1302.768@64.0.1302.768" timestamp="1650564148297" />
-    <state x="379" y="89" width="672" height="678" key="search.everywhere.popup" timestamp="1650980593602">
+    <state x="379" y="89" width="670" height="58" key="search.everywhere.popup" timestamp="1651115157031">
       <screen x="64" y="0" width="1302" height="768" />
     </state>
     <state x="377" y="89" width="672" height="678" key="search.everywhere.popup/62.0.1304.768@62.0.1304.768" timestamp="1649259642504" />
-    <state x="379" y="89" width="672" height="678" key="search.everywhere.popup/64.0.1302.768@64.0.1302.768" timestamp="1650980593602" />
+    <state x="379" y="89" width="670" height="58" key="search.everywhere.popup/64.0.1302.768@64.0.1302.768" timestamp="1651115157031" />
   </component>
 </project>

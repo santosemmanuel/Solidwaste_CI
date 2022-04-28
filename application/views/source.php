@@ -29,9 +29,9 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.debug.js" type="text/javascript"></script>
 	<?php if(isset($js)){ ?>
 			<script src="<?php echo base_url().$js; ?>"></script>
-	<?php} else {?>
+	<?php } else { ?>
 			<script src="<?php echo base_url().'assets/js/index.js'; ?>"></script>
-	<?php }?>
+	<?php } ?>
 
 
 </body>

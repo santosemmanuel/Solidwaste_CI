@@ -22,7 +22,7 @@ class Usersection extends CI_Controller {
 		$this->load->view('navigation', $user);
 		$this->load->view('admin/usersection', $data);
 		$this->load->view('footer');
-		$this->load->view('source', array('js' => ''));
+		$this->load->view('source', array('js' => null));
 	}
 
 	public function edit(){
@@ -35,7 +35,6 @@ class Usersection extends CI_Controller {
 			$info['operation'] = 'Ubah';
 		}
 
-		
 		$user_id = $this->uri->segment('3');
 		$firstName = $this->input->post('firstName');
 		$middleName = $this->input->post('middleName');
@@ -74,7 +73,7 @@ class Usersection extends CI_Controller {
 
 		$user_action = $this->data_user->update_data(array('user_id' => $user_id), $data,'user');
 		$user_info_action = $this->data_user->update_data(array('user_info_id' => $user_id), $data_info, 'user_info');
-		
+
 		$this->load->view('header');
 
 		if ($user_action && $user_info_action) {
@@ -83,7 +82,7 @@ class Usersection extends CI_Controller {
 			$this->load->view('notifications/insert_failed', $info);
 		}
 
-		$this->load->view('source');	
+		$this->load->view('source');
 	}
 
 	public function delete()
@@ -110,10 +109,6 @@ class Usersection extends CI_Controller {
 		if($action){
 			redirect(base_url().'welcome/logout');
 		}
-	}
-
-	public function editPersonal(){
-
 	}
 
 	function get_ajaxData(){

@@ -36,5 +36,17 @@ class Data_request extends CI_Model {
 			return $this->db->query($queryWithWhere);
 	}
 
+	public function get_requestListUser($userID){
+		return $this->db->select('request_date, remarks')->from('request')
+			->where("user_id = {$userID} AND remarks = 'request' OR remarks = 'pending'")
+			->get();
+	}
 
+	public function get_requestWasteList($userID){
+		return $this->db->query("SELECT RT.request_date, RT.name_wastecat, RT.waste_kg, user.firstName, user.lastName, 
+								RT.truck_model, RT.truck_color, RT.plate_no, RT.date_pickup FROM 
+								(SELECT * FROM truck INNER JOIN (SELECT * FROM request INNER JOIN wastecat ON 
+								request.waste_id = wastecat.wastecat_id) AS RW ON RW.truck_id = truck.id) AS RT 
+								INNER JOIN user ON RT.driver_id = user.user_id WHERE RT.user_id = {$userID} AND RT.remarks = 'done';");
+	}
 }

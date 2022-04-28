@@ -39,6 +39,7 @@ class Dashboard extends CI_Controller {
 			$js = array('js' => 'assets/js/driverdashboard.js');
 		} else {
 			$page = 'personalInfo';
+			$js = array('js' => 'assets/js/user.js');
 			$data = array(
 				'user_data' => $this->data_user->get_userById($this->session->userdata('user_id'))->result()
 			);
@@ -178,6 +179,11 @@ class Dashboard extends CI_Controller {
 
 	}
 
+	public function getListRequestUser(){
+		$requestByUser = $this->data_request->get_requestListUser($this->session->userdata('user_id'))->result();
+		echo json_encode($requestByUser);
+	}
+
 	private function chartDataReport($type, $dataItem){
 
 		$wasteData = $this->data_wastecat->get_data()->result();
@@ -207,5 +213,6 @@ class Dashboard extends CI_Controller {
 		return $resultCountWaste;
 
 	}
+
 
 }

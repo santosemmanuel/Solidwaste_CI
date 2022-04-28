@@ -122,7 +122,7 @@ $(document).ready(function(){
 
 	setInterval(getRequestAdmin, 2000);
 
-	$("#datepickerChart").datepicker({dateFormat: "yy-mm-dd"});
+	$("#dateByWeek").datepicker({dateFormat: "yy-mm-dd"});
 	$("#chartReport").find("select[name='reportCat']").change(function(){
 		var setCalendar;
 		var startDate;
