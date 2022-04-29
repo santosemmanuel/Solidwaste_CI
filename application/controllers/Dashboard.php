@@ -184,6 +184,23 @@ class Dashboard extends CI_Controller {
 		echo json_encode($requestByUser);
 	}
 
+	public function deleteRequest(){
+
+		$request_id = $this->uri->segment(3);
+
+		$info['datatype'] = 'dashboard';
+
+		$this->load->view('header');
+
+		if ($this->data_request->delete_request($request_id)) {
+			$this->load->view('notifications/delete_success', $info);
+		} else {
+			$this->load->view('notifications/delete_failed', $info);
+		}
+
+		$this->load->view('source');
+	}
+
 	private function chartDataReport($type, $dataItem){
 
 		$wasteData = $this->data_wastecat->get_data()->result();
@@ -213,6 +230,7 @@ class Dashboard extends CI_Controller {
 		return $resultCountWaste;
 
 	}
+
 
 
 }

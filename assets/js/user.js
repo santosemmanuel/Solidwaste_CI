@@ -141,11 +141,14 @@ $(document).ready(function(){
 		$.get(base_url + "dashboard/getListRequestUser/", function (data) {
 			var text = "";
 			for (let i = 0; i < data.length; i++) {
+				var status = (data[i].remarks == "pending")? "disabled" : "";
 				text += "<tr>";
 				text += "<td>"+(i+1)+"</td>";
 				text += "<td>"+data[i].request_date+"</td>";
 				text += "<td>"+data[i].remarks+"</td>";
-				text += "<td><button type=\"button\" class=\"btn btn-danger btn-sm\">Delete</button></td>";
+				text += "<td>" +
+					"<button type=\"button\" class=\"btn btn-danger btn-sm\" data-toggle=\"modal\" data-target=\"#delRequest\" " +
+					"data-whatever=\""+data[i].request_id+"\" "+status+">Delete</button></td>";
 				text += "</tr>";
 			}
 			$("#requestTable tbody").html(text);
@@ -154,4 +157,10 @@ $(document).ready(function(){
 
 	setInterval(getRequestUser, 2000);
 
+	$('#delRequest').on('show.bs.modal', function (event) {
+		var button = $(event.relatedTarget) // Button that triggered the modal
+		var recipient = button.data('whatever') // Extract info from data-* attributes
+		var modal = $(this)
+		modal.find('.modal-footer a').attr('href',base_url+"dashboard/deleteRequest/"+recipient)
+	})
 })
