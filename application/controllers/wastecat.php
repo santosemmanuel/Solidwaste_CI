@@ -87,8 +87,12 @@ class Wastecat extends CI_Controller {
 
 	public function printTable() {
 		$this->session->unset_userdata('wasteToPrint');
+		$this->session->unset_userdata('chartDate');
+		$this->session->unset_userdata('chartType');
 		$resultWasteToPrint = $this->wasteReport($this->input->post('type'), $this->input->post('dataItem'));
 		$data['wasteToPrint'] = $resultWasteToPrint;
+		$data['chartDate'] = $this->input->post('dataItem');
+		$data['chartType'] = $this->input->post('type');
 		$this->session->set_userdata($data);
 		echo true;
 	}
@@ -96,6 +100,8 @@ class Wastecat extends CI_Controller {
 	public function printPage($page){
 
 		$data['printWaste'] = $this->session->userdata('wasteToPrint');
+		$data['chartType'] = $this->session->userdata('chartType');
+		$data['chartDate'] = $this->session->userdata('chartDate');
 
 		if($page == 'pdf') {
 			$this->load->library('pdf');

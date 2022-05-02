@@ -110,16 +110,16 @@
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
-			<form name="form_add_mahasiswa" action="<?php echo base_url().'dashboard/addRequest' ?>" method="post" class="user needs-validation mx-3 mb-4" id="requestForm" novalidate>
+			<form name="form_add_mahasiswa" action="<?php echo base_url().'concerns/sendConcern/user' ?>" method="post" class="user needs-validation mx-3 mb-4" id="requestForm" novalidate>
 				<div class="modal-body">
 					<div class="form-row">
-						<label for="exampleFormControlTextarea1">Example textarea</label>
-						<textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+						<label for="exampleFormControlTextarea1">Input Message</label>
+						<textarea class="form-control" id="exampleFormControlTextarea1" name="message" rows="5"></textarea>
 					</div><br>
 				</div>
 				<div class="modal-footer d-flex">
 					<button type="button" class="flex-fill btn btn-danger btn-user" data-dismiss="modal">Cancel</button>
-					<button type="submit" class="flex-fill btn btn-success btn-user">Save</button>
+					<button type="submit" class="flex-fill btn btn-success btn-user">Send</button>
 				</div>
 			</form>
 		</div>

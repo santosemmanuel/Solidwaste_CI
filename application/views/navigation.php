@@ -102,10 +102,22 @@
                         <span>Concerns</span></a>
                 </li>
 
-            <?php }?>
+            <?php } else if ($level == 'driver') {?>
             <!-- Divider -->
             <!-- <hr class="sidebar-divider"> -->
 
+				<li class="nav-item">
+					<a class="nav-link" href="<?php echo base_url()?>dashboard">
+						<i class="fas fa-fw fa-tachometer-alt"></i>
+						<span>Dashboard</span></a>
+				</li>
+
+				<li class="nav-item">
+					<a class="nav-link" href="<?php echo base_url()?>wasteInfo/driverCollection">
+						<i class="fas fa-truck"></i>
+						<span>Waste Collection</span></a>
+				</li>
+			<?php } ?>
             <!-- Nav Item - Data Mahasiswa -->
             <li class="nav-item">
                 <a class="nav-link" href="#" data-toggle="modal" data-target="#logoutModal">

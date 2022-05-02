@@ -45,4 +45,14 @@ class Data_wastecat extends CI_Model {
 		return $this->db->select("IF(SUM(waste_kg) IS NULL, 0, SUM(waste_kg)) AS total_kg")
 			->where($data)->get('request');
 	}
+
+	public function getCollectionByDriver($where){
+		$queryCollectionByDriver = "SELECT request.user_id, request.waste_id, wastecat.name_wastecat, 
+									SUM(request.waste_kg) AS total_kg FROM request INNER JOIN user_info ON 
+									request.user_id = user_info.user_info_id INNER JOIN wastecat ON 
+									request.waste_id = wastecat.wastecat_id WHERE ";
+		$queryCollectionByDriver .= $where;
+		return $this->db->query($queryCollectionByDriver);
+	}
+
 }

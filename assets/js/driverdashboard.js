@@ -6,7 +6,7 @@ $(document).ready(function(){
 		$("#wasteCatForm").find("#wasteSpecs option").eq(selectedOption).prop("selected", true);
 	});
 
-var map1 = new ol.Map({
+	var map1 = new ol.Map({
 	target: "dashboardMapDriver",
 	layers: [
 		new ol.layer.Tile({
@@ -21,7 +21,7 @@ var map1 = new ol.Map({
 	}),
 });
 
-function getRequestDriver() {
+	function getRequestDriver() {
 	map1.getLayers().forEach((layer) => {
 		if (layer.get("name") && layer.get("name") == "burauenLeyte") {
 			map1.removeLayer(layer);
@@ -57,7 +57,7 @@ function getRequestDriver() {
 	}, 'json');
 }
 
-map1.on('click',function(evt){
+	map1.on('click',function(evt){
 
 	var feature1 = map1.forEachFeatureAtPixel(evt.pixel, (feature1) => feature1);
 
@@ -87,7 +87,147 @@ map1.on('click',function(evt){
 
 });
 
-setInterval(getRequestDriver, 2000);
+	setInterval(getRequestDriver, 2000);
 
+	$(".week-picker").datepicker();
+	$("#wasteReportForm").find("select[name='reportCat']").change(function(){
+		var setCalendar;
+		var startDate;
+		var endDate;
 
+		var selectCurrentWeek = function () {
+			window.setTimeout(function () {
+				$('.week-picker').find('.ui-datepicker-current-day a').addClass('ui-state-active')
+			}, 1);
+		}
+		$("#dateByWeek").val("");
+		switch ($(this).val()) {
+			case 'daily':
+				setCalendar = {};
+				break;
+			case 'weekly':
+				setCalendar = {
+					showOtherMonths: true,
+					selectOtherMonths: true,
+					onSelect: function (dateText, inst) {
+						var date = $(this).datepicker('getDate');
+						startDate = new Date(date.getFullYear(), date.getMonth(), date.getDate() - date.getDay());
+						endDate = new Date(date.getFullYear(), date.getMonth(), date.getDate() - date.getDay() + 6);
+						var dateFormat = inst.settings.dateFormat || $.datepicker._defaults.dateFormat;
+
+						var dateByWeek = $.datepicker.formatDate(dateFormat, startDate, inst.settings) + "-" +
+							$.datepicker.formatDate(dateFormat, endDate, inst.settings);
+						$("#dateByWeek").val(dateByWeek);
+						selectCurrentWeek();
+					},
+					beforeShowDay: function (date) {
+						var cssClass = '';
+						if (date >= startDate && date <= endDate)
+							cssClass = 'ui-datepicker-current-day';
+						return [true, cssClass];
+					},
+					onChangeMonthYear: function (year, month, inst) {
+						selectCurrentWeek();
+					}
+				};
+				break;
+			case 'monthly':
+				setCalendar = {
+					changeMonth: true,
+					changeYear: true,
+					showButtonPanel: true,
+					dateFormat: 'MM/yy',
+					onClose: function(dateText, inst) {
+						$(this).datepicker('setDate', new Date(inst.selectedYear, inst.selectedMonth, 1));
+					}
+				};
+				break;
+			default:
+		}
+		$("#dateByWeek").datepicker("destroy");
+		$('.week-picker').datepicker(setCalendar);
+
+	});
+
+	$("#wasteReportForm").on('submit', function(e){
+		e.preventDefault();
+		var wasteReportType = $(this).find("select[name='reportCat']").val();
+		var dataForm = $(this).find("input[name='dateWaste']").val();
+
+		var dataFromForm = setData(wasteReportType, dataForm);
+
+		$.ajax({
+			url: base_url+"wasteInfo/getDriverWasteCollection",
+			data: dataFromForm,
+			type: 'post',
+			dataType: 'json',
+			success: function(data){
+				console.log(data);
+				var inputData = "";
+				for (let i = 0; i < data.length; i++) {
+					inputData += "<tr><td>"+data[i][0]+"</td>";
+					for (let j = 0; j < data[i][1].length; j++){
+						inputData += "<td>"+data[i][1][j]+"</td>";
+					}
+						inputData += "<td><strong>"+data[i][1].reduce((total, num) => total + num, 0)+"</strong></td></tr>";
+				}
+				$("#dataTable tbody").html(inputData);
+			}
+
+		});
+	});
+
+	function dateToISOSTring(dateToConvert){
+		dateToConvert.setDate(dateToConvert.getDate() + 1);
+		return dateToConvert.toISOString().split('T')[0];
+	}
+	function setData(wasteReportType, dataForm){
+		var dataFromForm = {};
+		if(wasteReportType == 'daily'){
+			dataFromForm = {type:wasteReportType, dataItem:dateToISOSTring(new Date(dataForm))};
+		} else if (wasteReportType == 'weekly'){
+			var dateFromWeek = dataForm.split('-');
+			dataFromForm = {type:wasteReportType,
+				dataItem:[dateToISOSTring(new Date(dateFromWeek[0])),
+					dateToISOSTring(new Date(dateFromWeek[1]))]};
+		} else if (wasteReportType == 'monthly'){
+			var dateFromMonth = dataForm.split('/');
+			dataFromForm = {type:wasteReportType, dataItem:[dateFromMonth[0], dateFromMonth[1]]};
+		}
+		return dataFromForm;
+	}
+
+	$('#printTable').click(function(){
+		var wasteReportType = $("#wasteReportForm").find("select[name='reportCat']").val();
+		var dataForm = $("#wasteReportForm").find("input[name='dateWaste']").val();
+
+		var dataToPrint = setData(wasteReportType, dataForm);
+		$.ajax({
+			url:base_url+"wasteInfo/printTable",
+			data: dataToPrint,
+			type: 'post',
+			success: function(data){
+				if(data){
+					window.location.href = base_url+"wasteInfo/printPage/print";
+				}
+			}
+		});
+	})
+
+	$('#pdfTable').click(function(){
+		var wasteReportType = $("#wasteReportForm").find("select[name='reportCat']").val();
+		var dataForm = $("#wasteReportForm").find("input[name='dateWaste']").val();
+
+		var dataToPrint = setData(wasteReportType, dataForm);
+		$.ajax({
+			url:base_url+"wasteInfo/printTable",
+			data: dataToPrint,
+			type: 'post',
+			success: function(data){
+				if(data){
+					window.location.href = base_url+"wasteInfo/printPage/pdf";
+				}
+			}
+		});
+	})
 });

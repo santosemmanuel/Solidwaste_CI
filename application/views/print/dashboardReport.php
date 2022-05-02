@@ -53,7 +53,6 @@ if($chartType == 'daily'){
 } else {
 	echo '<p><strong>Report:</strong> '.ucfirst($chartType).'&nbsp;&nbsp;<strong>Date:</strong> '.$chartDate[0].' '.$chartDate[1].'</p>';
 }
-
 ?>
 <div class="chartDiv">
 	<canvas id="myChart"></canvas>
