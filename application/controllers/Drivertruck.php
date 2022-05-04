@@ -11,6 +11,7 @@ class Drivertruck extends CI_Controller {
 		}
 		$this->load->model('data_user');
 		$this->load->library('form_validation');
+		$this->load->model('data_log');
 	}
 
     public function user(){
@@ -34,6 +35,7 @@ class Drivertruck extends CI_Controller {
 		if ($this->input->is_ajax_request()) {
 			if ($this->driverValidation() != FALSE) {
 				if ($this->data_user->saveDriver($this->input->post())) {
+					$this->data_log->message_log("Admin added a Driver");
 					$data = array('response' => 'success');
 				} else {
 					$data = array('response' => 'error', 'message' => 'Data Failed');
@@ -54,6 +56,7 @@ class Drivertruck extends CI_Controller {
 
 		$action = $this->data_user->deleteDriver($driver_id);
 		if ($action) {
+			$this->data_log->message_log("Admin Deleted a Driver");
 			$this->load->view('notifications/delete_success', $info);
 		} else {
 			$this->load->view('notifications/delete_failed', $info);
@@ -66,6 +69,7 @@ class Drivertruck extends CI_Controller {
 		if ($this->input->is_ajax_request()) {
 			if ($this->driverValidation() != FALSE) {
 				if ($this->data_user->editDriver($this->input->post())) {
+					$this->data_log->message_log("Admin Edited a Driver");
 					$data = array('response' => 'success');
 				} else {
 					$data = array('response' => 'error', 'message' => 'Data Failed');
@@ -88,6 +92,7 @@ class Drivertruck extends CI_Controller {
 		if ($this->input->is_ajax_request()) {
 			if ($this->truckValidation() != FALSE) {
 				if ($this->data_user->addTruck($this->input->post())) {
+					$this->data_log->message_log("Admin added a Truck");
 					$data = array('response' => 'success');
 				} else {
 					$data = array('response' => 'error', 'message' => 'Data Failed');
@@ -108,6 +113,7 @@ class Drivertruck extends CI_Controller {
 
 		$action = $this->data_user->deleteTruck($truck_id);
 		if ($action) {
+			$this->data_log->message_log("Admin Deleted a Truck");
 			$this->load->view('notifications/delete_success', $info);
 		} else {
 			$this->load->view('notifications/delete_failed', $info);
@@ -120,6 +126,7 @@ class Drivertruck extends CI_Controller {
 		if ($this->input->is_ajax_request()) {
 			if ($this->truckValidation() != FALSE) {
 				if ($this->data_user->editTruck($this->input->post())) {
+					$this->data_log->message_log("Admin Edit a Truck");
 					$data = array('response' => 'success');
 				} else {
 					$data = array('response' => 'error', 'message' => 'Data Failed');

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "46189d730b75b09a3b53910ced9d5abb",
+    "content-hash": "0cc2c88afe88eaa1673229f5e5bfada6",
     "packages": [
         {
             "name": "mpdf/mpdf",
@@ -420,6 +420,51 @@
                 }
             ],
             "time": "2021-02-11T11:37:01+00:00"
+        },
+        {
+            "name": "seunmatt/codeigniter-log-viewer",
+            "version": "1.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/SeunMatt/codeigniter-log-viewer.git",
+                "reference": "06789c6abe3107db20707bb14903958f159de6dc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/SeunMatt/codeigniter-log-viewer/zipball/06789c6abe3107db20707bb14903958f159de6dc",
+                "reference": "06789c6abe3107db20707bb14903958f159de6dc",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "CILogViewer\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Seun Matt",
+                    "email": "smatt382@gmail.com"
+                }
+            ],
+            "description": "This is a simple Log Viewer for viewing Code Igniter log files on the browser",
+            "keywords": [
+                "Code Igniter",
+                "log viewer",
+                "php"
+            ],
+            "support": {
+                "issues": "https://github.com/SeunMatt/codeigniter-log-viewer/issues",
+                "source": "https://github.com/SeunMatt/codeigniter-log-viewer/tree/master"
+            },
+            "time": "2019-02-06T07:59:52+00:00"
         }
     ],
     "packages-dev": [

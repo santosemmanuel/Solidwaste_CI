@@ -1,0 +1,3 @@
+2022/05/04-06:53:28pm,A user with an ID of 1 has Logged Out as Admin
+2022/05/04-06:53:47pm,A user with an ID of 1 has logged In as Admin
+2022/05/04-09:46:25pm,A user with an ID of 1 has logged In as Admin

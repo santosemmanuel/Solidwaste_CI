@@ -100,7 +100,13 @@
 	top: 2px;
 	right: 8px;
 }
+
 .ol-popup-closer:after {
 	content: "✖";
+}
+
+.scroll {
+	max-height: 400px;
+	overflow-y: auto;
 }
 

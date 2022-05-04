@@ -15,4 +15,5 @@ return array(
     'Http\\Message\\' => array($vendorDir . '/php-http/message-factory/src'),
     'Doctrine\\Instantiator\\' => array($vendorDir . '/doctrine/instantiator/src/Doctrine/Instantiator'),
     'DeepCopy\\' => array($vendorDir . '/myclabs/deep-copy/src/DeepCopy'),
+    'CILogViewer\\' => array($vendorDir . '/seunmatt/codeigniter-log-viewer/src'),
 );

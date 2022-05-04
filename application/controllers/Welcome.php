@@ -7,6 +7,7 @@ class Welcome extends CI_Controller{
 		parent::__construct();
 		$this->load->model('data_user');
 		$this->load->library('form_validation');
+		$this->load->model('data_log');
 	}
 	
 	function index() {
@@ -37,6 +38,7 @@ class Welcome extends CI_Controller{
 							'status' => 'login'
 						   );
 			$this->session->set_userdata($session);
+			$this->data_log->message_log("A user with an ID of ".$d->user_id.' has logged In as Admin');
 			redirect(base_url().'dashboard');
 			} else {
 				redirect(base_url().'welcome?pesan=gagal');
@@ -82,6 +84,8 @@ class Welcome extends CI_Controller{
 	}
 
 	function logout(){
+		$userId = $this->session->userdata('user_id');
+		$this->data_log->message_log("A user with an ID of ".$userId.' has Logged Out as Admin');
 		$this->session->sess_destroy();
 		$this->load->view('header');
 		$this->load->view('notifications/logout_success');

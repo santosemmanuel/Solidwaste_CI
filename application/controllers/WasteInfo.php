@@ -87,7 +87,7 @@ class WasteInfo extends CI_Controller {
 		echo true;
 	}
 
-	public function printPage($page){
+	public function printPage($page) {
 
 		$data['printWaste'] = $this->session->userdata('wasteToPrint');
 		$data['chartType'] = $this->session->userdata('chartType');

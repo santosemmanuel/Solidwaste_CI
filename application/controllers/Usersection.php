@@ -77,6 +77,9 @@ class Usersection extends CI_Controller {
 		$this->load->view('header');
 
 		if ($user_action && $user_info_action) {
+			if($this->session->userdata('level') == 'admin'){
+				$this->data_log->message_log("Admin Edit a User");
+			}
 			$this->load->view('notifications/insert_success', $info);
 		} else {
 			$this->load->view('notifications/insert_failed', $info);
@@ -95,6 +98,9 @@ class Usersection extends CI_Controller {
 
 		$action = $this->data_usersection->delete_data($user_id);
 		if ($action) {
+			if($this->session->userdata('level') == 'admin'){
+				$this->data_log->message_log("Admin Deleted a User");
+			}
 			$this->load->view('notifications/delete_success', $info);
 		} else {
 			$this->load->view('notifications/delete_failed', $info);
@@ -115,58 +121,5 @@ class Usersection extends CI_Controller {
 		echo json_encode($this->data_usersection->get_data()->result());
 	}
 
-//	public function laporan()
-//	{
-//		$user = array(
-//			'name' => $this->session->userdata('name'),
-//			'level' => $this->session->userdata('level')
-//		);
-//		$this->load->view('header');
-//		$this->load->view('navigation', $user);
-//		$this->load->view('laporan/laporan_filter_municipal');
-//		$this->load->view('footer');
-//		$this->load->view('source');
-//	}
-//
-//	public function laporan_filter()
-//	{
-//		$user = array(
-//			'name' => $this->session->userdata('name'),
-//			'level' => $this->session->userdata('level')
-//		);
-//
-//		$zipcode = $this->input->post('zipcode');
-//
-//		if ($zipcode == "Semua") {
-//			$data['data_municipal'] = $this->data_municipal->get_data()->result();
-//		} else {
-//			$data['data_municipal'] = $this->db->query("select * from municipal where zipcode = '$zipcode'")->result();
-//		}
-//
-//		$this->load->view('header');
-//		$this->load->view('navigation', $user);
-//		$this->load->view('laporan/laporan_municipal', $data);
-//		$this->load->view('footer');
-//		$this->load->view('source');
-//	}
-
-//
-//	function cetak_pdf() {
-//		$this->load->library('dompdf_gen');
-//
-//		$zipcode = $this->uri->segment('3');
-//
-//		$data['zipcode'] = $zipcode;
-//		if ($zipcode == "Semua") {
-//			$data['data_municipal'] = $this->data_municipal->get_data()->result();
-//		} else {
-//			$data['data_municipal'] = $this->db->query("select * from municipal where zipcode = '$zipcode
-//				'")->result();
-//		}
-//
-//		$this->load->view('pdf/municipal', $data);
-
-//	}
-//
 
 }

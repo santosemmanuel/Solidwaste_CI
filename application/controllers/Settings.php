@@ -15,6 +15,7 @@ class Settings extends CI_Controller {
 		}
 		$this->load->model('data_user');
 		$this->load->library('form_validation');
+		$this->load->model('data_log');
 	}
 
     public function user(){
@@ -25,10 +26,10 @@ class Settings extends CI_Controller {
     }
 
 	public function index(){
-        $data['adminUsers'] = $this->data_user->get_admin()->result();
+        $data['activityLog'] = $this->data_log->show_log();
         $this->load->view('header');
 		$this->load->view('navigation', $this->user());
-		$this->load->view('admin/settings', $data);
+		$this->load->view('admin/activitylog', $data);
 		$this->load->view('footer');
 		$this->load->view('source');
 	}

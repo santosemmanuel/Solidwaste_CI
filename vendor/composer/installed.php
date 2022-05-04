@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => 'b0611f771c0d8c68d6b8d1908b02a48adfdc3305',
+        'reference' => '7a91da6aab6308c75c027cb9d313120e6b618f2a',
         'name' => 'codeigniter/framework',
         'dev' => true,
     ),
@@ -16,7 +16,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => 'b0611f771c0d8c68d6b8d1908b02a48adfdc3305',
+            'reference' => '7a91da6aab6308c75c027cb9d313120e6b618f2a',
             'dev_requirement' => false,
         ),
         'doctrine/instantiator' => array(
@@ -260,6 +260,15 @@
             'install_path' => __DIR__ . '/../setasign/fpdi',
             'aliases' => array(),
             'reference' => '6231e315f73e4f62d72b73f3d6d78ff0eed93c31',
+            'dev_requirement' => false,
+        ),
+        'seunmatt/codeigniter-log-viewer' => array(
+            'pretty_version' => '1.1.1',
+            'version' => '1.1.1.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../seunmatt/codeigniter-log-viewer',
+            'aliases' => array(),
+            'reference' => '06789c6abe3107db20707bb14903958f159de6dc',
             'dev_requirement' => false,
         ),
         'symfony/polyfill-ctype' => array(

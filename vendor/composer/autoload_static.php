@@ -39,6 +39,10 @@ class ComposerStaticInite1d482df7184a4ff3c845253b4df2e7f
             'Doctrine\\Instantiator\\' => 22,
             'DeepCopy\\' => 9,
         ),
+        'C' => 
+        array (
+            'CILogViewer\\' => 12,
+        ),
     );
 
     public static $prefixDirsPsr4 = array (
@@ -77,6 +81,10 @@ class ComposerStaticInite1d482df7184a4ff3c845253b4df2e7f
         'DeepCopy\\' => 
         array (
             0 => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy',
+        ),
+        'CILogViewer\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/seunmatt/codeigniter-log-viewer/src',
         ),
     );
 

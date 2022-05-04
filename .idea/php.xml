@@ -32,6 +32,7 @@
       <path value="$PROJECT_DIR$/vendor/setasign/fpdi" />
       <path value="$PROJECT_DIR$/vendor/php-http/message-factory" />
       <path value="$PROJECT_DIR$/vendor/mikey179/vfsstream" />
+      <path value="$PROJECT_DIR$/vendor/seunmatt/codeigniter-log-viewer" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="5.3.0" />
