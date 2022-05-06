@@ -522,11 +522,11 @@ $(document).ready(function () {
 			dataType: 'json',
 			success: function(data){
 				var inputData = "<td>"+data[0]+"</td>"
-								+"<td>"+data[1]+"</td>"
-								+"<td>"+data[2]+"</td>"
-								+"<td>"+data[3]+"</td>"
-								+"<td>"+data[4]+"</td>"
-								+"<td><strong>"+data[5]+"</strong></td>";
+								+"<td>"+data[1]+"kg</td>"
+								+"<td>"+data[2]+"kg</td>"
+								+"<td>"+data[3]+"kg</td>"
+								+"<td>"+data[4]+"kg</td>"
+								+"<td><strong>"+data[5]+"kg</strong></td>";
 				$("#dataTable tbody").html(inputData);
 			}
 
@@ -536,6 +536,22 @@ $(document).ready(function () {
 	function dateToISOSTring(dateToConvert){
 		dateToConvert.setDate(dateToConvert.getDate() + 1);
 		return dateToConvert.toISOString().split('T')[0];
+	}
+
+	function setData(wasteReportType, dataForm){
+		var dataFromForm = {};
+		if(wasteReportType == 'daily'){
+			dataFromForm = {type:wasteReportType, dataItem:dateToISOSTring(new Date(dataForm))};
+		} else if (wasteReportType == 'weekly'){
+			var dateFromWeek = dataForm.split('-');
+			dataFromForm = {type:wasteReportType,
+				dataItem:[dateToISOSTring(new Date(dateFromWeek[0])),
+					dateToISOSTring(new Date(dateFromWeek[1]))]};
+		} else if (wasteReportType == 'monthly'){
+			var dateFromMonth = dataForm.split('/');
+			dataFromForm = {type:wasteReportType, dataItem:[dateFromMonth[0], dateFromMonth[1]]};
+		}
+		return dataFromForm;
 	}
 
 	$('#printTable').click(function(){
@@ -572,21 +588,138 @@ $(document).ready(function () {
 		});
 	})
 
-	function setData(wasteReportType, dataForm){
-		var dataFromForm = {};
-		if(wasteReportType == 'daily'){
-			dataFromForm = {type:wasteReportType, dataItem:dateToISOSTring(new Date(dataForm))};
-		} else if (wasteReportType == 'weekly'){
-			var dateFromWeek = dataForm.split('-');
-			dataFromForm = {type:wasteReportType,
-				dataItem:[dateToISOSTring(new Date(dateFromWeek[0])),
-					dateToISOSTring(new Date(dateFromWeek[1]))]};
-		} else if (wasteReportType == 'monthly'){
-			var dateFromMonth = dataForm.split('/');
-			dataFromForm = {type:wasteReportType, dataItem:[dateFromMonth[0], dateFromMonth[1]]};
+	$("#activityLogForm").submit(function(e){
+		e.preventDefault();
+		var dataForm = $(this).find("input[name='dateWaste']").val();
+		$.post(base_url+"settings/getLoggerByDate",{dataWaste:dataForm},function(data){
+			let contentLog = "";
+			for (let i = 0; i < data.length; i++) {
+				contentLog += "<p>"+data[i].date_log+" - "+data[i].message_log+"</p>";
+			}
+			$("#loggerContent").html(contentLog);
+		},'json');
+	})
+
+	$("#barangayWasteForm").find("select[name='reportCat']").change(function(){
+		var setCalendar;
+		var startDate;
+		var endDate;
+
+		var selectCurrentWeek = function () {
+			window.setTimeout(function () {
+				$('.week-picker').find('.ui-datepicker-current-day a').addClass('ui-state-active')
+			}, 1);
 		}
-		return dataFromForm;
-	}
+		$("#dateByWeek").val("");
+		switch ($(this).val()) {
+			case 'daily':
+				setCalendar = {};
+				break;
+			case 'weekly':
+				setCalendar = {
+					showOtherMonths: true,
+					selectOtherMonths: true,
+					onSelect: function (dateText, inst) {
+						var date = $(this).datepicker('getDate');
+						startDate = new Date(date.getFullYear(), date.getMonth(), date.getDate() - date.getDay());
+						endDate = new Date(date.getFullYear(), date.getMonth(), date.getDate() - date.getDay() + 6);
+						var dateFormat = inst.settings.dateFormat || $.datepicker._defaults.dateFormat;
+
+						var dateByWeek = $.datepicker.formatDate(dateFormat, startDate, inst.settings) + "-" +
+							$.datepicker.formatDate(dateFormat, endDate, inst.settings);
+						$("#dateByWeek").val(dateByWeek);
+						selectCurrentWeek();
+					},
+					beforeShowDay: function (date) {
+						var cssClass = '';
+						if (date >= startDate && date <= endDate)
+							cssClass = 'ui-datepicker-current-day';
+						return [true, cssClass];
+					},
+					onChangeMonthYear: function (year, month, inst) {
+						selectCurrentWeek();
+					}
+				};
+				break;
+			case 'monthly':
+				setCalendar = {
+					changeMonth: true,
+					changeYear: true,
+					showButtonPanel: true,
+					dateFormat: 'MM/yy',
+					onClose: function(dateText, inst) {
+						$(this).datepicker('setDate', new Date(inst.selectedYear, inst.selectedMonth, 1));
+					}
+				};
+				break;
+			default:
+		}
+		$("#dateByWeek").datepicker("destroy");
+		$('.week-picker').datepicker(setCalendar);
+
+	})
+
+	$("#barangayWasteForm").submit(function(e){
+		e.preventDefault();
+		var wasteReportType = $(this).find("select[name='reportCat']").val();
+		var dataForm = $(this).find("input[name='dateWaste']").val();
+
+		var dataFromForm = setData(wasteReportType, dataForm);
+
+		$.ajax({
+			url: base_url+"wasteInfo/getBarangayWasteInfo",
+			data: dataFromForm,
+			type: 'post',
+			dataType: 'json',
+			success: function(data){
+				console.log(data);
+				var inputData = "";
+				for (let i = 0; i < data.length; i++) {
+					inputData += "<tr><td>"+data[i][0]+"</td>";
+					for (let j = 0; j < data[i][1].length; j++){
+						inputData += "<td>"+data[i][1][j]+"kg</td>";
+					}
+					inputData += "<td><strong>"+data[i][1].reduce((total, num) => total + num, 0)+"kg</strong></td></tr>";
+				}
+				$("#dataTable tbody").html(inputData);
+			}
+
+		});
+	})
+
+	$('#printTableBarangay').click(function(){
+		var wasteReportType = $("#barangayWasteForm").find("select[name='reportCat']").val();
+		var dataForm = $("#barangayWasteForm").find("input[name='dateWaste']").val();
+
+		var dataToPrint = setData(wasteReportType, dataForm);
+		$.ajax({
+			url:base_url+"wasteInfo/printTableBarangay",
+			data: dataToPrint,
+			type: 'post',
+			success: function(data){
+				if(data){
+					window.location.href = base_url+"wasteInfo/printPageBarangay/print";
+				}
+			}
+		});
+	})
+
+	$('#pdfTableBarangay').click(function(){
+		var wasteReportType = $("#barangayWasteForm").find("select[name='reportCat']").val();
+		var dataForm = $("#barangayWasteForm").find("input[name='dateWaste']").val();
+
+		var dataToPrint = setData(wasteReportType, dataForm);
+		$.ajax({
+			url:base_url+"wasteInfo/printTableBarangay",
+			data: dataToPrint,
+			type: 'post',
+			success: function(data){
+				if(data){
+					window.location.href = base_url+"wasteInfo/printPageBarangay/pdf";
+				}
+			}
+		});
+	})
 });
 
 

@@ -67,9 +67,9 @@ if($chartType == 'daily'){
 		<tr>
 		<td><?php echo $waste[0]?></td>
 		<?php foreach($waste[1] as $collection) { ?>
-			<td><?= $collection ?></td>
+			<td><?= $collection ?>kg</td>
 		<?php } ?>
-			<td><?php echo array_sum($waste[1]); ?></td>
+			<td><?php echo array_sum($waste[1]); ?>kg</td>
 		</tr>
 	<?php } ?>
 	</tbody>

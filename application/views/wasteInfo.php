@@ -32,7 +32,7 @@
 											<td><?= $no++?></td>
 											<td><?= $requestList->request_date?></td>
 											<td><?= $requestList->name_wastecat?></td>
-											<td><?= $requestList->waste_kg?></td>
+											<td><?= $requestList->waste_kg?>kg</td>
 											<td>
 												<?php echo $requestList->lastName.", ".$requestList->firstName;?>
 											</td>

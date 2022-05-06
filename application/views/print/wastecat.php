@@ -58,7 +58,7 @@
 		</thead>
 		<tbody>
 			<?php foreach($printWaste as $waste){ ?>
-				<td><?= $waste ?></td>
+				<td><?php echo (is_int($waste))? $waste."kg": $waste; ?></td>
 			<?php } ?>
 		</tbody>
 	</table>

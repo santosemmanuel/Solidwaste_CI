@@ -167,9 +167,9 @@ $(document).ready(function(){
 				for (let i = 0; i < data.length; i++) {
 					inputData += "<tr><td>"+data[i][0]+"</td>";
 					for (let j = 0; j < data[i][1].length; j++){
-						inputData += "<td>"+data[i][1][j]+"</td>";
+						inputData += "<td>"+data[i][1][j]+"kg</td>";
 					}
-						inputData += "<td><strong>"+data[i][1].reduce((total, num) => total + num, 0)+"</strong></td></tr>";
+						inputData += "<td><strong>"+data[i][1].reduce((total, num) => total + num, 0)+"kg</strong></td></tr>";
 				}
 				$("#dataTable tbody").html(inputData);
 			}

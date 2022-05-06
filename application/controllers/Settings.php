@@ -33,4 +33,18 @@ class Settings extends CI_Controller {
 		$this->load->view('footer');
 		$this->load->view('source');
 	}
+
+	public function getLoggerByDate(){
+		$dateLog = $this->input->post('dataWaste');
+		$loggerByDate = $this->data_log->getLoggerByDate(date('Y/m/d', strtotime($dateLog)));
+		echo json_encode($loggerByDate);
+	}
+
+	public function recyclebin(){
+		$this->load->view('header');
+		$this->load->view('navigation', $this->user());
+		$this->load->view('admin/recyclebin');
+		$this->load->view('footer');
+		$this->load->view('source');
+	}
 }

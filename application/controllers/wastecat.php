@@ -26,7 +26,7 @@ class Wastecat extends CI_Controller {
 		$this->load->view('navigation', $user);
 		$this->load->view('admin/wastecat', $data);
 		$this->load->view('footer');
-		$this->load->view('source', array('js'=>''));
+		$this->load->view('source', array('js'=> null));
 	}
 
 	private function wasteReport($type, $dataItem){

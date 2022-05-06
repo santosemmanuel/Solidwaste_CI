@@ -2,28 +2,25 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="36c22611-a081-4326-9ebb-9104805eb9a1" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/application/logs/log_file.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/application/models/Data_log.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/application/views/admin/activitylog.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/Solidwaste_CI.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Solidwaste_CI.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/application/views/admin/barangayWaste.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/application/views/admin/recyclebin.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/application/views/pdf/barangayWasteInfo.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/application/views/print/barangayWasteInfo.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/config/config.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/config/config.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/config/routes.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/config/routes.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/controllers/Dashboard.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/Dashboard.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/controllers/Drivertruck.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/Drivertruck.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/application/controllers/Settings.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/Settings.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/controllers/Usersection.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/Usersection.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/application/controllers/WasteInfo.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/WasteInfo.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/controllers/Welcome.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/Welcome.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/controllers/Wastecat.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/Wastecat.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/logs/log_file.txt" beforeDir="false" afterPath="$PROJECT_DIR$/application/logs/log_file.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/models/Data_log.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/models/Data_log.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/admin/activitylog.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/admin/activitylog.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/application/views/navigation.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/navigation.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/css/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_psr4.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_psr4.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_static.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_static.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/installed.json" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/installed.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/installed.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/installed.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/pdf/driverWasteInfo.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/pdf/driverWasteInfo.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/pdf/wastecat.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/pdf/wastecat.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/print/driverWasteInfo.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/print/driverWasteInfo.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/print/wastecat.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/print/wastecat.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/wasteInfo.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/wasteInfo.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/driverdashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/driverdashboard.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -184,6 +181,9 @@
       <workItem from="1651592829380" duration="14606000" />
       <workItem from="1651659129834" duration="2801000" />
       <workItem from="1651672096828" duration="3379000" />
+      <workItem from="1651679631104" duration="11331000" />
+      <workItem from="1651743928371" duration="3022000" />
+      <workItem from="1651747493118" duration="6541000" />
     </task>
     <servers />
   </component>
@@ -211,26 +211,26 @@
       <screen x="64" y="0" width="1302" height="768" />
     </state>
     <state x="467" y="107" key="NewPhpClassDialog/64.0.1302.768@64.0.1302.768" timestamp="1651242869331" />
-    <state x="549" y="307" key="NewPhpFileDialog" timestamp="1651648571989">
+    <state x="549" y="307" key="NewPhpFileDialog" timestamp="1651752849180">
       <screen x="64" y="0" width="1302" height="768" />
     </state>
     <state x="548" y="307" key="NewPhpFileDialog/62.0.1304.768@62.0.1304.768" timestamp="1649428326823" />
-    <state x="549" y="307" key="NewPhpFileDialog/64.0.1302.768@64.0.1302.768" timestamp="1651648571989" />
+    <state x="549" y="307" key="NewPhpFileDialog/64.0.1302.768@64.0.1302.768" timestamp="1651752849180" />
     <state x="116" y="57" key="SettingsEditor" timestamp="1651250558851">
       <screen x="64" y="0" width="1302" height="768" />
     </state>
     <state x="114" y="57" key="SettingsEditor/62.0.1304.768@62.0.1304.768" timestamp="1649245561527" />
     <state x="116" y="57" key="SettingsEditor/64.0.1302.768@64.0.1302.768" timestamp="1651250558851" />
-    <state x="532" y="298" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1651381838916">
+    <state x="532" y="298" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1651753072331">
       <screen x="64" y="0" width="1302" height="768" />
     </state>
     <state x="531" y="298" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/62.0.1304.768@62.0.1304.768" timestamp="1649165621576" />
-    <state x="532" y="298" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/64.0.1302.768@64.0.1302.768" timestamp="1651381838916" />
-    <state x="372" y="172" key="run.anything.popup" timestamp="1650564148297">
+    <state x="532" y="298" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/64.0.1302.768@64.0.1302.768" timestamp="1651753072331" />
+    <state x="372" y="172" key="run.anything.popup" timestamp="1651722154999">
       <screen x="64" y="0" width="1302" height="768" />
     </state>
     <state x="370" y="172" key="run.anything.popup/62.0.1304.768@62.0.1304.768" timestamp="1648882654998" />
-    <state x="372" y="172" key="run.anything.popup/64.0.1302.768@64.0.1302.768" timestamp="1650564148297" />
+    <state x="372" y="172" key="run.anything.popup/64.0.1302.768@64.0.1302.768" timestamp="1651722154999" />
     <state x="379" y="89" width="672" height="160" key="search.everywhere.popup" timestamp="1651648211456">
       <screen x="64" y="0" width="1302" height="768" />
     </state>

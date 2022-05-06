@@ -43,12 +43,12 @@
 <h5>Solid Waste Collection Management System </h5>
 <h1>Waste Category Data Report</h1>
 <?php
-if($chartType == 'daily'){
-	echo '<p><strong>Report:</strong> '.ucfirst($chartType).'&nbsp;&nbsp;<strong>Date:</strong> '.$chartDate.'</p>';
-} else if($chartType == 'weekly'){
-	echo '<p><strong>Report:</strong> '.ucfirst($chartType).'&nbsp;&nbsp;<strong>Date:</strong> '.$chartDate[0].' to '.$chartDate[1].'</p>';
+if($barangayType == 'daily'){
+	echo '<p><strong>Report:</strong> '.ucfirst($barangayType).'&nbsp;&nbsp;<strong>Date:</strong> '.$barangayDate.'</p>';
+} else if($barangayType == 'weekly'){
+	echo '<p><strong>Report:</strong> '.ucfirst($barangayType).'&nbsp;&nbsp;<strong>Date:</strong> '.$barangayDate[0].' to '.$barangayDate[1].'</p>';
 } else {
-	echo '<p><strong>Report:</strong> '.ucfirst($chartType).'&nbsp;&nbsp;<strong>Date:</strong> '.$chartDate[0].' '.$chartDate[1].'</p>';
+	echo '<p><strong>Report:</strong> '.ucfirst($barangayType).'&nbsp;&nbsp;<strong>Date:</strong> '.$barangayDate[0].' '.$barangayDate[1].'</p>';
 }
 ?>
 <table>
@@ -63,7 +63,7 @@ if($chartType == 'daily'){
 	</tr>
 	</thead>
 	<tbody>
-	<?php foreach($printWaste as $waste){ ?>
+	<?php foreach($printBarangayWaste as $waste){ ?>
 		<tr>
 			<td><?php echo $waste[0]?></td>
 			<?php foreach($waste[1] as $collection) { ?>

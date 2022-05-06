@@ -30,6 +30,18 @@ class WasteInfo extends CI_Controller {
 		$this->load->view('source');
 	}
 
+	public function barangayWastePage(){
+		$user = array(
+			'name' => $this->session->userdata('name'),
+			'level' => $this->session->userdata('level')
+		);
+		$this->load->view('header');
+		$this->load->view('navigation', $user);
+		$this->load->view('admin/barangayWaste');
+		$this->load->view('footer');
+		$this->load->view('source');
+	}
+
 	public function driverCollection(){
 		$user = array(
 			'name' => $this->session->userdata('name'),
@@ -47,7 +59,7 @@ class WasteInfo extends CI_Controller {
 		echo json_encode($result);
 	}
 
-	public function DriverWasteCollection($type, $dataItem){
+	public function DriverWasteCollection($type, $dataItem, $driver = true){
 		$barangay = $this->data_user->get_barangay()->result();
 		$waste = $this->data_wastecat->get_data()->result();
 		$collectionArray = array();
@@ -64,7 +76,11 @@ class WasteInfo extends CI_Controller {
 		foreach($barangay as $brgy){
 			$temp = array();
 			foreach($waste as $category){
-				$where = "driver_id = 3 AND user_info.brgy = {$brgy->id} AND request.waste_id = {$category->wastecat_id} AND ";
+				if($driver){
+					$where = "driver_id = {$this->session->userdata('user_id')} AND user_info.brgy = {$brgy->id} AND request.waste_id = {$category->wastecat_id} AND ";
+				} else {
+					$where = "user_info.brgy = {$brgy->id} AND request.waste_id = {$category->wastecat_id} AND ";
+				}
 				$where .= $queryWhereDate;
 				$wasteCollection = $this->data_wastecat->getCollectionByDriver($where)->result();
 				array_push($temp, (int)$wasteCollection[0]->total_kg);
@@ -98,6 +114,37 @@ class WasteInfo extends CI_Controller {
 			$this->pdf->load_view('pdf/driverWasteInfo', $data);
 		} else {
 			$this->load->view('print/driverWasteInfo', $data);
+		}
+	}
+
+	public function getBarangayWasteInfo(){
+		$result = $this->DriverWasteCollection($this->input->post('type'), $this->input->post('dataItem'), false);
+		echo json_encode($result);
+	}
+
+	public function printTableBarangay(){
+		$this->session->unset_userdata('barangayWasteToPrint');
+		$this->session->unset_userdata('reportBarangayDate');
+		$this->session->unset_userdata('reportBarangayType');
+		$resultWasteBarangayPrint = $this->DriverWasteCollection($this->input->post('type'), $this->input->post('dataItem'), false);
+		$data['barangayWasteToPrint'] = $resultWasteBarangayPrint;
+		$data['reportBarangayDate'] = $this->input->post('dataItem');
+		$data['reportBarangayType'] = $this->input->post('type');
+		$this->session->set_userdata($data);
+		echo true;
+	}
+
+	public function printPageBarangay($page){
+
+		$data['printBarangayWaste'] = $this->session->userdata('barangayWasteToPrint');
+		$data['barangayType'] = $this->session->userdata('reportBarangayType');
+		$data['barangayDate'] = $this->session->userdata('reportBarangayDate');
+
+		if($page == 'pdf') {
+			$this->load->library('pdf');
+			$this->pdf->load_view('pdf/barangayWasteInfo', $data);
+		} else {
+			$this->load->view('print/barangayWasteInfo', $data);
 		}
 	}
 }

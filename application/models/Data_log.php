@@ -29,4 +29,20 @@ class Data_log extends CI_Model {
 		fclose($logFile);
 		return $arrayLog;
 	}
+
+	public function getLoggerByDate($dateLog){
+		$logFile = fopen(APPPATH.'logs\log_file.txt', 'r') or die ("Unable to open file!");
+		$arrayLog = array();
+		while(!feof($logFile)){
+			$chunk = explode(",", fgets($logFile));
+			if (!empty($chunk[0])) {
+				$getdate  = explode('-', $chunk[0]);
+				if($getdate[0] == $dateLog){
+					array_push($arrayLog, array('date_log' => $chunk[0], 'message_log' => $chunk[1]));
+				}
+			}
+		}
+		fclose($logFile);
+		return $arrayLog;
+	}
 }

@@ -49,18 +49,9 @@
                         <span>Driver's and Truck Section</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
-                        aria-expanded="true" aria-controls="collapseUtilities">
-                        <i class="fas fa-fw fa-file-pdf"></i>
-                        <span>Reports Section</span>
-                    </a>
-                    <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
-                        data-parent="#accordionSidebar">
-                        <div class="bg-white py-2 collapse-inner rounded">
-                            <a class="collapse-item" href="<?php echo base_url()?>wastecat/laporan">Waste Category</a>
-                            <a class="collapse-item" href="<?php echo base_url()?>municipal/laporan">Municipality/LGU</a>
-                        </div>
-                    </div>
+					<a class="nav-link" href="<?php echo base_url()?>wasteInfo/barangayWastePage">
+						<i class="fas fa-map-signs"></i>
+						<span>Barangay Waste Report</span></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSettings"
@@ -72,6 +63,7 @@
                         data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
                             <a class="collapse-item" href="<?php echo base_url()?>settings">Activity Logs</a>
+							<a class="collapse-item" href="<?php echo base_url()?>settings/recyclebin">Recycle Bin</a>
                         </div>
                     </div>
                 </li>
