@@ -10,6 +10,7 @@ class Usersection extends CI_Controller {
 		}
 		$this->load->model("data_usersection");
 		$this->load->model("data_user");
+		$this->load->model("data_log");
 	}
 
 	public function index(){
@@ -96,7 +97,7 @@ class Usersection extends CI_Controller {
 
 		$this->load->view('header');
 
-		$action = $this->data_usersection->delete_data($user_id);
+		$action = $this->data_user->delete_UserDriver($user_id);
 		if ($action) {
 			if($this->session->userdata('level') == 'admin'){
 				$this->data_log->message_log("Admin Deleted a User");

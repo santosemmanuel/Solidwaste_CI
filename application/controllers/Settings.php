@@ -41,10 +41,51 @@ class Settings extends CI_Controller {
 	}
 
 	public function recyclebin(){
+
+		$data['deletedUserList'] = $this->data_user->deleted_UserList()->result();
+		$data['deletedDriverList'] = $this->data_user->deleted_DriverList()->result();
+		$data['deletedTruckList'] = $this->data_user->deleted_TruckList()->result();
+
 		$this->load->view('header');
 		$this->load->view('navigation', $this->user());
-		$this->load->view('admin/recyclebin');
+		$this->load->view('admin/recyclebin', $data);
 		$this->load->view('footer');
+		$this->load->view('source');
+	}
+
+	public function restore_UserDriver(){
+		$info['datatype'] = 'settings/recyclebin';
+
+		$user_id = $this->uri->segment('3');
+
+		$this->load->view('header');
+
+		$action = $this->data_user->restore_item_userDriver($user_id);
+		if ($action) {
+			$this->data_log->message_log("Admin Restore a User/Driver with an ID of".$user_id);
+			$this->load->view('notifications/insert_success', $info);
+		} else {
+			$this->load->view('notifications/insert_failed', $info);
+		}
+
+		$this->load->view('source');
+	}
+
+	public function restore_Truck(){
+		$info['datatype'] = 'settings/recyclebin';
+
+		$truck_id = $this->uri->segment('3');
+
+		$this->load->view('header');
+
+		$action = $this->data_user->restore_item_Truck($truck_id);
+		if ($action) {
+			$this->data_log->message_log("Admin Restore a Truck with an ID of ",$truck_id);
+			$this->load->view('notifications/insert_success', $info);
+		} else {
+			$this->load->view('notifications/insert_failed', $info);
+		}
+
 		$this->load->view('source');
 	}
 }

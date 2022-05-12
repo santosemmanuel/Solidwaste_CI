@@ -7,7 +7,7 @@ class Data_usersection extends CI_Model {
 
 		return $this->db->query("SELECT * FROM (SELECT * FROM user_info INNER JOIN barangay ON 
 								user_info.brgy = barangay.id) AS UB INNER JOIN user ON user.user_id = UB.user_info_id 
-								WHERE user.level = 'user'");
+								WHERE user.level = 'user' AND user.delete_item = 0");
 
 	}
 

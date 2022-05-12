@@ -350,6 +350,7 @@ $(document).ready(function () {
 	});
 
 	$("#dataTable1").DataTable();
+	$("#dataTable2").DataTable();
 
 	//Add Driver
 	$("#submitDriver").on('submit', function(e){

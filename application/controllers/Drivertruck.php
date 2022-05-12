@@ -54,7 +54,7 @@ class Drivertruck extends CI_Controller {
 
 		$this->load->view('header');
 
-		$action = $this->data_user->deleteDriver($driver_id);
+		$action = $this->data_user->delete_UserDriver($driver_id);
 		if ($action) {
 			$this->data_log->message_log("Admin Deleted a Driver");
 			$this->load->view('notifications/delete_success', $info);
@@ -111,7 +111,7 @@ class Drivertruck extends CI_Controller {
 
 		$this->load->view('header');
 
-		$action = $this->data_user->deleteTruck($truck_id);
+		$action = $this->data_user->delete_Truck($truck_id);
 		if ($action) {
 			$this->data_log->message_log("Admin Deleted a Truck");
 			$this->load->view('notifications/delete_success', $info);

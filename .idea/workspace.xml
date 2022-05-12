@@ -2,24 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="36c22611-a081-4326-9ebb-9104805eb9a1" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/application/views/admin/barangayWaste.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/application/views/admin/recyclebin.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/application/views/pdf/barangayWasteInfo.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/application/views/print/barangayWasteInfo.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/controllers/Drivertruck.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/Drivertruck.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/application/controllers/Settings.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/Settings.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/controllers/WasteInfo.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/WasteInfo.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/controllers/Wastecat.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/Wastecat.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/controllers/Usersection.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/Usersection.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/application/logs/log_file.txt" beforeDir="false" afterPath="$PROJECT_DIR$/application/logs/log_file.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/models/Data_log.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/models/Data_log.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/views/admin/activitylog.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/admin/activitylog.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/views/navigation.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/navigation.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/views/pdf/driverWasteInfo.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/pdf/driverWasteInfo.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/views/pdf/wastecat.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/pdf/wastecat.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/views/print/driverWasteInfo.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/print/driverWasteInfo.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/views/print/wastecat.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/print/wastecat.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/views/wasteInfo.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/wasteInfo.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/js/driverdashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/driverdashboard.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/models/Data_user.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/models/Data_user.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/models/Data_usersection.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/models/Data_usersection.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/admin/drivertruck.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/admin/drivertruck.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/admin/recyclebin.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/admin/recyclebin.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/js/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -184,6 +175,9 @@
       <workItem from="1651679631104" duration="11331000" />
       <workItem from="1651743928371" duration="3022000" />
       <workItem from="1651747493118" duration="6541000" />
+      <workItem from="1652178286261" duration="824000" />
+      <workItem from="1652260339949" duration="12425000" />
+      <workItem from="1652350182740" duration="5162000" />
     </task>
     <servers />
   </component>
@@ -231,10 +225,10 @@
     </state>
     <state x="370" y="172" key="run.anything.popup/62.0.1304.768@62.0.1304.768" timestamp="1648882654998" />
     <state x="372" y="172" key="run.anything.popup/64.0.1302.768@64.0.1302.768" timestamp="1651722154999" />
-    <state x="379" y="89" width="672" height="160" key="search.everywhere.popup" timestamp="1651648211456">
+    <state x="379" y="89" width="672" height="160" key="search.everywhere.popup" timestamp="1652262439526">
       <screen x="64" y="0" width="1302" height="768" />
     </state>
     <state x="377" y="89" width="672" height="678" key="search.everywhere.popup/62.0.1304.768@62.0.1304.768" timestamp="1649259642504" />
-    <state x="379" y="89" width="672" height="160" key="search.everywhere.popup/64.0.1302.768@64.0.1302.768" timestamp="1651648211456" />
+    <state x="379" y="89" width="672" height="160" key="search.everywhere.popup/64.0.1302.768@64.0.1302.768" timestamp="1652262439526" />
   </component>
 </project>

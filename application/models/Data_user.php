@@ -101,7 +101,7 @@ class Data_user extends CI_Model {
 		$this->db->select('*');
 		$this->db->from('user');
 		$this->db->join('driver_info','user.user_id = driver_info.driver_info_id');
-		$this->db->where('user.level','driver');
+		$this->db->where(array('user.level'=>'driver','user.delete_item' => 0));
 		return $this->db->get();
 	}
 
@@ -156,6 +156,7 @@ class Data_user extends CI_Model {
 	}
 
 	public function getTruck(){
+				$this->db->where('delete_item', 0);
 		return $this->db->get('truck');
 	}
 
@@ -175,6 +176,49 @@ class Data_user extends CI_Model {
 
 	public function get_barangay(){
 		return $this->db->get("barangay");
+	}
+
+	public function delete_UserDriver($user_id){
+		$this->db->set('delete_item', 1);
+		$this->db->where('user_id', $user_id);
+		return $this->db->update('user');
+	}
+
+	public function delete_Truck($truck_id){
+		$this->db->set('delete_item', 1);
+		$this->db->where('id', $truck_id);
+		return $this->db->update('truck');
+	}
+
+	public function deleted_UserList(){
+		return $this->db->query("SELECT * FROM (SELECT * FROM user_info INNER JOIN barangay ON 
+								user_info.brgy = barangay.id) AS UB INNER JOIN user ON user.user_id = UB.user_info_id 
+								WHERE user.level = 'user' AND user.delete_item = 1");
+	}
+
+	public function deleted_DriverList(){
+		$this->db->select('*');
+		$this->db->from('user');
+		$this->db->join('driver_info','user.user_id = driver_info.driver_info_id');
+		$this->db->where(array('user.level'=>'driver','user.delete_item' => 1));
+		return $this->db->get();
+	}
+
+	public function deleted_TruckList(){
+		$this->db->where('delete_item', 1);
+		return $this->db->get('truck');
+	}
+	
+	public function restore_item_userDriver($user_id){
+		$this->db->set('delete_item', 0);
+		$this->db->where('user_id', $user_id);
+		return $this->db->update('user');
+	}
+
+	public function restore_item_Truck($truck_id){
+		$this->db->set('delete_item',0);
+		$this->db->where('id', $truck_id);
+		return $this->db->update('truck');
 	}
 
 }

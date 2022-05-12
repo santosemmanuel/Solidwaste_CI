@@ -26,9 +26,6 @@
                                     class="fas fa-plus fa-sm text-white-500"></i>&nbsp;Add Driver</a>
                                 </div>
                                 <div class="table-responsive">
-                                    <?php if(isset($_GET['delete']) && $_GET['delete'] == "error"){ ?>
-                                        <div class="alert alert-danger" role="alert" id="alertMessage">There's an error in deleting an admin.</div>
-                                    <?php }?>
                                     <table class="table table-bordered table-hover table-striped" id="dataTable" width="100%" cellspacing="0">
                                         <thead>
                                             <tr class="text-primary">

@@ -36,3 +36,18 @@
 2022/05/05-08:00:06pm,A user with an ID of 3 has Logged Out as Admin
 2022/05/05-08:00:28pm,A user with an ID of 1 has logged In as Admin
 2022/05/06-10:03:28am,A user with an ID of 1 has logged In as Admin
+2022/05/10-06:12:58pm,A user with an ID of 1 has logged In as Admin
+2022/05/11-05:20:20pm,A user with an ID of 1 has logged In as Admin
+2022/05/11-05:58:01pm,Admin Deleted a Truck
+2022/05/11-06:04:28pm,Admin Deleted a Driver
+2022/05/11-06:05:08pm,Admin Deleted a Driver
+2022/05/11-06:14:40pm,Admin added a Driver
+2022/05/11-06:18:07pm,Admin Deleted a Driver
+2022/05/11-06:19:22pm,Admin added a Driver
+2022/05/11-06:20:38pm,Admin Deleted a Driver
+2022/05/11-08:45:30pm,A user with an ID of 1 has logged In as Admin
+2022/05/11-08:55:53pm,Admin Deleted a User
+2022/05/11-10:12:57pm,Admin Deleted a User
+2022/05/12-06:19:16pm,A user with an ID of 1 has logged In as Admin
+2022/05/12-09:34:05pm,Admin Restore a User/Driver with an ID of4
+2022/05/12-09:35:47pm,Admin Restore a Truck with an ID of 
