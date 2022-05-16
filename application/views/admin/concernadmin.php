@@ -51,13 +51,13 @@
 <div class="container bootstrap snippets bootdey">
 	<hr>
 	<div class="row">
-		<div class="col-sm-3 col-md-2">
-			<a href="#" class="btn btn-success btn-sm btn-block" role="button" data-toggle="modal" data-target="#concern">
-				<i class="glyphicon glyphicon-edit"></i> Compose
-			</a>
-			<hr>
-		</div>
-		<div class="col-sm-9 col-md-10">
+<!--		<div class="col-sm-3 col-md-2">-->
+<!--			<a href="#" class="btn btn-success btn-sm btn-block" role="button" data-toggle="modal" data-target="#concern">-->
+<!--				<i class="glyphicon glyphicon-edit"></i> Compose-->
+<!--			</a>-->
+<!--			<hr>-->
+<!--		</div>-->
+		<div class="col-sm-9 col-md-12">
 			<!-- Nav tabs -->
 			<ul class="nav nav-pills">
 				<li class="nav-item active"><a class="nav-link" href="#home" data-toggle="tab"><span class="glyphicon glyphicon-inbox">

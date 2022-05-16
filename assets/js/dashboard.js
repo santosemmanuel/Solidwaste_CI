@@ -54,11 +54,12 @@ $(document).ready(function(){
 
 	function getRequestAdmin() {
 		map.getLayers().forEach((layer) => {
-			if (layer.get("name") && layer.get("name") == "burauenLeyte") {
+			if (layer.get("name") && layer.get("name") == "burauenLayer") {
 				map.removeLayer(layer);
 			}
 		});
 		$.get(base_url + "dashboard/getRequest", function (data) {
+			console.log(data);
 			let featureArray = [];
 			for (let i = 0; i < data.length; i++) {
 				let coordinate = data[i].location.split(", ");

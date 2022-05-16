@@ -720,7 +720,32 @@ $(document).ready(function () {
 				}
 			}
 		});
-	})
+	});
+
+	function getConcernList(){
+		$.get(base_url+"concerns/getConcernList", function(data){
+			let content = "";
+			let name = "";
+			for (let i = 0; i < data.length; i++) {
+				if(data[i].level == 'admin'){
+					name = 'admin';
+				} else {
+					name = data[i].lastName+", "+data[i].firstName;
+				}
+				content += "<a href=\"#\" class=\"list-group-item\">\n" +
+					"\t\t\t\t\t\t\t<span class=\"name label label-info\" style=\"min-width: 120px; display: inline-block;\">"+name+"</span>\n" +
+					"\t\t\t\t\t\t\t<span class=\"text-muted\" style=\"font-size: 11px;\">- "+data[i].message+"</span>\n" +
+					"\t\t\t\t\t\t\t<span class=\"badge\">"+data[i].message_date+"</span>\n" +
+					"\t\t\t\t\t\t\t<span class=\"float-right\">\n" +
+					"\t\t\t\t\t\t\t\t<i class=\"fas fa-trash\"></i>\n" +
+					"\t\t\t\t\t\t\t</span>\n" +
+					"\t\t\t\t\t\t</a>";
+			}
+			$("#concern_list").html(content);
+		},'json');
+	}
+
+	setInterval(getConcernList, 2000);
 });
 
 

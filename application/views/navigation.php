@@ -53,6 +53,11 @@
 						<i class="fas fa-map-signs"></i>
 						<span>Barangay Waste Report</span></a>
                 </li>
+				<li class="nav-item">
+					<a class="nav-link" href="<?php echo base_url()?>concerns/concernAdmin">
+						<i class="fas fa-inbox"></i>
+						<span>Concern</span></a>
+				</li>
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSettings"
                         aria-expanded="true" aria-controls="collapseUtilities">

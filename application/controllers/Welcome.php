@@ -13,7 +13,7 @@ class Welcome extends CI_Controller{
 	function index() {
 		$this->load->view('header');
 		$this->load->view('login');
-		$this->load->view('source', array('js'	 => ''));
+		$this->load->view('source', array('js'	 => null));
 	}
 
 	function login() {
@@ -24,7 +24,8 @@ class Welcome extends CI_Controller{
 		if($this->form_validation->run() != false){
 			$where = array(
 						'username' => $username,
-						'password' => base64_encode($password)
+						'password' => base64_encode($password),
+						'delete_item' => 0
 					);
 			$data = $this->data_user->get_records($where);
 			$d = $this->data_user->get_records($where)->row();

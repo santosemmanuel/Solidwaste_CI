@@ -20,10 +20,9 @@ class Concerns extends CI_Controller{
 			'name' => $this->session->userdata('name'),
 			'level' => $this->session->userdata('level')
 		);
-		$data['list_concern'] = $this->data_concern->getConcern($this->session->userdata('user_id'))->result();
 		$this->load->view('header');
 		$this->load->view('navigation', $user);
-		$this->load->view('concerns', $data);
+		$this->load->view('concerns');
 		$this->load->view('footer');
 		$this->load->view('source');
 	}
@@ -61,5 +60,21 @@ class Concerns extends CI_Controller{
 
 		$this->load->view('source');
 
+	}
+
+	public function getConcernList(){
+		echo json_encode($this->data_concern->getConcern($this->session->userdata('user_id'))->result());
+	}
+
+	public function concernAdmin(){
+		$user = array(
+			'name' => $this->session->userdata('name'),
+			'level' => $this->session->userdata('level')
+		);
+		$this->load->view('header');
+		$this->load->view('navigation', $user);
+		$this->load->view('admin/concernadmin');
+		$this->load->view('footer');
+		$this->load->view('source');
 	}
 }

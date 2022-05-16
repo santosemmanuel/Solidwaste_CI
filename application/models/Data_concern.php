@@ -8,9 +8,8 @@ class Data_concern extends CI_Model {
 	}
 
 	public function getConcern($userID){
-		$where = "sender = {$userID} OR sender = 1";
-		$this->db->where($where);
-		return $this->db->get('concern');
+		return $this->db->query("SELECT * FROM `concern` INNER JOIN user ON concern.sender = user.user_id 
+				WHERE reciever = {$userID} OR sender = {$userID} ORDER BY message_date");
 	}
 
 }

@@ -73,9 +73,11 @@ $(document).ready(function(){
 		e.preventDefault();
 		var wasteReportType = $(this).find("select[name='reportCat']").val();
 		var dataForm = $(this).find("input[name='dateWaste']").val();
+		var dataSetToSubmit = setData(wasteReportType, dataForm);
+
 		$.ajax({
 			url: base_url+"dashboard/getChartDataReport",
-			data: setData(wasteReportType, dataForm),
+			data: dataSetToSubmit,
 			method: 'post',
 			dataType: 'json',
 			success: function(data){
@@ -136,7 +138,7 @@ $(document).ready(function(){
 	}
 
 	function dateToISOSTring(dateToConvert){
-		dateToConvert.setDate(dateToConvert.getDate() + 1);
+		dateToConvert.setDate(dateToConvert.getDate());
 		return dateToConvert.toISOString().split('T')[0];
 	}
 
