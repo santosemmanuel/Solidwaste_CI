@@ -4,6 +4,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Concerns extends CI_Controller{
 
+	public $userConversation;
+
 	function __construct(){
 		parent::__construct();
 		// cek sesi login
@@ -29,12 +31,12 @@ class Concerns extends CI_Controller{
 
 	public function sendConcern(){
 
-		$info['datatype'] = 'dashboard';
-
 		$admin_user = $this->data_user->get_admin()->result();
-		$dateNow = date('Y-m-d');
+		date_default_timezone_set('Asia/Manila');
+		$dateNow = date('Y-m-d h:i:s');
 
 		if($this->uri->segment(3) == 'user'){
+			$info['datatype'] = 'concerns';
 			$where = array(
 				'sender' => $this->session->userdata('user_id'),
 				'message' => $this->input->post('message'),
@@ -42,10 +44,11 @@ class Concerns extends CI_Controller{
 				'message_date' => $dateNow
 			);
 		} else {
+			$info['datatype'] = 'concerns/concernAdmin';
 			$where = array(
 				'sender' => $admin_user[0]->user_id,
 				'message' => $this->input->post('message'),
-				'reciever' => $this->session->userdata('user_id'),
+				'reciever' => $this->input->post('sendTo'),
 				'message_date' => $dateNow
 			);
 		}
@@ -53,9 +56,9 @@ class Concerns extends CI_Controller{
 		$this->load->view('header');
 
 		if($this->data_concern->sendConcern($where)){
-			$this->load->view('notifications/delete_success', $info);
+			$this->load->view('notifications/insert_success', $info);
 		} else {
-			$this->load->view('notifications/delete_failed', $info);
+			$this->load->view('notifications/insert_failed', $info);
 		}
 
 		$this->load->view('source');
@@ -76,5 +79,23 @@ class Concerns extends CI_Controller{
 		$this->load->view('admin/concernadmin');
 		$this->load->view('footer');
 		$this->load->view('source');
+	}
+
+	public function concernConversation(){
+
+		$user = array(
+			'name' => $this->session->userdata('name'),
+			'level' => $this->session->userdata('level')
+		);
+		$this->load->view('header');
+		$this->load->view('navigation', $user);
+		$this->load->view('admin/conversation');
+		$this->load->view('footer');
+		$this->load->view('source');
+		$this->userConversation = $this->uri->segment(3);
+	}
+
+	public function getConversationConcern(){
+		echo json_encode($this->data_concern->getUserConversation($this->input->post('dataItem'))->result());
 	}
 }

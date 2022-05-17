@@ -56,7 +56,8 @@
 				<li class="nav-item">
 					<a class="nav-link" href="<?php echo base_url()?>concerns/concernAdmin">
 						<i class="fas fa-inbox"></i>
-						<span>Concern</span></a>
+						<span>Concern <span class="badge badge-light" style="font-size: 12px">0</span>
+						</span></a>
 				</li>
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSettings"

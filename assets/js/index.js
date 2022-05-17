@@ -732,20 +732,54 @@ $(document).ready(function () {
 				} else {
 					name = data[i].lastName+", "+data[i].firstName;
 				}
-				content += "<a href=\"#\" class=\"list-group-item\">\n" +
-					"\t\t\t\t\t\t\t<span class=\"name label label-info\" style=\"min-width: 120px; display: inline-block;\">"+name+"</span>\n" +
-					"\t\t\t\t\t\t\t<span class=\"text-muted\" style=\"font-size: 11px;\">- "+data[i].message+"</span>\n" +
-					"\t\t\t\t\t\t\t<span class=\"badge\">"+data[i].message_date+"</span>\n" +
+				content += "<li href=\"#\" class=\"list-group-item\">\n" +
+					"\t\t\t\t\t\t\t<a href='"+base_url+"concerns/concernConversation/"+data[i].user_id+"'>" +
+					"<span class=\"name label label-info\" style=\"min-width: 120px; display: inline-block;\">"+name+"</span></a>\n" +
+					"<span class=\"badge badge-info\">New</span>\n"+
 					"\t\t\t\t\t\t\t<span class=\"float-right\">\n" +
-					"\t\t\t\t\t\t\t\t<i class=\"fas fa-trash\"></i>\n" +
+					"\t\t\t\t\t\t\t\t<a href=''><i class=\"fas fa-trash\"></i></a>\n" +
 					"\t\t\t\t\t\t\t</span>\n" +
-					"\t\t\t\t\t\t</a>";
+					"\t\t\t\t\t\t</li>";
 			}
 			$("#concern_list").html(content);
 		},'json');
 	}
 
-	setInterval(getConcernList, 2000);
+	setInterval(getConcernList, 1000);
+
+
+	function getConversationConcern(){
+		if(userConversationID){
+			$.ajax({
+				url: base_url+"concerns/getConversationConcern",
+				data: {dataItem: userConversationID},
+				type: 'post',
+				dataType: 'json',
+				success: function(data){
+					let name = "";
+					let content = "";
+					for (let j = 0; j < data.length; j++) {
+						if(data[j].level == 'admin'){
+							name = 'Administrator';
+						} else {
+							name = data[j].lastName+", "+data[j].firstName;
+						}
+						content += "<li href=\"#\" class=\"list-group-item\">\n" +
+							"\t\t\t\t\t\t\t<a href='#'><span class=\"name label label-info\" style=\"min-width: 120px; display: inline-block;\">"+name+"</span></a>\n" +
+							"\t\t\t\t\t\t\t<br><span class=\"text-muted\" style=\"font-size: 11px;\">- "+data[j].message+"</span>\n" +
+							"\t\t\t\t\t\t\t<br><span class=\"badge\">"+data[j].message_date+"</span>\n" +
+							"\t\t\t\t\t\t\t<span class=\"float-right\">\n" +
+							"\t\t\t\t\t\t\t\t<a href=''><i class=\"fas fa-trash\"></i></a>\n" +
+							"\t\t\t\t\t\t\t</span>\n" +
+							"\t\t\t\t\t\t</li>";
+					}
+					$("#conversation_list").html(content);
+				}
+			});
+		}
+	}
+
+	setInterval(getConversationConcern, 1000);
 });
 
 

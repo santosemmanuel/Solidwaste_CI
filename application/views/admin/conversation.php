@@ -16,28 +16,7 @@
 	</div><hr>
 	<div class="row">
 		<div class="col-12">
-			<div class="col-sm-9 col-md-12">
-				<!-- Nav tabs -->
-				<ul class="nav nav-pills">
-					<li class="nav-item"><a class="nav-link active" href="#home" data-toggle="tab"><span class="glyphicon glyphicon-inbox">
-                			</span>Primary</a></li>
-					<li class="nav-item"><a class="nav-link" href="#profile" data-toggle="tab"><span class="glyphicon glyphicon-user"></span>
-							Trash</a></li>
-				</ul><br>
-				<!-- Tab panes -->
-				<div class="tab-content">
-					<div class="tab-pane fade show active" id="home">
-						<div class="list-group list-group-flush" id="conversation_list"></div>
-					</div>
-					<div class="tab-pane fade in" id="profile">
-						<div class="list-group">
-							<div class="list-group-item">
-								<span class="text-center">This tab is empty.</span>
-							</div>
-						</div>
-					</div>
-				</div><br>
-			</div>
+			<div class="list-group list-group-flush" id="conversation_list"></div>
 		</div>
 	</div><br>
 	<!-- /.container-fluid-->
@@ -52,8 +31,11 @@
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
-			<form name="form_add_mahasiswa" action="<?php echo base_url().'concerns/sendConcern/user';?>" method="post" class="user needs-validation mx-3 mb-4" id="requestForm" novalidate>
+			<form name="form_add_mahasiswa" action="<?php echo base_url().'concerns/sendConcern/admin/';?>" method="post" class="user needs-validation mx-3 mb-4" id="requestForm" novalidate>
 				<div class="modal-body">
+					<div class="form-row">
+						<input type="text" name="sendTo" value="<?php echo $this->uri->segment(3); ?>" hidden/>
+					</div>
 					<div class="form-row">
 						<label for="exampleFormControlTextarea1">Input Message</label>
 						<textarea class="form-control" id="exampleFormControlTextarea1" name="message" rows="5"></textarea>
@@ -68,5 +50,5 @@
 	</div>
 </div>
 <script>
-	var userConversationID = '<?php echo $this->session->userdata('user_id');?>';
+	var userConversationID = '<?php echo $this->uri->segment(3);?>';
 </script>
