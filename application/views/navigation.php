@@ -56,7 +56,7 @@
 				<li class="nav-item">
 					<a class="nav-link" href="<?php echo base_url()?>concerns/concernAdmin">
 						<i class="fas fa-inbox"></i>
-						<span>Concern <span class="badge badge-light" style="font-size: 12px">0</span>
+						<span>Concern <span class="badge badge-light notifConcern" style="font-size: 12px">0</span>
 						</span></a>
 				</li>
                 <li class="nav-item">
@@ -97,7 +97,7 @@
                 <li class="nav-item">
                     <a class="nav-link" href="<?php echo base_url()?>concerns">
                         <i class="fas fa-building"></i>
-                        <span>Concerns</span></a>
+                        <span>Concerns</span> <span class="badge badge-light notifConcern" style="font-size: 12px">0</span></a>
                 </li>
 
             <?php } else if ($level == 'driver') {?>

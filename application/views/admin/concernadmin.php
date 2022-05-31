@@ -17,8 +17,6 @@
 						<ul class="nav nav-pills">
 							<li class="nav-item"><a class="nav-link active" href="#home" data-toggle="tab"><span class="glyphicon glyphicon-inbox">
                 			</span>Primary</a></li>
-							<li class="nav-item"><a class="nav-link" href="#profile" data-toggle="tab"><span class="glyphicon glyphicon-user"></span>
-									Trash</a></li>
 						</ul><br>
 						<!-- Tab panes -->
 						<div class="tab-content">
@@ -40,30 +38,21 @@
 	</div>
 <!-- /.container-fluid-->
 </div>
-
-
-<div class="modal fade" id="adminConcern" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="formAddWastecat" aria-hidden="true">
+<div class="modal fade" id="deleteConcernModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog modal-lg modal-dialog-centered">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title font-weight-bold text-primary mx-3 mt-3" id="formAddWastecatLabel">Send Concern</h5>
+				<h5 class="modal-title font-weight-bold text-primary mx-3 mt-3" id="formEditMunicipalLabel">Delete Concern Data</h5>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
-			<form name="form_add_mahasiswa" action="<?php echo base_url().'concerns/sendConcern/admin' ?>" method="post" class="user needs-validation mx-3 mb-4" id="requestForm" novalidate>
-				<div class="modal-body">
-					<div class="form-row">
-						<input type="text" name="sendTo" hidden/>
-					</div>
-					<div class="form-row">
-						<label for="exampleFormControlTextarea1">Input Message</label>
-						<textarea class="form-control" id="exampleFormControlTextarea1" name="message" rows="5"></textarea>
-					</div><br>
-				</div>
+			<form name="form_edit_mahasiswa" action="<?php echo base_url().'concerns/deleteUserConcern/'?>" method="post" class="user needs-validation mx-3 mb-4" novalidate>
+				<input type="text" id="deleteConcernID" name="deleteConcernID" hidden>
+				<br><p>Are you sure you want to delete this concern ?</p>
 				<div class="modal-footer d-flex">
 					<button type="button" class="flex-fill btn btn-danger btn-user" data-dismiss="modal">Cancel</button>
-					<button type="submit" class="flex-fill btn btn-success btn-user">Send</button>
+					<button type="submit" class="flex-fill btn btn-warning btn-user">Delete</button>
 				</div>
 			</form>
 		</div>

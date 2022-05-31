@@ -727,17 +727,20 @@ $(document).ready(function () {
 			let content = "";
 			let name = "";
 			for (let i = 0; i < data.length; i++) {
-				if(data[i].level == 'admin'){
+				if(data[i][0].level == 'admin'){
 					name = 'admin';
 				} else {
-					name = data[i].lastName+", "+data[i].firstName;
+					name = data[i][0].lastName+", "+data[i][0].firstName;
 				}
 				content += "<li href=\"#\" class=\"list-group-item\">\n" +
-					"\t\t\t\t\t\t\t<a href='"+base_url+"concerns/concernConversation/"+data[i].user_id+"'>" +
-					"<span class=\"name label label-info\" style=\"min-width: 120px; display: inline-block;\">"+name+"</span></a>\n" +
-					"<span class=\"badge badge-info\">New</span>\n"+
-					"\t\t\t\t\t\t\t<span class=\"float-right\">\n" +
-					"\t\t\t\t\t\t\t\t<a href=''><i class=\"fas fa-trash\"></i></a>\n" +
+					"\t\t\t\t\t\t\t<a href='"+base_url+"concerns/concernConversation/"+data[i][0].user_id+"'>" +
+					"<span class=\"name label label-info\" style=\"min-width: 120px; display: inline-block;\">"+name+"</span></a>\n";
+					if (data[i][1] > 0){
+						content += "<span class=\"badge badge-info\">New</span>\n";
+					}
+				content	+= "\t\t\t\t\t\t\t<span class=\"float-right\">\n" +
+					"\t\t\t\t\t\t\t\t<button class=\"btn btn-link\" data-toggle=\"modal\" data-target=\"#deleteConcernModal\" data-whatever=\""+data[i][0].user_id
+					+"\"><i class=\"fas fa-trash\"></i></button>\n" +
 					"\t\t\t\t\t\t\t</span>\n" +
 					"\t\t\t\t\t\t</li>";
 			}
@@ -745,11 +748,17 @@ $(document).ready(function () {
 		},'json');
 	}
 
-	setInterval(getConcernList, 1000);
-
+	$('#deleteConcernModal').on('show.bs.modal', function (event) {
+		var button = $(event.relatedTarget) // Button that triggered the modal
+		var recipient = button.data('whatever') // Extract info from data-* attributes
+		// If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+		// Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+		var modal = $(this)
+		modal.find('#deleteConcernID').attr("value",recipient);
+	})
 
 	function getConversationConcern(){
-		if(userConversationID){
+		if(typeof userConversationID !== 'undefined'){
 			$.ajax({
 				url: base_url+"concerns/getConversationConcern",
 				data: {dataItem: userConversationID},
@@ -769,7 +778,7 @@ $(document).ready(function () {
 							"\t\t\t\t\t\t\t<br><span class=\"text-muted\" style=\"font-size: 11px;\">- "+data[j].message+"</span>\n" +
 							"\t\t\t\t\t\t\t<br><span class=\"badge\">"+data[j].message_date+"</span>\n" +
 							"\t\t\t\t\t\t\t<span class=\"float-right\">\n" +
-							"\t\t\t\t\t\t\t\t<a href=''><i class=\"fas fa-trash\"></i></a>\n" +
+							"\t\t\t\t\t\t\t\t<a href='"+base_url+"concerns/deleteConcern/"+data[j].concern_id+"'><i class=\"fas fa-trash\"></i></a>\n" +
 							"\t\t\t\t\t\t\t</span>\n" +
 							"\t\t\t\t\t\t</li>";
 					}
@@ -779,7 +788,8 @@ $(document).ready(function () {
 		}
 	}
 
-	setInterval(getConversationConcern, 1000);
+	setInterval(function(){getConversationConcern(); getConcernList();}, 2000);
+
 });
 
 

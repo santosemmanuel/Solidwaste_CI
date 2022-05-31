@@ -21,8 +21,6 @@
 				<ul class="nav nav-pills">
 					<li class="nav-item"><a class="nav-link active" href="#home" data-toggle="tab"><span class="glyphicon glyphicon-inbox">
                 			</span>Primary</a></li>
-					<li class="nav-item"><a class="nav-link" href="#profile" data-toggle="tab"><span class="glyphicon glyphicon-user"></span>
-							Trash</a></li>
 				</ul><br>
 				<!-- Tab panes -->
 				<div class="tab-content">
@@ -67,6 +65,7 @@
 		</div>
 	</div>
 </div>
+
 <script>
-	var userConversationID = '<?php echo $this->session->userdata('user_id');?>';
+	let userConversationID = '<?php echo $this->session->userdata('user_id');?>';
 </script>

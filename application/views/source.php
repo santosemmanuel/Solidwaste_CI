@@ -27,13 +27,13 @@
 			integrity="sha512-Z8CqofpIcnJN80feS2uccz+pXWgZzeKxDsDNMD/dJ6997/LSRY+W4NmEt9acwR+Gt9OHN0kkI1CTianCwoqcjQ=="
 			crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.debug.js" type="text/javascript"></script>
+
 	<?php if(isset($js)){ ?>
 			<script src="<?php echo base_url().$js; ?>"></script>
 	<?php } else { ?>
 			<script src="<?php echo base_url().'assets/js/index.js'; ?>"></script>
 	<?php } ?>
-
-
+	<script src="<?php echo base_url().'assets/js/notification.js'?>" type="text/javascript"></script>
 </body>
 
 </html>

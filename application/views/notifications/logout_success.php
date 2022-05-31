@@ -8,7 +8,7 @@
 				<span aria-hidden="true">&times;</span>
 				</button>
 				<hr>
-				<p class="lead">Please login again to re-access the <br>Laundry Management System</p>
+				<p class="lead">Please login again to re-access the <br>Solid Waste Management System</p>
 				<img class="illustration" src="<?php echo base_url().'assets/img/undraw_Login.svg' ?>">
 			</div>
 		</div>
